@@ -14,6 +14,29 @@ test('leeg terugbelformulier toont een foutoverzicht met links naar de velden', 
   await expect(page.getByLabel('Naam', { exact: true })).toBeFocused();
 });
 
+test('terugbelformulier controleert net zo streng als de server', async ({ page }) => {
+  await page.goto('/terugbellen/');
+  await page.getByLabel('Naam', { exact: true }).fill('   ');
+  await page.getByLabel('E-mailadres').fill('naam@gmailcom');
+  await page.getByLabel('Telefoonnummer').fill('06.12345678');
+  await page.getByLabel('Waar gaat het over?').selectOption('advies');
+  await page.getByRole('button', { name: 'Verstuur aanvraag' }).click();
+  const overzicht = page.locator('.foutoverzicht');
+  await expect(overzicht).toBeVisible();
+  await expect(overzicht).toHaveAccessibleName('Controleer deze velden');
+  await expect(overzicht.getByRole('link', { name: 'Vul uw naam in.' })).toBeVisible();
+  await expect(overzicht.getByRole('link', { name: /geldig e-mailadres/ })).toBeVisible();
+  await expect(page.getByLabel('Telefoonnummer')).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(overzicht.getByRole('link', { name: /telefoonnummer/ })).toHaveCount(0);
+});
+
+test('scanformulier weigert een webadres zonder punt, met een eigen melding', async ({ page }) => {
+  await page.goto('/scan-aanvragen/');
+  await page.getByLabel('Webadres van uw site').fill('praktijk');
+  await page.getByRole('button', { name: 'Vraag de scan aan' }).click();
+  await expect(page.locator('.foutoverzicht').getByRole('link', { name: 'Dit webadres klopt niet. Vul het in zoals www.uwpraktijk.nl.' })).toBeVisible();
+});
+
 test('ingevuld terugbelformulier gaat naar de functie en daarna naar de bevestiging', async ({ page }) => {
   let ontvangen = '';
   await page.route(`${FUNCTIONS}/terugbellen`, async (route) => {

@@ -6,6 +6,21 @@ function isVeld(el: Element): el is Veld {
   return el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement;
 }
 
+// Zelfde regels als de server, zodat wat hier goed is ook daar goed gaat.
+function fouttekst(veld: Veld): string | null {
+  const standaard = veld.dataset.fout ?? 'Dit veld is niet goed ingevuld.';
+  if (!veld.validity.valid) return standaard;
+  if (veld instanceof HTMLSelectElement) return null;
+  const waarde = veld.value.trim();
+  if (veld.required && veld.type !== 'checkbox' && veld.type !== 'radio' && waarde === '') return standaard;
+  if (waarde === '') return null;
+  const minCijfers = Number(veld.dataset.minCijfers);
+  if (minCijfers > 0 && (waarde.match(/\d/g) ?? []).length < minCijfers) return standaard;
+  const patroon = veld.dataset.patroon;
+  if (patroon && !new RegExp(patroon).test(waarde)) return veld.dataset.foutPatroon ?? standaard;
+  return null;
+}
+
 function zetFout(veld: Veld, tekst: string | null): void {
   const melding = document.getElementById(`${veld.id}-fout`);
   if (melding) {
@@ -26,7 +41,7 @@ export function koppelFormulier(form: HTMLFormElement): void {
     const fouten: { veld: Veld; tekst: string }[] = [];
     for (const el of Array.from(form.elements)) {
       if (!isVeld(el) || !el.id || el.closest('[aria-hidden="true"]')) continue;
-      const tekst = el.validity.valid ? null : (el.dataset.fout ?? 'Dit veld is niet goed ingevuld.');
+      const tekst = fouttekst(el);
       zetFout(el, tekst);
       if (tekst) fouten.push({ veld: el, tekst });
     }

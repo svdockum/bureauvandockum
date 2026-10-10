@@ -18,8 +18,8 @@ import '../../styles/formulieren.css';
     </section>
 
     <form class="formulier" method="post" action={`${FUNCTIONS_URL}/scan-aanvragen`} data-controleer>
-      <div class="foutoverzicht" tabindex="-1" hidden>
-        <h2>Controleer deze velden</h2>
+      <div class="foutoverzicht" tabindex="-1" role="group" aria-labelledby="foutoverzicht-titel" hidden>
+        <h2 id="foutoverzicht-titel">Controleer deze velden</h2>
         <ul></ul>
       </div>
       <div class="veld">
@@ -34,17 +34,17 @@ import '../../styles/formulieren.css';
       </div>
       <div class="veld">
         <label for="email">E-mailadres</label>
-        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
+        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-patroon="^[^\s@]+@[^\s@]+\.[^\s@]+$" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
         <p class="veldfout" id="email-fout" hidden></p>
       </div>
       <div class="veld">
         <label for="telefoon">Telefoonnummer</label>
-        <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" pattern="[0-9+ \(\)\-]{10,}" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
+        <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" data-min-cijfers="10" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
         <p class="veldfout" id="telefoon-fout" hidden></p>
       </div>
       <div class="veld">
         <label for="website">Webadres van uw site</label>
-        <input id="website" name="website" type="text" inputmode="url" autocomplete="url" required maxlength="300" aria-describedby="website-fout" data-fout="Vul het webadres in dat we scannen, zoals www.uwpraktijk.nl." />
+        <input id="website" name="website" type="text" inputmode="url" autocomplete="url" required maxlength="300" aria-describedby="website-fout" data-patroon="^(https?://)?[^\s/@]+\.[^\s/@]+" data-fout-patroon="Dit webadres klopt niet. Vul het in zoals www.uwpraktijk.nl." data-fout="Vul het webadres in dat we scannen, zoals www.uwpraktijk.nl." />
         <p class="veldfout" id="website-fout" hidden></p>
       </div>
       <div class="veld">
@@ -64,7 +64,7 @@ import '../../styles/formulieren.css';
 </Basis>
 
 <style>
-  h1 { max-width: none; font-size: clamp(1.4rem, 8vw - 1rem, 4.5rem); }
+  h1 { max-width: none; font-size: clamp(1.75rem, 1rem + 4vw, 4.5rem); }
   .scan-prijs { font-size: 1.5rem; letter-spacing: -.02em; }
   .scan-prijs strong { font-size: clamp(2.25rem, 6vw, 3rem); font-weight: 600; line-height: 1.1; }
   .scan-uitleg h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; margin-top: 2rem; }

@@ -39,18 +39,19 @@ export function terugbelMailVoorOns(v: Terugbelverzoek, aan: string): Mail {
   };
 }
 
+// Geen vrije tekst van de aanvrager: dit formulier mag geen postbus voor derden zijn.
 export function terugbelMailVoorBezoeker(v: Terugbelverzoek): Mail {
   const moment = `${dagTekst(v.dag)}, ${DAGDEEL[v.dagdeel]}`;
   const alineas = [
-    `Beste ${escapeHtml(v.naam)},`,
+    'Beste lezer,',
     'Dank u wel. We hebben uw aanvraag ontvangen. Binnen één werkdag mailen we u een moment om te bellen.',
     `U gaf aan dat we u het best kunnen bellen ${escapeHtml(moment)}.`,
   ];
   return {
-    aan: { email: v.email, naam: v.naam },
+    aan: { email: v.email },
     onderwerp: 'We bellen u terug',
     html: omhul('We bellen u terug', alineas),
-    tekst: `Beste ${v.naam},\n\nDank u wel. We hebben uw aanvraag ontvangen. Binnen één werkdag mailen we u een moment om te bellen.\n\nU gaf aan dat we u het best kunnen bellen ${moment}.\n\nBureau van Dockum`,
+    tekst: `Beste lezer,\n\nDank u wel. We hebben uw aanvraag ontvangen. Binnen één werkdag mailen we u een moment om te bellen.\n\nU gaf aan dat we u het best kunnen bellen ${moment}.\n\nBureau van Dockum`,
   };
 }
 
@@ -101,15 +102,15 @@ export function scanMailVoorOns(a: Scanaanvraag, aan: string): Mail {
 
 export function scanMailVoorBezoeker(a: Scanaanvraag): Mail {
   const alineas = [
-    `Beste ${escapeHtml(a.naam)},`,
-    `Dank u wel voor uw aanvraag voor een toegankelijkheidsscan van ${escapeHtml(a.website)}.`,
+    'Beste lezer,',
+    'Dank u wel voor uw aanvraag voor een toegankelijkheidsscan.',
     'Binnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.',
     'De scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.',
   ];
   return {
-    aan: { email: a.email, naam: a.naam },
+    aan: { email: a.email },
     onderwerp: 'Uw aanvraag voor een toegankelijkheidsscan',
     html: omhul('Uw aanvraag voor een toegankelijkheidsscan', alineas),
-    tekst: `Beste ${a.naam},\n\nDank u wel voor uw aanvraag voor een toegankelijkheidsscan van ${a.website}.\nBinnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.\n\nDe scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.\n\nBureau van Dockum`,
+    tekst: `Beste lezer,\n\nDank u wel voor uw aanvraag voor een toegankelijkheidsscan.\nBinnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.\n\nDe scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.\n\nBureau van Dockum`,
   };
 }

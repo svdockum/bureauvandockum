@@ -16,8 +16,14 @@ describe('mails', () => {
   it('zet de bezoeker als antwoordadres in de mail aan ons', () => {
     expect(terugbelMailVoorOns(v, 'ons@bureau.nl').antwoordAan).toBe('anna@praktijk.nl');
   });
-  it('noemt dag en dagdeel in de bevestiging', () => {
-    expect(terugbelMailVoorBezoeker(v).tekst).toContain('op dinsdag, in de ochtend');
+  it('noemt dag en dagdeel in de bevestiging, maar geen vrije tekst van de aanvrager', () => {
+    const m = terugbelMailVoorBezoeker({ ...v, naam: 'Kwaadwillende naam', vraag: 'geheime vraag' });
+    expect(m.tekst).toContain('op dinsdag, in de ochtend');
+    expect(m.tekst).toContain('Beste lezer,');
+    expect(m.tekst).not.toContain('Kwaadwillende');
+    expect(m.html).not.toContain('Kwaadwillende');
+    expect(m.tekst).not.toContain('geheime');
+    expect(m.aan.naam).toBeUndefined();
   });
   it('bevestigt een betaalde bestelling neutraal, met productnaam, twee werkdagen en bestelnummer', () => {
     const m = bestelMailVoorKlant(scan);
@@ -50,15 +56,15 @@ describe('scan-mails', () => {
   it('zet de bezoeker als antwoordadres in de mail aan ons', () => {
     expect(scanMailVoorOns(scanaanvraag, 'ons@bureau.nl').antwoordAan).toBe('anna@praktijk.nl');
   });
-  it('noemt twee werkdagen, het bedrag en het webadres in de bevestiging', () => {
-    const m = scanMailVoorBezoeker(scanaanvraag);
+  it('noemt twee werkdagen en het bedrag, maar geen naam of webadres in de bevestiging', () => {
+    const m = scanMailVoorBezoeker({ ...scanaanvraag, naam: 'Kwaadwillende naam' });
     expect(m.tekst).toContain('twee werkdagen');
     expect(m.tekst).toContain('€ 59');
-    expect(m.tekst).toContain('https://www.praktijk.nl/');
+    expect(m.tekst).toContain('Beste lezer,');
+    expect(m.tekst).not.toContain('Kwaadwillende');
+    expect(m.tekst).not.toContain('praktijk.nl/');
+    expect(m.html).not.toContain('www.praktijk.nl');
     expect(m.aan.email).toBe('anna@praktijk.nl');
-  });
-  it('escapet de naam in de HTML-bevestiging', () => {
-    const m = scanMailVoorBezoeker({ ...scanaanvraag, naam: '<script>x</script>' });
-    expect(m.html).not.toContain('<script>');
+    expect(m.aan.naam).toBeUndefined();
   });
 });

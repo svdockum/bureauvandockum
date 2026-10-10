@@ -44,6 +44,16 @@ describe('valideerBestelling', () => {
   it('weigert javascript: als webadres', () => {
     expect(normaliseerWebsite('javascript:alert(1)')).toBeNull();
   });
+  it('weigert gebruikersnaam of wachtwoord in het webadres', () => {
+    expect(normaliseerWebsite('https://www.bank.nl@evil.example/')).toBeNull();
+    expect(normaliseerWebsite('https://gebruiker:wachtwoord@praktijk.nl')).toBeNull();
+  });
+  it('weigert IP-adressen als hostnaam', () => {
+    expect(normaliseerWebsite('http://192.168.1.1/')).toBeNull();
+    expect(normaliseerWebsite('127.0.0.1')).toBeNull();
+    expect(normaliseerWebsite('http://[::1]/')).toBeNull();
+    expect(normaliseerWebsite('www.praktijk.nl')).toBe('https://www.praktijk.nl/');
+  });
   it('eist akkoord met de voorwaarden', () => {
     const r = valideerBestelling(formulier({ ...bestelling, akkoord: '' }));
     expect(!r.ok && r.fouten.akkoord).toBeTruthy();

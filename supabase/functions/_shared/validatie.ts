@@ -33,7 +33,9 @@ export function normaliseerWebsite(invoer: string): string | null {
   try {
     const url = new URL(invoer.includes('://') ? invoer : `https://${invoer}`);
     if (url.protocol !== 'https:' && url.protocol !== 'http:') return null;
+    if (url.username || url.password) return null;
     if (!url.hostname.includes('.')) return null;
+    if (/^\d{1,3}(\.\d{1,3}){3}$/.test(url.hostname) || url.hostname.startsWith('[')) return null;
     return url.href;
   } catch {
     return null;

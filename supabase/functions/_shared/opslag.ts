@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from 'npm:@supabase/supabase-js@2.117.3';
 import type { BestelDeps, Product } from './bestellen.ts';
+import type { LimietDeps } from './limiet.ts';
 import type { BetaalDeps } from './betaling.ts';
 import type { BestellingVoorMail } from './mails.ts';
 import type { Bestelstatus } from './mollie.ts';
@@ -63,6 +64,24 @@ export function betaalOpslag(db: SupabaseClient): Pick<BetaalDeps, 'zetStatus' |
     async geefMailVrij(bestellingId: string) {
       const { error } = await db.from('bestellingen').update({ gemaild_op: null }).eq('id', bestellingId);
       if (error) throw error;
+    },
+  };
+}
+
+export function limietOpslag(db: SupabaseClient): LimietDeps {
+  return {
+    async tel(sleutel, sinds) {
+      const { count, error } = await db.from('verzoeken').select('id', { count: 'exact', head: true }).eq('sleutel', sleutel).gte('op', sinds.toISOString());
+      if (error) throw error;
+      return count ?? 0;
+    },
+    async registreer(sleutel) {
+      const { error } = await db.from('verzoeken').insert({ sleutel });
+      if (error) throw error;
+      // Opruimen: we bewaren hooguit een dag. Mislukt dat, dan is het verzoek zelf toch al vastgelegd.
+      const grens = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { error: opruimFout } = await db.from('verzoeken').delete().lt('op', grens);
+      if (opruimFout) console.error('Opruimen van verzoeken mislukt', opruimFout);
     },
   };
 }

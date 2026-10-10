@@ -9,8 +9,8 @@ import '../../styles/formulieren.css';
     <p class="lead">Laat uw gegevens achter. Binnen één werkdag mailen we u een moment om te bellen.</p>
 
     <form class="formulier" method="post" action={`${FUNCTIONS_URL}/terugbellen`} data-controleer>
-      <div class="foutoverzicht" tabindex="-1" hidden>
-        <h2>Controleer deze velden</h2>
+      <div class="foutoverzicht" tabindex="-1" role="group" aria-labelledby="foutoverzicht-titel" hidden>
+        <h2 id="foutoverzicht-titel">Controleer deze velden</h2>
         <ul></ul>
       </div>
       <div class="veld">
@@ -20,12 +20,12 @@ import '../../styles/formulieren.css';
       </div>
       <div class="veld">
         <label for="email">E-mailadres</label>
-        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
+        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-patroon="^[^\s@]+@[^\s@]+\.[^\s@]+$" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
         <p class="veldfout" id="email-fout" hidden></p>
       </div>
       <div class="veld">
         <label for="telefoon">Telefoonnummer</label>
-        <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" pattern="[0-9+ \(\)\-]{10,}" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
+        <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" data-min-cijfers="10" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
         <p class="veldfout" id="telefoon-fout" hidden></p>
       </div>
       <div class="veld">

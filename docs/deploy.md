@@ -17,6 +17,8 @@ Deze stappen zet je één keer in de juiste volgorde. Alles wat hieronder staat 
    supabase db push
    ```
 
+   Dit maakt ook de tabel `verzoeken` aan. Die telt per afzender hoeveel formulierverzoeken er binnenkomen (maximaal vijf per uur), tegen misbruik. Zonder deze tabel werken de formulieren niet.
+
 4. Zet de geheimen (secrets) klaar. `TOEGESTANE_ORIGINS` is een lijst van extra adressen, gescheiden door een komma, die formulieren mogen versturen. Laat die leeg als je er geen hebt.
 
    ```bash
@@ -55,7 +57,17 @@ Deze stappen zet je één keer in de juiste volgorde. Alles wat hieronder staat 
 3. Voeg de omgevingsvariabelen toe:
    - `PUBLIC_FUNCTIONS_URL` = `https://<ref>.supabase.co/functions/v1` (zonder slash aan het eind)
    - `SITE_URL` = het adres van de site, bijvoorbeeld `https://bureauvandockum.vercel.app`
-4. Deploy. De beveiligingsheaders uit `vercel.json` gaan vanzelf mee.
+4. Koppel je eigen domein (zowel `bureauvandockum.nl` als `www.bureauvandockum.nl`) in Vercel en laat één van de twee doorsturen naar de ander. Daarna:
+   - Zet `SITE_URL` in Vercel op het hoofddomein, bijvoorbeeld `https://bureauvandockum.nl`.
+   - Zet in Supabase `SITE_URL` op hetzelfde adres en zet alle adressen waar de site mee bereikbaar is in `TOEGESTANE_ORIGINS`, gescheiden door een komma (bijvoorbeeld `https://bureauvandockum.nl,https://www.bureauvandockum.nl`):
+
+     ```bash
+     supabase secrets set SITE_URL=https://bureauvandockum.nl TOEGESTANE_ORIGINS=https://www.bureauvandockum.nl
+     ```
+
+   - Opnieuw `supabase functions deploy` is niet nodig, `supabase secrets set` wel. Zonder dit geven formulierposts vanaf het eigen domein een 403 en komen er geen aanvragen binnen.
+   - Doe daarna stap 4 (Testen op de live site) nog een keer op het definitieve domein.
+5. Deploy. De beveiligingsheaders uit `vercel.json` gaan vanzelf mee.
 
 **Let op:** het gratis Hobby-abonnement is volgens de voorwaarden van Vercel alleen voor niet-commercieel gebruik. Stap naar Pro vóór de site voor het eerst commercieel wordt gebruikt.
 

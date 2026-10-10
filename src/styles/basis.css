@@ -126,7 +126,7 @@ h3 {
   transition: background-size .5s var(--ease);
 }
 .hoofdmenu a:hover { background-size: 100% 1px; }
-@media (min-width: 60.0625rem) and (max-width: 66rem) { .header-inner { gap: 1rem; } .nav-paneel { gap: 1rem; } .hoofdmenu ul { gap: .875rem; } .hoofdmenu a { font-size: .875rem; } .header-cta { padding-inline: 1rem; } }
+@media (min-width: 60.0625rem) and (max-width: 66rem) { :root { --gutter: 1.5rem; } .header-inner { gap: 1rem; } .nav-paneel { gap: 1rem; } .hoofdmenu ul { gap: .875rem; } .hoofdmenu a { font-size: .875rem; } .header-cta { padding-inline: .75rem; white-space: nowrap; } .hoofdmenu a { white-space: nowrap; } .hoofdmenu ul { gap: .75rem; } .nav-paneel { gap: .75rem; } .header-inner { gap: .75rem; } .merk { gap: .5rem; } }
 @media (min-width: 60.0625rem) and (max-width: 75rem) { .nav-paneel { gap: 1.5rem; } .hoofdmenu ul { gap: 1.25rem; } .header-cta { white-space: nowrap; } }
 .menu-knop { display: none; }
 
@@ -162,6 +162,7 @@ h3 {
   .hoofdmenu a { display: block; padding-block: 1rem; border-bottom: 1px solid var(--line); font-size: 1.25rem; background: none; }
   .header-cta { width: 100%; }
 }
+@media (max-width: 24rem) { .merk { gap: .5rem; } .js .menu-knop { padding-inline: .75rem; gap: .5rem; } }
 @media (max-width: 60rem) { html:not(.js) .header-inner { flex-wrap: wrap; } html:not(.js) .nav-paneel { flex-wrap: wrap; } }
 
 /* ---------- Hero ---------- */
@@ -299,8 +300,9 @@ body::before {
 
 /* Header */
 .site-header { padding-block: 1.25rem; border-bottom: 1px solid var(--ink); background: var(--bg); }
-.merk-teken { display: block; width: 1.125rem; height: 1.125rem; background: var(--ink); }
-.merk-tekst { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; }
+.merk-teken { display: block; width: 1.25rem; height: 1.25rem; background: var(--ink); }
+.merk-tekst { font-size: 1.1875rem; font-weight: 600; letter-spacing: -.02em; }
+@media (max-width: 24rem) { .merk-tekst { font-size: 1.0625rem; } .merk-teken { width: 1.125rem; height: 1.125rem; } }
 .merk-b,
 .footer-merk span { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .hoofdmenu a { font-weight: 500; }
@@ -364,7 +366,7 @@ h1 em { font-style: normal; color: var(--muted); }
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--ink); }
-.footer-merk { font-weight: 600; font-size: 1.0625rem; letter-spacing: -.02em; }
+.footer-merk { font-weight: 600; font-size: 1.1875rem; letter-spacing: -.02em; }
 
 /* Huidige pagina: onderstreping, niet alleen kleur */
 .hoofdmenu a[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
