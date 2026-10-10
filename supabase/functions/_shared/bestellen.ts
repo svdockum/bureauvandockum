@@ -21,8 +21,9 @@ export async function startBestelling(form: FormData, deps: BestelDeps): Promise
   const r = valideerBestelling(form);
   if (!r.ok) return mislukt;
 
+  // Thema's zijn pas bestelbaar als de levering ervan gebouwd is (zie mails.ts bestelMailVoorKlant).
   const product = await deps.zoekProduct(r.waarde.product);
-  if (!product) return mislukt;
+  if (!product || product.soort !== 'scan') return mislukt;
 
   const id = await deps.maakBestelling(r.waarde, product);
   try {

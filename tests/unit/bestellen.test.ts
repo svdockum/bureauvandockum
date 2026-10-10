@@ -8,12 +8,12 @@ const formulier = (extra: Record<string, string> = {}) => {
   return f;
 };
 
-function maak(opties: { product?: boolean; mollieFaalt?: boolean } = {}) {
+function maak(opties: { product?: boolean; mollieFaalt?: boolean; soort?: 'scan' | 'thema' } = {}) {
   const log: string[] = [];
   const deps: BestelDeps = {
     siteUrl: 'https://site.nl',
     functionsUrl: 'https://f.supabase.co/functions/v1',
-    zoekProduct: async (slug) => (opties.product === false ? null : { slug, naam: 'Snelle scan', soort: 'scan', prijs_centen: 2400 }),
+    zoekProduct: async (slug) => (opties.product === false ? null : { slug, naam: 'Snelle scan', soort: opties.soort ?? 'scan', prijs_centen: 2400 }),
     maakBestelling: async () => { log.push('bestelling'); return 'b1'; },
     maakBetaling: async (v) => {
       if (opties.mollieFaalt) throw new Error('Mollie plat');
@@ -34,6 +34,11 @@ describe('startBestelling', () => {
   });
   it('stuurt naar de foutpagina bij een onbekend product', async () => {
     const { deps, log } = maak({ product: false });
+    expect(await startBestelling(formulier(), deps)).toBe('https://site.nl/bestellen/mislukt/');
+    expect(log).toEqual([]);
+  });
+  it('weigert een thema zolang levering niet gebouwd is', async () => {
+    const { deps, log } = maak({ soort: 'thema' });
     expect(await startBestelling(formulier(), deps)).toBe('https://site.nl/bestellen/mislukt/');
     expect(log).toEqual([]);
   });
