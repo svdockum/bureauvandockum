@@ -56,17 +56,23 @@ export function terugbelMailVoorBezoeker(v: Terugbelverzoek): Mail {
 
 export function bestelMailVoorKlant(b: BestellingVoorMail): Mail {
   if (b.product.soort !== 'scan') throw new Error('Levering van thema’s is nog niet gebouwd');
-  const site = b.website ?? '(onbekend)';
   return {
     aan: { email: b.email, naam: b.naam },
-    onderwerp: 'Bedankt voor uw bestelling: snelle scan',
+    onderwerp: 'Bedankt voor uw bestelling',
     html: omhul('Bedankt voor uw bestelling', [
       `Beste ${escapeHtml(b.naam)},`,
-      `Dank u wel voor uw betaling. We gaan aan de slag met de snelle scan van ${escapeHtml(site)}.`,
-      'U krijgt het rapport binnen vijf werkdagen per e-mail.',
+      `Dank u wel voor uw betaling voor ${escapeHtml(b.product.naam)}.`,
+      'We nemen binnen twee werkdagen contact met u op over de uitvoering.',
       `Uw bestelnummer is ${escapeHtml(b.id)}.`,
     ]),
-    tekst: `Beste ${b.naam},\n\nDank u wel voor uw betaling. We gaan aan de slag met de snelle scan van ${site}.\nU krijgt het rapport binnen vijf werkdagen per e-mail.\n\nUw bestelnummer is ${b.id}.\n\nBureau van Dockum`,
+    tekst: `Beste ${b.naam},
+
+Dank u wel voor uw betaling voor ${b.product.naam}.
+We nemen binnen twee werkdagen contact met u op over de uitvoering.
+
+Uw bestelnummer is ${b.id}.
+
+Bureau van Dockum`,
   };
 }
 

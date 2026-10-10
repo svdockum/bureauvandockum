@@ -19,10 +19,13 @@ describe('mails', () => {
   it('noemt dag en dagdeel in de bevestiging', () => {
     expect(terugbelMailVoorBezoeker(v).tekst).toContain('op dinsdag, in de ochtend');
   });
-  it('bevestigt de snelle scan met webadres en levertijd', () => {
+  it('bevestigt een betaalde bestelling neutraal, met productnaam, twee werkdagen en bestelnummer', () => {
     const m = bestelMailVoorKlant(scan);
-    expect(m.tekst).toContain('https://www.praktijk.nl/');
-    expect(m.tekst).toContain('vijf werkdagen');
+    expect(m.onderwerp).toBe('Bedankt voor uw bestelling');
+    expect(m.tekst).toContain('betaling voor Snelle scan');
+    expect(m.tekst).toContain('binnen twee werkdagen contact met u op over de uitvoering');
+    expect(m.tekst).toContain('b1');
+    expect(m.tekst).not.toContain('vijf werkdagen');
   });
   it('weigert een themamail zolang levering niet gebouwd is', () => {
     expect(() => bestelMailVoorKlant({ ...scan, product: { naam: 'X', soort: 'thema' } })).toThrow();

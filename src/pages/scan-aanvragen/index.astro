@@ -7,14 +7,15 @@ import '../../styles/formulieren.css';
   <div class="wrap pagina">
     <h1>Toegankelijkheidsscan aanvragen</h1>
     <p class="lead">Wij bekijken de toegankelijkheid van uw website: de belangrijkste pagina’s, automatisch en met de hand, met toetsenbord en schermlezer. U krijgt een rapport in gewone taal met de belangrijkste problemen en wat oplossen ongeveer kost.</p>
-    <p class="prijs"><strong>€ 59, inclusief btw</strong></p>
-
-    <h2>Zo werkt het</h2>
-    <ol>
-      <li>U vraagt de scan vrijblijvend aan.</li>
-      <li>Binnen twee werkdagen nemen wij contact met u op. We stemmen de verwachtingen af en horen waar we extra op moeten letten.</li>
-      <li>Daarna doen we de scan en krijgt u het rapport.</li>
-    </ol>
+    <section class="pagina-sectie scan-uitleg" aria-labelledby="werkt-titel">
+      <p class="scan-prijs"><strong>€ 59</strong>, inclusief btw</p>
+      <h2 id="werkt-titel">Zo werkt het</h2>
+      <ol>
+        <li>U vraagt de scan vrijblijvend aan.</li>
+        <li>Binnen twee werkdagen nemen wij contact met u op. We stemmen de verwachtingen af en horen waar we extra op moeten letten.</li>
+        <li>Daarna doen we de scan en krijgt u het rapport.</li>
+      </ol>
+    </section>
 
     <form class="formulier" method="post" action={`${FUNCTIONS_URL}/scan-aanvragen`} data-controleer>
       <div class="foutoverzicht" tabindex="-1" hidden>
@@ -61,3 +62,10 @@ import '../../styles/formulieren.css';
   </div>
   <script>import '../../scripts/formulier';</script>
 </Basis>
+
+<style>
+  h1 { max-width: none; font-size: clamp(1.4rem, 8vw - 1rem, 4.5rem); }
+  .scan-prijs { font-size: 1.5rem; letter-spacing: -.02em; }
+  .scan-prijs strong { font-size: clamp(2.25rem, 6vw, 3rem); font-weight: 600; line-height: 1.1; }
+  .scan-uitleg h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; margin-top: 2rem; }
+</style>
