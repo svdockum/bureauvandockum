@@ -4,8 +4,8 @@ export const bedrijf = {
   naam: 'Bureau van Dockum',
   email: 'hallo@bureauvandockum.nl',
   eigenaar: 'Stefan van Dockum',
-  kvk: '[in te vullen: KvK-nummer]',
-  btw: '[in te vullen: btw-id]',
+  kvk: '11053393',
+  btw: 'NL001929106B52',
   adres: '[in te vullen: vestigingsadres]',
 } as const;
 
