@@ -8,7 +8,7 @@ gecontroleerd: 2026-10-10
 wcag:
   - { nummer: "1.4.3", naam: "Contrast (minimum)", url: "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" }
   - { nummer: "1.4.11", naam: "Contrast van niet-tekstuele content", url: "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html" }
-verwijzing: { tekst: "Laat uw site snel scannen voor € 24", href: "/toegankelijke-website/advies/" }
+verwijzing: { tekst: "Vraag een toegankelijkheidsscan aan", href: "/scan-aanvragen/" }
 ---
 Een mooie kleur is niet altijd een leesbare kleur. Lichtgrijze tekst op een witte achtergrond ziet er rustig uit. Maar veel mensen kunnen die tekst nauwelijks lezen. Dat geldt voor mensen die slecht zien. Het geldt ook voor iedereen die op een zonnig terras naar een telefoon kijkt.
 

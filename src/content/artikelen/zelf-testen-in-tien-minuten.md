@@ -6,7 +6,7 @@ volgorde: 1
 gepubliceerd: 2026-10-10
 gecontroleerd: 2026-10-10
 wcag: []
-verwijzing: { tekst: "Liever een grondige scan? € 24", href: "/toegankelijke-website/advies/" }
+verwijzing: { tekst: "Liever een grondige scan? Vraag hem aan", href: "/scan-aanvragen/" }
 ---
 U hoeft geen expert te zijn om te zien of uw site toegankelijk is. Met een korte test vindt u al veel van de grootste problemen. Het kost tien minuten, en u hebt alleen een browser nodig.
 

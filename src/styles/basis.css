@@ -58,6 +58,7 @@ h2 {
   line-height: 1.06;
   letter-spacing: var(--h2-track, -.015em);
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 h3 {
   font-family: var(--font-h3, var(--font-body));

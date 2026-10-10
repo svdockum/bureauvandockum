@@ -7,7 +7,7 @@ gepubliceerd: 2026-10-10
 gecontroleerd: 2026-10-10
 wcag:
   - { nummer: "WCAG 2.2", naam: "Overzicht van de richtlijnen", url: "https://www.w3.org/TR/WCAG22/" }
-verwijzing: { tekst: "Laat uw site snel scannen voor € 24", href: "/toegankelijke-website/advies/" }
+verwijzing: { tekst: "Vraag een toegankelijkheidsscan aan", href: "/scan-aanvragen/" }
 ---
 Een website is toegankelijk als iedereen hem kan gebruiken. Ook als iemand slecht ziet, slecht hoort, geen muis kan gebruiken of moeite heeft met lezen. Dat noemen we digitale toegankelijkheid.
 

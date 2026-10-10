@@ -27,29 +27,29 @@ test('ingevuld terugbelformulier gaat naar de functie en daarna naar de bevestig
   await expect(page.locator('h1')).toContainText('We bellen u terug');
 });
 
-test('bestelformulier eist akkoord en een webadres', async ({ page }) => {
-  await page.goto('/bestellen/snelle-scan/');
-  await page.getByLabel('Naam', { exact: true }).fill('Anna');
-  await page.getByLabel('E-mailadres').fill('anna@praktijk.nl');
-  await page.getByRole('button', { name: 'Bestellen en betalen' }).click();
+test('leeg scanformulier toont een foutoverzicht', async ({ page }) => {
+  await page.goto('/scan-aanvragen/');
+  await page.getByRole('button', { name: 'Vraag de scan aan' }).click();
   const overzicht = page.locator('.foutoverzicht');
-  await expect(overzicht.getByRole('link', { name: /webadres/ })).toBeVisible();
-  await expect(overzicht.getByRole('link', { name: /voorwaarden/ })).toBeVisible();
+  await expect(overzicht).toBeVisible();
+  await expect(overzicht).toBeFocused();
+  await expect(overzicht.getByRole('link', { name: 'Vul uw naam in.' })).toBeVisible();
+  await expect(overzicht.getByRole('link', { name: 'Vul het webadres in dat we scannen, zoals www.uwpraktijk.nl.' })).toBeVisible();
 });
 
-test('ingevuld bestelformulier gaat naar de functie', async ({ page }) => {
+test('ingevuld scanformulier gaat naar de functie', async ({ page }) => {
   let ontvangen = '';
-  await page.route(`${FUNCTIONS}/bestelling-starten`, async (route) => {
+  await page.route(`${FUNCTIONS}/scan-aanvragen`, async (route) => {
     ontvangen = route.request().postData() ?? '';
-    await route.fulfill({ status: 303, headers: { location: 'http://127.0.0.1:4321/bestellen/bezig/' } });
+    await route.fulfill({ status: 303, headers: { location: 'http://127.0.0.1:4321/scan-aanvragen/verzonden/' } });
   });
-  await page.goto('/bestellen/snelle-scan/');
+  await page.goto('/scan-aanvragen/');
   await page.getByLabel('Naam', { exact: true }).fill('Anna');
   await page.getByLabel('E-mailadres').fill('anna@praktijk.nl');
+  await page.getByLabel('Telefoonnummer').fill('06 12345678');
   await page.getByLabel('Webadres van uw site').fill('www.praktijk.nl');
-  await page.getByLabel(/akkoord met de voorwaarden/).check();
-  await page.getByRole('button', { name: 'Bestellen en betalen' }).click();
-  await expect(page).toHaveURL(/\/bestellen\/bezig\/$/);
-  expect(ontvangen).toContain('product=snelle-scan');
-  expect(ontvangen).toContain('akkoord=ja');
+  await page.getByRole('button', { name: 'Vraag de scan aan' }).click();
+  await expect(page).toHaveURL(/\/scan-aanvragen\/verzonden\/$/);
+  expect(ontvangen).toContain('website=');
+  expect(ontvangen).toContain('naam=');
 });

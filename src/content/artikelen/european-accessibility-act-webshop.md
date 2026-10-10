@@ -6,7 +6,7 @@ volgorde: 2
 gepubliceerd: 2026-10-10
 gecontroleerd: 2026-10-10
 wcag: []
-verwijzing: { tekst: "Laat uw webshop snel scannen voor € 24", href: "/toegankelijke-website/advies/" }
+verwijzing: { tekst: "Vraag een scan van uw webshop aan", href: "/scan-aanvragen/" }
 ---
 Verkoopt u producten of diensten online aan consumenten? Dan hebt u waarschijnlijk te maken met de European Accessibility Act. Dat is een Europese richtlijn over toegankelijkheid. In dit artikel leggen we uit wat dat betekent voor uw webshop.
 

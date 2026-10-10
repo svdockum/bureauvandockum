@@ -1,0 +1,11 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { bedrijf } from '../../lib/bedrijf';
+---
+<Basis titel="Uw aanvraag is niet verstuurd" beschrijving="Er ging iets mis bij het versturen.">
+  <div class="wrap pagina">
+    <h1>Uw aanvraag is niet verstuurd</h1>
+    <p class="lead">Er ging iets mis. Probeer het opnieuw, of mail ons op <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>.</p>
+    <p><a class="knop knop-primair" href="/scan-aanvragen/">Terug naar het formulier</a></p>
+  </div>
+</Basis>
