@@ -15,4 +15,7 @@ export const routes: string[] = [
   '/info/formulieren-die-iedereen-kan-invullen/',
   '/info/zelf-testen-in-tien-minuten/',
   '/info/overlays-en-plugins-afgeraden/',
+  '/toegankelijkheidsverklaring/',
+  '/privacy/',
+  '/voorwaarden/',
 ];

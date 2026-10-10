@@ -1,0 +1,58 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { bedrijf } from '../lib/bedrijf';
+---
+<!-- CONCEPT: laten nalezen vóór livegang -->
+<Basis titel="Voorwaarden" beschrijving="De algemene voorwaarden van Bureau van Dockum in gewone taal.">
+  <div class="wrap pagina">
+    <h1>Voorwaarden</h1>
+    <p class="lead">Dit zijn onze afspraken in gewone taal. Ze gelden voor alles wat u bij ons afneemt.</p>
+
+    <section class="pagina-sectie" aria-labelledby="wie-titel">
+      <h2 id="wie-titel">Wie wij zijn</h2>
+      <ul>
+        <li>{bedrijf.naam}, van {bedrijf.eigenaar}</li>
+        <li>Adres: {bedrijf.adres}</li>
+        <li>KvK-nummer: {bedrijf.kvk}</li>
+        <li>Btw-id: {bedrijf.btw}</li>
+        <li>E-mail: <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a></li>
+      </ul>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="prijzen-titel">
+      <h2 id="prijzen-titel">Prijzen</h2>
+      <p>Alle prijzen op onze website zijn inclusief btw.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="werken-titel">
+      <h2 id="werken-titel">Maatwerk en abonnement</h2>
+      <p>Op de pagina <a href="/tarieven/">Tarieven</a> leest u hoe u met ons kunt werken: maatwerk voor een vast bedrag, of een abonnement. De afspraken voor uw situatie staan in een schriftelijke offerte, zoals de prijs en wat u krijgt. Wijkt de offerte af van deze voorwaarden, dan gaat de offerte voor.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="scan-titel">
+      <h2 id="scan-titel">De snelle scan</h2>
+      <p>U krijgt een rapport over de toegankelijkheid van de site die u opgeeft. U ontvangt het rapport binnen vijf werkdagen na betaling.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="herroep-titel">
+      <h2 id="herroep-titel">Bedenktijd</h2>
+      <p>Bent u een consument? Dan mag u binnen veertien dagen zonder reden van uw bestelling afzien.</p>
+      <p>Bij een dienst zoals de snelle scan geldt een uitzondering. Vraagt u ons om direct te beginnen en hebben wij de scan binnen die veertien dagen helemaal klaar? Dan vervalt dit recht. Daar vragen wij u vooraf om uitdrukkelijke toestemming voor.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="betalen-titel">
+      <h2 id="betalen-titel">Betalen</h2>
+      <p>U betaalt online via Mollie.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="aansprakelijk-titel">
+      <h2 id="aansprakelijk-titel">Gaat er iets mis?</h2>
+      <p>Wij doen ons werk zorgvuldig. Gaat er toch iets mis en zijn wij daarvoor aansprakelijk, dan vergoeden wij hooguit het bedrag dat op de factuur staat.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="recht-titel">
+      <h2 id="recht-titel">Nederlands recht</h2>
+      <p>Op onze afspraken is Nederlands recht van toepassing.</p>
+    </section>
+  </div>
+</Basis>

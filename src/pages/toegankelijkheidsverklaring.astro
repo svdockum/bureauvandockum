@@ -1,0 +1,35 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { bedrijf } from '../lib/bedrijf';
+---
+<Basis titel="Toegankelijkheidsverklaring" beschrijving="Hoe toegankelijk deze website is, hoe wij dat toetsen en wat u kunt doen als iets niet lukt.">
+  <div class="wrap pagina">
+    <h1>Toegankelijkheidsverklaring</h1>
+    <p class="lead">Een bureau voor toegankelijkheid hoort zelf toegankelijk te zijn. Hier leest u hoe wij dat doen.</p>
+
+    <section class="pagina-sectie" aria-labelledby="doel-titel">
+      <h2 id="doel-titel">Ons doel</h2>
+      <p>Deze website voldoet aan WCAG 2.2 niveau AA. Dat is de internationale norm voor toegankelijke websites.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="toets-titel">
+      <h2 id="toets-titel">Hoe wij toetsen</h2>
+      <ul>
+        <li>Automatisch, met het testprogramma axe.</li>
+        <li>Met de hand, alleen met het toetsenbord.</li>
+        <li>Met de hand, met een schermlezer.</li>
+      </ul>
+      <p>De laatste toets was op 10 oktober 2026.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="bekend-titel">
+      <h2 id="bekend-titel">Bekende problemen</h2>
+      <p>De betaalpagina is van Mollie. Die kunnen wij niet aanpassen.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="contact-titel">
+      <h2 id="contact-titel">Loopt u ergens tegenaan?</h2>
+      <p>Laat het ons weten via <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>. Vertel wat u probeerde te doen en op welke pagina. Wij lossen het zo snel mogelijk op.</p>
+    </section>
+  </div>
+</Basis>

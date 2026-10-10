@@ -1,0 +1,65 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { bedrijf } from '../lib/bedrijf';
+---
+<!-- CONCEPT: laten nalezen vóór livegang -->
+<Basis titel="Privacy" beschrijving="Welke gegevens wij van u bewaren, waarom, hoe lang en wat uw rechten zijn.">
+  <div class="wrap pagina">
+    <h1>Privacy</h1>
+    <p class="lead">Wij vragen alleen wat we nodig hebben. Hier leest u wat dat is en wat we ermee doen.</p>
+
+    <section class="pagina-sectie" aria-labelledby="wie-titel">
+      <h2 id="wie-titel">Wie wij zijn</h2>
+      <p>{bedrijf.naam} is verantwoordelijk voor de gegevens op deze pagina. Vragen? Mail naar <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="gegevens-titel">
+      <h2 id="gegevens-titel">Welke gegevens wij bewaren</h2>
+      <h3>Als u een terugbelverzoek doet</h3>
+      <p>Uw naam, e-mailadres, telefoonnummer, het onderwerp, uw voorkeur voor het moment van bellen en uw vraag. Hiermee nemen wij contact met u op.</p>
+      <h3>Als u iets bestelt</h3>
+      <p>Uw naam, e-mailadres, bedrijf, webadres en of u betaald hebt. Hiermee voeren wij de bestelling uit en sturen wij u het resultaat.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="verwerkers-titel">
+      <h2 id="verwerkers-titel">Wie nog meer met uw gegevens werkt</h2>
+      <p>Wij schakelen een paar bedrijven in. Zij verwerken gegevens alleen in opdracht van ons.</p>
+      <ul>
+        <li>Supabase: bewaart de bestellingen.</li>
+        <li>Brevo: verstuurt onze e-mail.</li>
+        <li>Mollie: verwerkt de betalingen.</li>
+        <li>Vercel: host deze website.</li>
+      </ul>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="bewaren-titel">
+      <h2 id="bewaren-titel">Hoe lang wij gegevens bewaren</h2>
+      <ul>
+        <li>Terugbelverzoeken: zolang als nodig is voor het contact, en ten hoogste één jaar.</li>
+        <li>Bestellingen: zeven jaar. Dat is de fiscale bewaarplicht.</li>
+      </ul>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="cookies-titel">
+      <h2 id="cookies-titel">Cookies en tracking</h2>
+      <p>Deze website gebruikt geen cookies en volgt u niet.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="rechten-titel">
+      <h2 id="rechten-titel">Uw rechten</h2>
+      <p>U mag ons vragen:</p>
+      <ul>
+        <li>welke gegevens wij van u hebben;</li>
+        <li>die gegevens te verbeteren of te verwijderen;</li>
+        <li>te stoppen met het gebruiken van uw gegevens;</li>
+        <li>uw gegevens aan u mee te geven.</li>
+      </ul>
+      <p>Mail ons daarvoor. Komen we er samen niet uit, dan kunt u een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="contact-titel">
+      <h2 id="contact-titel">Contact</h2>
+      <p>{bedrijf.naam}, {bedrijf.adres}. E-mail: <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>.</p>
+    </section>
+  </div>
+</Basis>
