@@ -12,9 +12,11 @@ export async function binnenLimiet(sleutel: string, deps: LimietDeps, nu = new D
 }
 
 // Hash van functie + IP-adres; het IP-adres zelf komt nergens terecht.
+// Alleen adressen die de proxy zet: cf-connecting-ip, anders het laatste X-Forwarded-For-adres.
+// Het eerste X-Forwarded-For-adres kan de bezoeker zelf meesturen, dus dat gebruiken we niet.
 export async function afzenderSleutel(functie: string, req: Request): Promise<string> {
-  const doorgestuurd = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-  const ip = doorgestuurd || req.headers.get('cf-connecting-ip')?.trim() || 'onbekend';
+  const doorgestuurd = req.headers.get('x-forwarded-for')?.split(',').at(-1)?.trim();
+  const ip = req.headers.get('cf-connecting-ip')?.trim() || doorgestuurd || 'onbekend';
   const bytes = new TextEncoder().encode(`${functie}:${ip}`);
   const hash = await crypto.subtle.digest('SHA-256', bytes);
   return Array.from(new Uint8Array(hash), (b) => b.toString(16).padStart(2, '0')).join('');
