@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { bestelMailVoorKlant, terugbelMailVoorBezoeker, terugbelMailVoorOns } from '../../supabase/functions/_shared/mails.ts';
+import { bestelMailVoorKlant, scanMailVoorBezoeker, scanMailVoorOns, terugbelMailVoorBezoeker, terugbelMailVoorOns } from '../../supabase/functions/_shared/mails.ts';
 import { brevoBody } from '../../supabase/functions/_shared/brevo.ts';
-import type { Terugbelverzoek } from '../../supabase/functions/_shared/validatie.ts';
+import type { Scanaanvraag, Terugbelverzoek } from '../../supabase/functions/_shared/validatie.ts';
 
 const v: Terugbelverzoek = { naam: 'Anna', email: 'anna@praktijk.nl', telefoon: '0612345678', onderwerp: 'advies', dag: 'dinsdag', dagdeel: 'ochtend', vraag: 'Kunt u helpen?' };
 const scan = { id: 'b1', naam: 'Anna', email: 'anna@praktijk.nl', website: 'https://www.praktijk.nl/', product: { naam: 'Snelle scan', soort: 'scan' as const } };
@@ -32,5 +32,30 @@ describe('mails', () => {
     expect(body.sender.email).toBe('noreply@bureau.nl');
     expect(body.replyTo).toEqual({ email: 'anna@praktijk.nl' });
     expect(body.to).toEqual([{ email: 'ons@bureau.nl' }]);
+  });
+});
+
+const scanaanvraag: Scanaanvraag = { naam: 'Anna', email: 'anna@praktijk.nl', telefoon: '0612345678', organisatie: 'Praktijk', website: 'https://www.praktijk.nl/', opmerkingen: 'Kunt u kijken naar het formulier?' };
+
+describe('scan-mails', () => {
+  it('escapet HTML uit naam, website en opmerkingen in de mail aan ons', () => {
+    const m = scanMailVoorOns({ ...scanaanvraag, naam: '<script>x</script>', website: 'https://x.nl/<img src=x onerror=alert(1)>', opmerkingen: '<script>y</script>' }, 'ons@bureau.nl');
+    expect(m.html).toContain('&lt;script&gt;');
+    expect(m.html).not.toContain('<script>');
+    expect(m.html).not.toContain('<img');
+  });
+  it('zet de bezoeker als antwoordadres in de mail aan ons', () => {
+    expect(scanMailVoorOns(scanaanvraag, 'ons@bureau.nl').antwoordAan).toBe('anna@praktijk.nl');
+  });
+  it('noemt twee werkdagen, het bedrag en het webadres in de bevestiging', () => {
+    const m = scanMailVoorBezoeker(scanaanvraag);
+    expect(m.tekst).toContain('twee werkdagen');
+    expect(m.tekst).toContain('€ 59');
+    expect(m.tekst).toContain('https://www.praktijk.nl/');
+    expect(m.aan.email).toBe('anna@praktijk.nl');
+  });
+  it('escapet de naam in de HTML-bevestiging', () => {
+    const m = scanMailVoorBezoeker({ ...scanaanvraag, naam: '<script>x</script>' });
+    expect(m.html).not.toContain('<script>');
   });
 });

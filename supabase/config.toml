@@ -424,3 +424,6 @@ verify_jwt = false
 
 [functions.mollie-webhook]
 verify_jwt = false
+
+[functions.scan-aanvragen]
+verify_jwt = false

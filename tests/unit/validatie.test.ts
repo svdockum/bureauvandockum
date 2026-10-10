@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isSpam, normaliseerWebsite, valideerBestelling, valideerTerugbelverzoek } from '../../supabase/functions/_shared/validatie.ts';
+import { isSpam, normaliseerWebsite, valideerBestelling, valideerScanaanvraag, valideerTerugbelverzoek } from '../../supabase/functions/_shared/validatie.ts';
 
 function formulier(velden: Record<string, string>): FormData {
   const f = new FormData();
@@ -58,5 +58,27 @@ describe('isSpam', () => {
   it('herkent een ingevuld lokveld', () => {
     expect(isSpam(formulier({ adres2: 'http://spam' }))).toBe(true);
     expect(isSpam(formulier({}))).toBe(false);
+  });
+});
+
+describe('valideerScanaanvraag', () => {
+  const aanvraag = { naam: 'Anna de Vries', email: 'anna@praktijk.nl', telefoon: '06 12345678', organisatie: 'Praktijk Anna', website: 'www.praktijk.nl', opmerkingen: 'Vooral het formulier.' };
+
+  it('accepteert een volledig formulier en normaliseert het webadres', () => {
+    const r = valideerScanaanvraag(formulier(aanvraag));
+    expect(r.ok && r.waarde.website).toBe('https://www.praktijk.nl/');
+    expect(r.ok && r.waarde.naam).toBe('Anna de Vries');
+  });
+  it('geeft bij een leeg formulier precies fouten op de verplichte velden', () => {
+    const r = valideerScanaanvraag(formulier({}));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(Object.keys(r.fouten).sort()).toEqual(['email', 'naam', 'telefoon', 'website']);
+  });
+  it('weigert een ongeldig webadres', () => {
+    const r = valideerScanaanvraag(formulier({ ...aanvraag, website: 'javascript:alert(1)' }));
+    expect(!r.ok && r.fouten.website).toBeTruthy();
+  });
+  it('maakt organisatie en opmerkingen niet verplicht', () => {
+    expect(valideerScanaanvraag(formulier({ ...aanvraag, organisatie: '', opmerkingen: '' })).ok).toBe(true);
   });
 });

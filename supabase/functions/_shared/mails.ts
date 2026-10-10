@@ -1,6 +1,6 @@
 import { escapeHtml } from './html.ts';
 import type { Mail } from './brevo.ts';
-import type { Terugbelverzoek } from './validatie.ts';
+import type { Scanaanvraag, Terugbelverzoek } from './validatie.ts';
 
 export type BestellingVoorMail = {
   id: string; naam: string; email: string; website: string | null;
@@ -77,5 +77,33 @@ export function bestelMailVoorOns(b: BestellingVoorMail, aan: string): Mail {
     onderwerp: `Betaald: ${b.product.naam} voor ${b.naam}`,
     html: omhul('Nieuwe bestelling', [regels(paren)]),
     tekst: paren.map(([k, w]) => `${k}: ${w}`).join('\n'),
+  };
+}
+
+export function scanMailVoorOns(a: Scanaanvraag, aan: string): Mail {
+  const paren: [string, string][] = [
+    ['Naam', a.naam], ['Organisatie', a.organisatie || '-'], ['E-mail', a.email], ['Telefoon', a.telefoon],
+    ['Website', a.website], ['Extra aandachtspunten', a.opmerkingen || '(geen)'],
+  ];
+  return {
+    aan: { email: aan }, antwoordAan: a.email,
+    onderwerp: `Scanaanvraag: ${a.website}`,
+    html: omhul('Scanaanvraag', [regels(paren)]),
+    tekst: paren.map(([k, w]) => `${k}: ${w}`).join('\n'),
+  };
+}
+
+export function scanMailVoorBezoeker(a: Scanaanvraag): Mail {
+  const alineas = [
+    `Beste ${escapeHtml(a.naam)},`,
+    `Dank u wel voor uw aanvraag voor een toegankelijkheidsscan van ${escapeHtml(a.website)}.`,
+    'Binnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.',
+    'De scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.',
+  ];
+  return {
+    aan: { email: a.email, naam: a.naam },
+    onderwerp: 'Uw aanvraag voor een toegankelijkheidsscan',
+    html: omhul('Uw aanvraag voor een toegankelijkheidsscan', alineas),
+    tekst: `Beste ${a.naam},\n\nDank u wel voor uw aanvraag voor een toegankelijkheidsscan van ${a.website}.\nBinnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.\n\nDe scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.\n\nBureau van Dockum`,
   };
 }

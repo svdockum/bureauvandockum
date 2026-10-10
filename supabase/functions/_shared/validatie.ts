@@ -83,3 +83,25 @@ export function valideerBestelling(form: FormData): Resultaat<Bestelgegevens> {
   if (Object.keys(fouten).length > 0) return { ok: false, fouten };
   return { ok: true, waarde: { product, naam, email, bedrijf, website } };
 }
+
+export type Scanaanvraag = { naam: string; email: string; telefoon: string; organisatie: string; website: string; opmerkingen: string };
+
+export function valideerScanaanvraag(form: FormData): Resultaat<Scanaanvraag> {
+  const fouten: Veldfouten = {};
+  const naam = tekst(form, 'naam', 120);
+  const email = tekst(form, 'email', 200);
+  const telefoon = tekst(form, 'telefoon', 40);
+  const organisatie = tekst(form, 'organisatie', 120);
+  const websiteInvoer = tekst(form, 'website', 300);
+  const website = normaliseerWebsite(websiteInvoer);
+  const opmerkingen = tekst(form, 'opmerkingen', 2000);
+
+  if (!naam) fouten.naam = 'Vul uw naam in.';
+  if (!EMAIL.test(email)) fouten.email = 'Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl.';
+  if (telefoon.replace(/\D/g, '').length < 10) fouten.telefoon = 'Vul een telefoonnummer in van minstens tien cijfers.';
+  if (!websiteInvoer) fouten.website = 'Vul het webadres in dat we scannen, zoals www.uwpraktijk.nl.';
+  else if (!website) fouten.website = 'Dit webadres klopt niet. Vul het in zoals www.uwpraktijk.nl.';
+
+  if (Object.keys(fouten).length > 0 || !website) return { ok: false, fouten };
+  return { ok: true, waarde: { naam, email, telefoon, organisatie, website, opmerkingen } };
+}
