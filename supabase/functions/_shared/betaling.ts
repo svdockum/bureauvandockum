@@ -13,12 +13,21 @@ export type BetaalDeps = {
   stuurMails(bestelling: BestellingVoorMail): Promise<void>;
 };
 
-// Wordt aangeroepen door de webhook én bij terugkeer van de klant. Mag dus vaker draaien:
-// de mail gaat precies één keer, en bij een mislukte mail probeert de volgende melding het opnieuw.
-export async function verwerkBetaling(mollieId: string, deps: BetaalDeps): Promise<Bestelstatus> {
+export type StatusDeps = Pick<BetaalDeps, 'haalBetaling' | 'zetStatus'>;
+
+// Alleen de status bijwerken, zonder te mailen. Voor de terugkeer van de klant: mailen doet de webhook,
+// want die probeert Mollie opnieuw als het mislukt.
+export async function werkStatusBij(mollieId: string, deps: StatusDeps): Promise<Bestelstatus> {
   const { status: mollieStatus } = await deps.haalBetaling(mollieId);
   const status = naarBestelstatus(mollieStatus);
   await deps.zetStatus(mollieId, status);
+  return status;
+}
+
+// Wordt aangeroepen door de webhook. Mag vaker draaien:
+// de mail gaat precies één keer, en bij een mislukte mail probeert de volgende melding het opnieuw.
+export async function verwerkBetaling(mollieId: string, deps: BetaalDeps): Promise<Bestelstatus> {
+  const status = await werkStatusBij(mollieId, deps);
 
   if (status === 'betaald') {
     const bestelling = await deps.claimMail(mollieId);

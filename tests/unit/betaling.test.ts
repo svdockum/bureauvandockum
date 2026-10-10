@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { paginaVoorStatus, verwerkBetaling, type BetaalDeps } from '../../supabase/functions/_shared/betaling.ts';
+import { paginaVoorStatus, verwerkBetaling, werkStatusBij, type BetaalDeps } from '../../supabase/functions/_shared/betaling.ts';
 import type { Bestelstatus } from '../../supabase/functions/_shared/mollie.ts';
 
 // Nepopslag die dezelfde regels volgt als de echte: een betaalde bestelling blijft betaald,
@@ -54,6 +54,21 @@ describe('verwerkBetaling', () => {
     const t = maak();
     await verwerkBetaling('tr_onbekend', t.deps);
     expect(t.mails).toEqual([]);
+  });
+});
+
+describe('werkStatusBij', () => {
+  it('werkt de status bij zonder te mailen', async () => {
+    const t = maak();
+    expect(await werkStatusBij('tr_1', t.deps)).toBe('betaald');
+    expect(t.rij.status).toBe('betaald');
+    expect(t.mails).toEqual([]);
+  });
+  it('de webhook mailt daarna alsnog precies één keer', async () => {
+    const t = maak();
+    await werkStatusBij('tr_1', t.deps);
+    await verwerkBetaling('tr_1', t.deps);
+    expect(t.mails).toEqual(['b1']);
   });
 });
 

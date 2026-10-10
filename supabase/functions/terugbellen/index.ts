@@ -8,11 +8,16 @@ Deno.serve(async (req) => {
   const { siteUrl, origins } = site();
   if (!origineToegestaan(req, origins)) return new Response('Verboden', { status: 403 });
 
-  const cfg = mail();
-  const naar = await verwerkTerugbelverzoek(await req.formData(), {
-    mailAan: cfg.aan,
-    siteUrl,
-    stuurMail: (m) => stuurViaBrevo(m, cfg),
-  });
-  return doorsturen(naar);
+  try {
+    const cfg = mail();
+    const naar = await verwerkTerugbelverzoek(await req.formData(), {
+      mailAan: cfg.aan,
+      siteUrl,
+      stuurMail: (m) => stuurViaBrevo(m, cfg),
+    });
+    return doorsturen(naar);
+  } catch (fout) {
+    console.error('Terugbelverzoek mislukt', fout);
+    return doorsturen(`${siteUrl}/terugbellen/niet-verzonden/`);
+  }
 });
