@@ -1,8 +1,171 @@
 ---
+import '../styles/home.css';
+import { getCollection } from 'astro:content';
 import Basis from '../layouts/Basis.astro';
+import { groepen } from '../lib/artikelgroepen';
+import { leestijd } from '../lib/leestijd';
+
+const alle = await getCollection('artikelen');
+const groepVolgorde = (id: string) => groepen.findIndex((g) => g.id === id);
+const artikelen = alle
+  .filter((a) => a.data.groep === 'basis' || a.data.groep === 'bediening')
+  .map((a) => ({ id: a.id, ...a.data, minuten: leestijd(a.body ?? '') }))
+  .sort((x, y) => groepVolgorde(x.groep) - groepVolgorde(y.groep) || x.volgorde - y.volgorde)
+  .slice(0, 3);
+
+const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 ---
 <Basis titel="Home" beschrijving="Bureau van Dockum ontwerpt en bouwt toegankelijke websites en webshops.">
-  <div class="wrap sectie">
-    <h1>Websites en webshops die voor iedereen werken.</h1>
-  </div>
+  <section class="hero" aria-labelledby="hero-titel">
+    <div class="wrap hero-grid">
+      <div class="hero-tekst">
+        <p class="eyebrow">Digitale toegankelijkheid, van praktijk tot webshop</p>
+        <h1 id="hero-titel">Websites en webshops die voor <em>iedereen</em> werken.</h1>
+        <p class="lead">Wij ontwerpen en bouwen toegankelijke websites en webshops voor de eerstelijnszorg, praktijken, verenigingen en online winkels. In WordPress, WooCommerce of Shopify, getoetst aan WCAG&nbsp;2.2 en getest met echte bezoekers.</p>
+        <div class="acties">
+          <a class="knop knop-primair" href="/terugbellen/">
+            <span>Plan een terugbelafspraak</span>
+            <span class="knop-icoon" aria-hidden="true" set:html={pijl} />
+          </a>
+          <a class="knop knop-secundair" href="/toegankelijke-website/advies/">Laat uw site scannen voor € 24</a>
+        </div>
+      </div>
+      <ul class="kenmerken" aria-label="Kenmerken">
+        <li><span class="kenmerk-nr" aria-hidden="true">01</span><span>Getoetst aan WCAG 2.2 niveau AA</span></li>
+        <li><span class="kenmerk-nr" aria-hidden="true">02</span><span>Getest met echte bezoekers</span></li>
+        <li><span class="kenmerk-nr" aria-hidden="true">03</span><span>WordPress, WooCommerce, Shopify, Drupal en HTML</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sectoren" aria-labelledby="sectoren-titel">
+    <div class="wrap sectoren-inner">
+      <h2 id="sectoren-titel" class="sectoren-titel">Wij werken voor</h2>
+      <ul class="sectoren-lijst">
+        <li>Eerstelijnszorg</li>
+        <li>Webshops</li>
+        <li>Praktijken</li>
+        <li>Verenigingen en clubs</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sectie diensten" aria-labelledby="diensten-titel">
+    <div class="wrap">
+      <header class="sectie-kop">
+        <p class="eyebrow">Wat wij doen</p>
+        <h2 id="diensten-titel">Drie disciplines, één standaard.</h2>
+      </header>
+      <div class="diensten-grid">
+        <article class="dienst">
+          <div class="dienst-binnen">
+            <span class="dienst-nr" aria-hidden="true">01</span>
+            <h3>Toegankelijke website</h3>
+            <p>Een nieuwe website of webshop, of uw bestaande site verbeterd tot WCAG&nbsp;2.2&nbsp;AA. In WordPress, WooCommerce of Shopify: goed leesbaar, te bedienen met toetsenbord en schermlezer, en snel op elk apparaat.</p>
+            <a class="tekstlink" href="/toegankelijke-website/">Zo pakken wij het aan<span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article class="dienst">
+          <div class="dienst-binnen">
+            <span class="dienst-nr" aria-hidden="true">02</span>
+            <h3>UX Testing</h3>
+            <p>Echte bezoekers testen uw site of webshop, van homepage tot afrekenen, onder wie mensen met een beperking. U ontvangt een helder rapport met verbeteringen, op volgorde van belang.</p>
+            <a class="tekstlink" href="/ux-testing/">Lees meer over UX Testing<span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article class="dienst">
+          <div class="dienst-binnen">
+            <span class="dienst-nr" aria-hidden="true">03</span>
+            <h3>Thema’s</h3>
+            <p>Kant-en-klare, toegankelijke thema’s voor WordPress en Shopify. Snel live, ingericht in uw huisstijl en met dezelfde zorg gebouwd als maatwerk.</p>
+            <a class="tekstlink" href="/themas/">Bekijk de thema’s<span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie advies" aria-labelledby="advies-titel">
+    <div class="wrap advies-inner">
+      <p class="eyebrow">Advies</p>
+      <h2 id="advies-titel">Advies voor uw huidige site</h2>
+      <p class="lead">Niet iedereen heeft een nieuwe site nodig. Wij zoeken uit hoe toegankelijk uw huidige site is en wat er beter moet, op elk platform.</p>
+      <div class="acties">
+        <a class="knop knop-primair" href="/bestellen/snelle-scan/">
+          <span>Bestel de snelle scan, € 24</span>
+          <span class="knop-icoon" aria-hidden="true" set:html={pijl} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement" aria-label="Onze overtuiging">
+    <div class="wrap">
+      <p class="statement-tekst">Toegankelijkheid is geen vinkje achteraf. <em>Het is gastvrijheid, vanaf de eerste schets.</em></p>
+    </div>
+  </section>
+
+  <section class="sectie werkwijze" id="werkwijze" aria-labelledby="werkwijze-titel">
+    <div class="wrap">
+      <header class="sectie-kop">
+        <p class="eyebrow">Werkwijze</p>
+        <h2 id="werkwijze-titel">Van eerste gesprek tot livegang.</h2>
+      </header>
+      <ol class="stappen">
+        <li class="stap"><h3>Kennismaking</h3><p>We bespreken uw organisatie, uw bezoekers en wat u met de website wilt bereiken.</p></li>
+        <li class="stap"><h3>Onderzoek</h3><p>We toetsen uw huidige website of webshop en brengen de knelpunten helder in kaart.</p></li>
+        <li class="stap"><h3>Ontwerp en bouw</h3><p>Maatwerk of een thema, altijd toegankelijk vanaf de basis.</p></li>
+        <li class="stap"><h3>Toetsing</h3><p>Vóór livegang testen echte bezoekers de site. Pas daarna gaat hij online.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sectie themas" aria-labelledby="themas-titel">
+    <div class="wrap">
+      <header class="sectie-kop">
+        <p class="eyebrow">Thema’s</p>
+        <h2 id="themas-titel">Thema’s om mee te starten</h2>
+      </header>
+      <div class="themas-tekst">
+        <p>Maatwerk is bijna altijd de beste oplossing: een website die precies past bij uw praktijk, club of winkel. Wilt u snel en voordelig starten? Dan zijn onze thema’s een goed alternatief. Ze zijn met dezelfde zorg gebouwd en vooraf getoetst aan WCAG 2.2 AA.</p>
+        <p>De eerste thema’s verschijnen hier zodra ze getest zijn.</p>
+        <a class="tekstlink" href="/themas/">Naar de thema’s<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie kennisbank" aria-labelledby="kennisbank-titel">
+    <div class="wrap">
+      <header class="sectie-kop">
+        <p class="eyebrow">Kennisbank</p>
+        <h2 id="kennisbank-titel">Uitleg over toegankelijkheid</h2>
+      </header>
+      <ul class="artikel-lijst">
+        {artikelen.map((a) => (
+          <li class="kaart">
+            <h3><a href={`/info/${a.id}/`}>{a.titel}</a></h3>
+            <p>{a.samenvatting}</p>
+            <p class="meta">Leestijd: {a.minuten} min</p>
+          </li>
+        ))}
+      </ul>
+      <p class="kennisbank-meer"><a class="tekstlink" href="/info/">Alle uitleg over toegankelijkheid<span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <section class="cta" id="kennismaken" aria-labelledby="cta-titel">
+    <div class="wrap">
+      <div class="cta-inner">
+        <p class="eyebrow">Kennismaken</p>
+        <h2 id="cta-titel">Zullen we kennismaken?</h2>
+        <p class="cta-tekst">Laat uw gegevens achter. Binnen één werkdag mailen we u een moment om te bellen.</p>
+        <div class="acties">
+          <a class="knop knop-primair" href="/terugbellen/">
+            <span>Plan een terugbelafspraak</span>
+            <span class="knop-icoon" aria-hidden="true" set:html={pijl} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Basis>

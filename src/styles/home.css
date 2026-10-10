@@ -1,0 +1,9 @@
+/* Alleen voor de homepage */
+.advies-inner { display: grid; justify-items: start; gap: 1.5rem; max-width: 48rem; }
+.advies-inner .lead { margin-top: 0; }
+.advies-inner .acties { margin-top: .5rem; }
+.themas-tekst { display: grid; justify-items: start; gap: 1.25rem; max-width: 40em; }
+.themas-tekst p:first-child { font-size: 1.1875rem; }
+.kennisbank-meer { margin-top: 2rem; }
+.kennisbank-meer .tekstlink { margin-top: 0; padding-top: 0; }
+.kennisbank .artikel-lijst { margin-top: 0; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
