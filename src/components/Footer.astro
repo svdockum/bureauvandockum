@@ -1,0 +1,24 @@
+---
+import { bedrijf } from '../lib/bedrijf';
+
+const links = [
+  { href: '/toegankelijke-website/', label: 'Toegankelijke website' },
+  { href: '/ux-testing/', label: 'UX Testing' },
+  { href: '/themas/', label: 'Thema’s' },
+  { href: '/info/', label: 'Info' },
+  { href: '/toegankelijkheidsverklaring/', label: 'Toegankelijkheidsverklaring' },
+  { href: '/privacy/', label: 'Privacy' },
+  { href: '/voorwaarden/', label: 'Voorwaarden' },
+];
+---
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-merk">Bureau <span>van Dockum</span></p>
+    <nav class="footer-nav" aria-label="Footermenu">
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <p class="footer-klein">© {new Date().getFullYear()} {bedrijf.naam} · <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a></p>
+  </div>
+</footer>

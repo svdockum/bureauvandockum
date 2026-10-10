@@ -1,0 +1,30 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '../styles/basis.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props { titel: string; beschrijving: string }
+const { titel, beschrijving } = Astro.props;
+const volledig = titel === 'Home'
+  ? 'Bureau van Dockum — toegankelijke websites en webshops'
+  : `${titel} — Bureau van Dockum`;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{volledig}</title>
+    <meta name="description" content={beschrijving} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skiplink" href="#inhoud">Naar de inhoud</a>
+    <Header />
+    <main id="inhoud" tabindex="-1"><slot /></main>
+    <Footer />
+  </body>
+</html>

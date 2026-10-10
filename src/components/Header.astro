@@ -1,0 +1,50 @@
+---
+const pad = Astro.url.pathname;
+const menu = [
+  { href: '/toegankelijke-website/', label: 'Toegankelijke website' },
+  { href: '/ux-testing/', label: 'UX Testing' },
+  { href: '/themas/', label: 'Thema’s' },
+  { href: '/info/', label: 'Info' },
+];
+const huidig = (href: string) => (pad === href ? 'page' : pad.startsWith(href) ? 'true' : undefined);
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="merk" href="/">
+      <span class="merk-teken" aria-hidden="true"></span>
+      <span class="merk-tekst">Bureau <span class="merk-b">van Dockum</span></span>
+    </a>
+    <button class="menu-knop" type="button" aria-expanded="false" aria-controls="nav-paneel">
+      <span class="menu-knop-lijnen" aria-hidden="true"><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+    <div class="nav-paneel" id="nav-paneel">
+      <nav class="hoofdmenu" aria-label="Hoofdmenu">
+        <ul>
+          {menu.map((item) => (
+            <li><a href={item.href} aria-current={huidig(item.href)}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <a class="knop knop-primair header-cta" href="/terugbellen/">Plan een terugbelafspraak</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const knop = header?.querySelector<HTMLButtonElement>('.menu-knop');
+  if (header && knop) {
+    const zet = (open: boolean) => {
+      header.classList.toggle('is-open', open);
+      knop.setAttribute('aria-expanded', String(open));
+    };
+    knop.addEventListener('click', () => zet(knop.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) {
+        zet(false);
+        knop.focus();
+      }
+    });
+  }
+</script>
