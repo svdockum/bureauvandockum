@@ -1,0 +1,39 @@
+---
+import Basis from '../layouts/Basis.astro';
+import LeesOok from '../components/LeesOok.astro';
+import Kennismaken from '../components/Kennismaken.astro';
+---
+<Basis titel="UX Testing" beschrijving="Echte bezoekers testen uw site of webshop, onder wie mensen met een beperking. U krijgt een helder rapport met verbeteringen.">
+  <div class="wrap pagina">
+    <h1>UX Testing</h1>
+    <p class="lead">Echte bezoekers testen uw site of webshop, van de homepage tot afrekenen. Onder hen zijn mensen met een beperking. Zo ziet u waar het misgaat, voordat uw klanten afhaken.</p>
+
+    <section class="pagina-sectie" aria-labelledby="verloop-titel">
+      <h2 id="verloop-titel">Hoe een test verloopt</h2>
+      <ol>
+        <li><strong>Kennismaking.</strong> We bespreken uw organisatie, uw bezoekers en wat u wilt weten.</li>
+        <li><strong>Testplan.</strong> Wij maken de opdrachten voor de test, zoals “zoek de openingstijden” of “bestel een product”.</li>
+        <li><strong>Sessies.</strong> Echte bezoekers voeren die opdrachten uit op uw site. Onder hen zijn mensen met een beperking.</li>
+        <li><strong>Rapport.</strong> U krijgt een helder rapport met wat we zagen en wat u kunt verbeteren.</li>
+      </ol>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="krijgt-titel">
+      <h2 id="krijgt-titel">Wat u krijgt</h2>
+      <p>Een rapport in gewone taal. Alle verbeteringen staan op volgorde van belang. Zo weet u wat u als eerste oplost.</p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="voor-wie-titel">
+      <h2 id="voor-wie-titel">Voor wie</h2>
+      <ul>
+        <li>Eerstelijnszorg</li>
+        <li>Webshops</li>
+        <li>Praktijken</li>
+        <li>Verenigingen en clubs</li>
+      </ul>
+    </section>
+  </div>
+
+  <LeesOok ids={['alles-met-het-toetsenbord', 'formulieren-die-iedereen-kan-invullen']} />
+  <Kennismaken />
+</Basis>

@@ -1,0 +1,53 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import LeesOok from '../../components/LeesOok.astro';
+import Kennismaken from '../../components/Kennismaken.astro';
+---
+<Basis titel="Toegankelijke website" beschrijving="Een nieuwe toegankelijke website of webshop, of uw huidige site verbeterd tot WCAG 2.2 AA.">
+  <div class="wrap pagina">
+    <p class="eyebrow">Toegankelijke website</p>
+    <h1>Een website die voor iedereen werkt</h1>
+    <p class="lead">Wij bouwen nieuwe websites en webshops. Of we maken uw huidige site beter. Altijd getoetst aan WCAG&nbsp;2.2 AA en getest met echte bezoekers.</p>
+
+    <section class="pagina-sectie" aria-labelledby="nieuw-titel">
+      <h2 id="nieuw-titel">Een nieuwe site of webshop</h2>
+      <p>Wij bouwen in het platform dat bij u past. U kiest, of wij adviseren u.</p>
+      <ul>
+        <li><strong>WordPress:</strong> voor wie zelf veel bijhoudt, zoals nieuws en een agenda.</li>
+        <li><strong>WooCommerce:</strong> voor een webshop in WordPress, helemaal in eigen hand.</li>
+        <li><strong>Shopify:</strong> voor een webshop zonder gedoe met hosting en updates.</li>
+        <li><strong>Drupal:</strong> voor grotere organisaties met veel inhoud en veel redacteuren.</li>
+        <li><strong>HTML:</strong> voor een site die weinig verandert. Bijna geen onderhoud.</li>
+      </ul>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="huidig-titel">
+      <h2 id="huidig-titel">Uw huidige site verbeteren</h2>
+      <p>Heeft u al een site? Dan hoeft u niet opnieuw te beginnen. Wij zoeken uit hoe toegankelijk uw site is en wat er beter moet. Ook als een ander bureau hem heeft gebouwd.</p>
+      <p><a href="/toegankelijke-website/advies/">Lees over ons advies voor uw huidige site</a></p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="eaa-titel">
+      <h2 id="eaa-titel">De European Accessibility Act</h2>
+      <p>Sinds juni 2025 moeten veel webshops en online diensten toegankelijk zijn. Geldt dat ook voor u? Dat leggen wij u uit.</p>
+      <p><a href="/info/european-accessibility-act-webshop/">Lees: geldt de European Accessibility Act voor uw webshop?</a></p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="krijgt-titel">
+      <h2 id="krijgt-titel">Wat u van ons krijgt</h2>
+      <ul>
+        <li>Een site die voldoet aan WCAG 2.2 AA. Wij toetsen automatisch met axe en met de hand, met toetsenbord, schermlezers, 200% zoom en een scherm van 320 pixels breed.</li>
+        <li>Een test met minstens vijf echte bezoekers, onder wie mensen met een beperking. Wat ze vinden lossen wij op voordat uw site online gaat.</li>
+        <li>Voorbeeldteksten op B1-niveau, zodat iedereen uw tekst begrijpt.</li>
+        <li>Een korte handleiding: zo houdt u uw site zelf toegankelijk.</li>
+        <li>Een contrastcheck op de kleuren van uw huisstijl.</li>
+        <li>Een sjabloon voor uw toegankelijkheidsverklaring.</li>
+        <li>Een snelle site op een gewone telefoon.</li>
+        <li>Geen tracking van derden, en lettertypes die wij zelf hosten.</li>
+      </ul>
+    </section>
+  </div>
+
+  <LeesOok ids={['wat-is-digitale-toegankelijkheid', 'european-accessibility-act-webshop', 'overlays-en-plugins-afgeraden']} />
+  <Kennismaken />
+</Basis>

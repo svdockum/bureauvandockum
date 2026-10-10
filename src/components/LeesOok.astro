@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import { leestijd } from '../lib/leestijd';
+
+interface Props { ids: string[] }
+const { ids } = Astro.props;
+const alle = await getCollection('artikelen');
+const artikelen = ids
+  .map((id) => alle.find((a) => a.id === id))
+  .filter((a) => a !== undefined)
+  .map((a) => ({ id: a.id, ...a.data, minuten: leestijd(a.body ?? '') }));
+---
+<section class="sectie lees-ook" aria-labelledby="lees-ook-titel">
+  <div class="wrap">
+    <h2 id="lees-ook-titel">Lees ook</h2>
+    <ul class="artikel-lijst">
+      {artikelen.map((a) => (
+        <li class="kaart">
+          <h3><a href={`/info/${a.id}/`}>{a.titel}</a></h3>
+          <p>{a.samenvatting}</p>
+          <p class="meta">Leestijd: {a.minuten} min</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

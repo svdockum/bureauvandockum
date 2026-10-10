@@ -1,0 +1,55 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import LeesOok from '../../components/LeesOok.astro';
+import Kennismaken from '../../components/Kennismaken.astro';
+---
+<Basis titel="Advies voor uw huidige site" beschrijving="Een snelle scan van € 24, een volledige audit of begeleiding en hertest voor uw bestaande website.">
+  <div class="wrap pagina">
+    <p class="eyebrow"><a href="/toegankelijke-website/">Toegankelijke website</a></p>
+    <h1>Advies voor uw huidige site</h1>
+    <p class="lead">Niet iedereen heeft een nieuwe site nodig. Wij zoeken uit hoe toegankelijk uw huidige site is en wat er beter moet. Op elk platform, ook als een ander hem heeft gebouwd.</p>
+
+    <section class="pagina-sectie" aria-labelledby="vormen-titel">
+      <h2 id="vormen-titel">Drie vormen van advies</h2>
+      <ul class="kaarten">
+        <li class="kaart">
+          <h3>Snelle scan</h3>
+          <p class="prijs">€ 24</p>
+          <p>Inclusief btw. U bestelt online en betaalt vooraf. U krijgt binnen vijf werkdagen een kort rapport in gewone taal met de tien grootste problemen. Ook leest u wat oplossen ongeveer kost.</p>
+          <div class="acties">
+            <a class="knop knop-primair" href="/bestellen/snelle-scan/"><span>Bestel de snelle scan</span></a>
+          </div>
+        </li>
+        <li class="kaart">
+          <h3>Volledige audit</h3>
+          <p class="prijs">Op offerte</p>
+          <p>Een complete toets aan WCAG 2.2 AA op een steekproef van pagina’s, volgens WCAG-EM. U krijgt een rapport per succescriterium, een verbeterplan op volgorde van belang en de basis voor een toegankelijkheidsverklaring.</p>
+          <div class="acties">
+            <a class="knop knop-secundair" href="/terugbellen/"><span>Plan een terugbelafspraak</span></a>
+          </div>
+        </li>
+        <li class="kaart">
+          <h3>Begeleiding en hertest</h3>
+          <p class="prijs">Op offerte</p>
+          <p>Wij helpen uw eigen bouwer of IT-partij met de verbeteringen. Daarna testen we opnieuw. U krijgt een bijgewerkt rapport en een actuele toegankelijkheidsverklaring.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="scan-titel">
+      <h2 id="scan-titel">Wat we bij de snelle scan bekijken</h2>
+      <p>U geeft bij het bestellen het webadres op. Wij bekijken de belangrijkste pagina’s:</p>
+      <ul>
+        <li>de homepage;</li>
+        <li>de contactpagina;</li>
+        <li>een formulier;</li>
+        <li>bij een webshop: de weg naar afrekenen.</li>
+      </ul>
+      <p>Dat doen we automatisch en met de hand, met toetsenbord en schermlezer.</p>
+      <p>De snelle scan is een goede eerste stap. Daarna volgt vaak een audit, een UX-test of een nieuwe site.</p>
+    </section>
+  </div>
+
+  <LeesOok ids={['zelf-testen-in-tien-minuten', 'kleurcontrast-controleren']} />
+  <Kennismaken />
+</Basis>
