@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import { groepen } from '../../lib/artikelgroepen';
+import { leestijd } from '../../lib/leestijd';
+
+export async function getStaticPaths() {
+  const artikelen = await getCollection('artikelen');
+  return artikelen.map((artikel) => ({ params: { id: artikel.id }, props: { artikel } }));
+}
+
+const { artikel } = Astro.props;
+const { Content } = await render(artikel);
+const groep = groepen.find((g) => g.id === artikel.data.groep)!;
+const datum = (d: Date) => d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Basis titel={artikel.data.titel} beschrijving={artikel.data.samenvatting}>
+  <article class="wrap artikel">
+    <p class="eyebrow"><a href={`/info/#groep-${groep.id}`}>{groep.naam}</a></p>
+    <h1>{artikel.data.titel}</h1>
+    <p class="lead">{artikel.data.samenvatting}</p>
+    <p class="artikel-meta">
+      Leestijd: {leestijd(artikel.body ?? '')} min ·
+      Gepubliceerd <time datetime={artikel.data.gepubliceerd.toISOString().slice(0, 10)}>{datum(artikel.data.gepubliceerd)}</time> ·
+      Laatst gecontroleerd <time datetime={artikel.data.gecontroleerd.toISOString().slice(0, 10)}>{datum(artikel.data.gecontroleerd)}</time>
+    </p>
+    <div class="artikel-tekst"><Content /></div>
+    {artikel.data.wcag.length > 0 && (
+      <aside class="artikel-wcag" aria-labelledby="wcag-titel">
+        <h2 id="wcag-titel">Uit de richtlijnen</h2>
+        <ul>{artikel.data.wcag.map((c) => <li><a href={c.url}>{c.nummer}: {c.naam}</a></li>)}</ul>
+      </aside>
+    )}
+    <p><a class="knop knop-primair" href={artikel.data.verwijzing.href}>{artikel.data.verwijzing.tekst}</a></p>
+  </article>
+</Basis>

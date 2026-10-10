@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import { groepen } from '../../lib/artikelgroepen';
+import { leestijd } from '../../lib/leestijd';
+
+const alle = await getCollection('artikelen');
+const artikelen = alle.map((a) => ({ id: a.id, ...a.data, minuten: leestijd(a.body ?? '') }));
+const perGroep = groepen.map((g) => ({
+  ...g,
+  artikelen: artikelen.filter((a) => a.groep === g.id).sort((x, y) => x.volgorde - y.volgorde),
+}));
+const aantal = (n: number) => (n === 1 ? '1 artikel' : `${n} artikelen`);
+---
+<Basis titel="Info" beschrijving="Wie zit er achter Bureau van Dockum, en vaste uitleg over digitale toegankelijkheid in de kennisbank.">
+  <div class="wrap info">
+    <h1>Info</h1>
+
+    <section class="sectie info-sectie" aria-labelledby="wie-titel">
+      <!-- TIJDELIJK: echte tekst en foto volgen (bouwplan, besluit 13) -->
+      <h2 id="wie-titel">Wie zit er achter Bureau van Dockum?</h2>
+      <p class="lead">Achter Bureau van Dockum zit Stefan van Dockum. Wij maken websites en webshops die voor iedereen werken, en we testen ze met echte bezoekers. Wilt u weten wat wij voor u kunnen doen? Plan een terugbelafspraak.</p>
+    </section>
+
+    <section class="sectie info-sectie" aria-labelledby="kennisbank-titel">
+      <h2 id="kennisbank-titel">Kennisbank</h2>
+      <p class="lead">Vaste uitleg over toegankelijkheid, per onderwerp. Kies een onderwerp of lees verder.</p>
+
+      <ul class="groep-raster">
+        {perGroep.map((g) => (
+          <li class="kaart groep-tegel">
+            <h3>
+              {g.artikelen.length > 0 ? <a href={`#groep-${g.id}`}>{g.naam}</a> : g.naam}
+            </h3>
+            <p>{g.uitleg}</p>
+            <p class="meta">{g.artikelen.length > 0 ? aantal(g.artikelen.length) : 'Volgt nog'}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {perGroep.filter((g) => g.artikelen.length > 0).map((g) => (
+      <section class="info-groep" id={`groep-${g.id}`} aria-labelledby={`groep-titel-${g.id}`}>
+        <h2 id={`groep-titel-${g.id}`}>{g.naam}</h2>
+        <ul class="artikel-lijst">
+          {g.artikelen.map((a) => (
+            <li class="kaart">
+              <h3><a href={`/info/${a.id}/`}>{a.titel}</a></h3>
+              <p>{a.samenvatting}</p>
+              <p class="meta">Leestijd: {a.minuten} min</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Basis>
