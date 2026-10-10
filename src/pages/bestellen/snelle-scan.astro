@@ -1,0 +1,54 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { bedrijf, FUNCTIONS_URL } from '../../lib/bedrijf';
+import '../../styles/formulieren.css';
+---
+<Basis titel="Snelle scan bestellen" beschrijving="Een snelle toegankelijkheidsscan van uw website voor € 24, inclusief btw. U krijgt het rapport binnen vijf werkdagen.">
+  <div class="wrap pagina">
+    <h1>Snelle scan bestellen</h1>
+    <p class="lead">We bekijken uw website op de meest voorkomende toegankelijkheidsproblemen. U krijgt binnen vijf werkdagen een rapport met wat we vinden en wat u als eerste kunt aanpakken.</p>
+    <p><strong>€ 24, inclusief btw.</strong> U betaalt via Mollie: iDEAL, creditcard of Bancontact.</p>
+
+    <form class="formulier" method="post" action={`${FUNCTIONS_URL}/bestelling-starten`} data-controleer>
+      <div class="foutoverzicht" tabindex="-1" hidden>
+        <h2>Controleer deze velden</h2>
+        <ul></ul>
+      </div>
+      <input type="hidden" name="product" value="snelle-scan" />
+      <div class="veld">
+        <label for="naam">Naam</label>
+        <input id="naam" name="naam" autocomplete="name" required maxlength="120" aria-describedby="naam-fout" data-fout="Vul uw naam in." />
+        <p class="veldfout" id="naam-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="email">E-mailadres</label>
+        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
+        <p class="veldfout" id="email-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="bedrijf">Bedrijfsnaam (niet verplicht)</label>
+        <input id="bedrijf" name="bedrijf" autocomplete="organization" maxlength="120" aria-describedby="bedrijf-fout" />
+        <p class="veldfout" id="bedrijf-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="website">Webadres van uw site</label>
+        <input id="website" name="website" type="text" inputmode="url" autocomplete="url" required maxlength="300" aria-describedby="website-fout" data-fout="Vul het webadres in dat we scannen, zoals www.uwpraktijk.nl." />
+        <p class="veldfout" id="website-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label class="keuze" for="akkoord">
+          <input id="akkoord" name="akkoord" type="checkbox" value="ja" required aria-describedby="akkoord-fout" data-fout="Ga akkoord met de voorwaarden om te bestellen." />
+          <span>Ik ga akkoord met de <a href="/voorwaarden/">voorwaarden</a></span>
+        </label>
+        <p class="veldfout" id="akkoord-fout" hidden></p>
+      </div>
+      <div class="lokveld" aria-hidden="true">
+        <label for="adres2">Laat dit veld leeg</label>
+        <input id="adres2" name="adres2" tabindex="-1" autocomplete="off" />
+      </div>
+      <button class="knop knop-primair" type="submit">Bestellen en betalen</button>
+      <p>Vragen vooraf? Mail ons op <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a></p>
+    </form>
+  </div>
+  <script>import '../../scripts/formulier';</script>
+</Basis>

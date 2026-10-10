@@ -1,0 +1,75 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { bedrijf, FUNCTIONS_URL } from '../../lib/bedrijf';
+import '../../styles/formulieren.css';
+---
+<Basis titel="Plan een terugbelafspraak" beschrijving="Laat uw gegevens achter. Binnen één werkdag mailen we u een moment om te bellen.">
+  <div class="wrap pagina">
+    <h1>Plan een terugbelafspraak</h1>
+    <p class="lead">Laat uw gegevens achter. Binnen één werkdag mailen we u een moment om te bellen.</p>
+
+    <form class="formulier" method="post" action={`${FUNCTIONS_URL}/terugbellen`} data-controleer>
+      <div class="foutoverzicht" tabindex="-1" hidden>
+        <h2>Controleer deze velden</h2>
+        <ul></ul>
+      </div>
+      <div class="veld">
+        <label for="naam">Naam</label>
+        <input id="naam" name="naam" autocomplete="name" required maxlength="120" aria-describedby="naam-fout" data-fout="Vul uw naam in." />
+        <p class="veldfout" id="naam-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="email">E-mailadres</label>
+        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
+        <p class="veldfout" id="email-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="telefoon">Telefoonnummer</label>
+        <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" pattern="[0-9+ \(\)\-]{10,}" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
+        <p class="veldfout" id="telefoon-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="onderwerp">Waar gaat het over?</label>
+        <select id="onderwerp" name="onderwerp" required aria-describedby="onderwerp-fout" data-fout="Kies waar het over gaat.">
+          <option value="">Kies een onderwerp</option>
+          <option value="toegankelijke-website">Een toegankelijke website</option>
+          <option value="advies">Advies</option>
+          <option value="ux-testing">UX-testing</option>
+          <option value="thema">Een thema</option>
+          <option value="anders">Iets anders</option>
+        </select>
+        <p class="veldfout" id="onderwerp-fout" hidden></p>
+      </div>
+      <div class="veld">
+        <label for="dag">Welke dag past het best?</label>
+        <select id="dag" name="dag" aria-describedby="dag-fout" data-fout="Kies een dag.">
+          <option value="maakt-niet-uit" selected>Maakt niet uit</option>
+          <option value="maandag">Maandag</option>
+          <option value="dinsdag">Dinsdag</option>
+          <option value="woensdag">Woensdag</option>
+          <option value="donderdag">Donderdag</option>
+          <option value="vrijdag">Vrijdag</option>
+        </select>
+        <p class="veldfout" id="dag-fout" hidden></p>
+      </div>
+      <fieldset class="veld keuzes">
+        <legend>Welk dagdeel?</legend>
+        <label class="keuze"><input type="radio" id="dagdeel-ochtend" name="dagdeel" value="ochtend" /> Ochtend</label>
+        <label class="keuze"><input type="radio" id="dagdeel-middag" name="dagdeel" value="middag" /> Middag</label>
+        <label class="keuze"><input type="radio" id="dagdeel-maakt-niet-uit" name="dagdeel" value="maakt-niet-uit" checked /> Maakt niet uit</label>
+      </fieldset>
+      <div class="veld">
+        <label for="vraag">Uw vraag (niet verplicht)</label>
+        <textarea id="vraag" name="vraag" rows="5" maxlength="2000" aria-describedby="vraag-fout"></textarea>
+        <p class="veldfout" id="vraag-fout" hidden></p>
+      </div>
+      <div class="lokveld" aria-hidden="true">
+        <label for="adres2">Laat dit veld leeg</label>
+        <input id="adres2" name="adres2" tabindex="-1" autocomplete="off" />
+      </div>
+      <button class="knop knop-primair" type="submit">Verstuur aanvraag</button>
+      <p>Liever zelf mailen? <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a></p>
+    </form>
+  </div>
+  <script>import '../../scripts/formulier';</script>
+</Basis>

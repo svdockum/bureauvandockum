@@ -1,0 +1,11 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { bedrijf } from '../../lib/bedrijf';
+---
+<Basis titel="Uw betaling wordt verwerkt" beschrijving="We verwerken uw betaling.">
+  <div class="wrap pagina">
+    <h1>Uw betaling wordt verwerkt</h1>
+    <p class="lead">Dat duurt soms even. Zodra de betaling binnen is, krijgt u een bevestiging per e-mail. U hoeft niets te doen. Geen mail binnen een uur? Mail ons op <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>.</p>
+    <p><a class="knop knop-secundair" href="/info/">Lees onze tips in Info</a></p>
+  </div>
+</Basis>

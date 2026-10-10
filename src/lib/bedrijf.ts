@@ -10,4 +10,4 @@ export const bedrijf = {
 } as const;
 
 export const FUNCTIONS_URL: string =
-  import.meta.env.PUBLIC_FUNCTIONS_URL ?? 'http://127.0.0.1:54321/functions/v1';
+  import.meta.env.PUBLIC_FUNCTIONS_URL ?? 'http://127.0.0.1:54521/functions/v1';

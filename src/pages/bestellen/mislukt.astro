@@ -1,0 +1,11 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { bedrijf } from '../../lib/bedrijf';
+---
+<Basis titel="De bestelling is niet gelukt" beschrijving="Er is niets besteld.">
+  <div class="wrap pagina">
+    <h1>De bestelling is niet gelukt</h1>
+    <p class="lead">Er is niets afgeschreven, of de betaling is afgebroken. Probeer het opnieuw, of mail ons op <a href={`mailto:${bedrijf.email}`}>{bedrijf.email}</a>.</p>
+    <p><a class="knop knop-primair" href="/bestellen/snelle-scan/">Opnieuw bestellen</a></p>
+  </div>
+</Basis>

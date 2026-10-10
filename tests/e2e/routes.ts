@@ -18,4 +18,11 @@ export const routes: string[] = [
   '/toegankelijkheidsverklaring/',
   '/privacy/',
   '/voorwaarden/',
+  '/terugbellen/',
+  '/terugbellen/verzonden/',
+  '/terugbellen/niet-verzonden/',
+  '/bestellen/snelle-scan/',
+  '/bestellen/gelukt/',
+  '/bestellen/bezig/',
+  '/bestellen/mislukt/',
 ];
