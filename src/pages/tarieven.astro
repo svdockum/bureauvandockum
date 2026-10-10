@@ -1,0 +1,47 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Kennismaken from '../components/Kennismaken.astro';
+---
+<Basis titel="Tarieven" beschrijving="Voor ieder budget een oplossing: een vast bedrag voor maatwerk vanaf € 1.500, of een abonnement vanaf € 59 per maand.">
+  <div class="wrap pagina">
+    <h1>Tarieven</h1>
+    <p class="lead">Voor ieder budget een oplossing. U kiest voor een vast bedrag of voor een abonnement.</p>
+
+    <section class="pagina-sectie">
+      <div class="kaarten">
+        <article class="kaart" aria-labelledby="vast-titel">
+          <h2 id="vast-titel">Vast bedrag</h2>
+          <p class="prijs-groot"><span class="prijs-vanaf">Maatwerk vanaf</span> <span class="prijs-bedrag">€ 1.500</span></p>
+          <p>U betaalt één keer voor ontwerp en bouw van uw website of webshop. Toegankelijk volgens WCAG 2.2 AA en getest met echte bezoekers. Daarna is de site van u.</p>
+        </article>
+        <article class="kaart" aria-labelledby="abonnement-titel">
+          <h2 id="abonnement-titel">Abonnement</h2>
+          <p class="prijs-groot"><span class="prijs-vanaf">Vanaf</span> <span class="prijs-bedrag">€ 59</span> <span class="prijs-vanaf">per maand</span></p>
+          <p>Full service: wij bouwen de site en blijven helpen. Daar hoort bij:</p>
+          <ul>
+            <li>hulp bij teksten en content</li>
+            <li>updates en beveiliging</li>
+            <li>de site toegankelijk houden</li>
+            <li>kleine aanpassingen</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="scan-titel">
+      <h2 id="scan-titel">Liever eerst weten waar u staat?</h2>
+      <p>Een snelle scan van uw huidige site kost € 24.</p>
+      <p class="acties"><a class="knop knop-secundair" href="/bestellen/snelle-scan/">Bestel de snelle scan</a></p>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="maat-titel">
+      <h2 id="maat-titel">Op maat</h2>
+      <p>Audits, UX-tests en begeleiding gaan op offerte.</p>
+      <p class="acties"><a class="knop knop-primair" href="/terugbellen/">Plan een terugbelafspraak</a></p>
+    </section>
+
+    <p class="btw-noot">Alle prijzen zijn inclusief btw.</p>
+  </div>
+
+  <Kennismaken />
+</Basis>

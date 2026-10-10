@@ -125,6 +125,8 @@ h3 {
   transition: background-size .5s var(--ease);
 }
 .hoofdmenu a:hover { background-size: 100% 1px; }
+@media (min-width: 60.0625rem) and (max-width: 66rem) { .header-inner { gap: 1rem; } .nav-paneel { gap: 1rem; } .hoofdmenu ul { gap: .875rem; } .hoofdmenu a { font-size: .875rem; } .header-cta { padding-inline: 1rem; } }
+@media (min-width: 60.0625rem) and (max-width: 75rem) { .nav-paneel { gap: 1.5rem; } .hoofdmenu ul { gap: 1.25rem; } .header-cta { white-space: nowrap; } }
 .menu-knop { display: none; }
 
 @media (max-width: 60rem) {
@@ -412,6 +414,11 @@ h1 em { font-style: normal; color: var(--muted); }
 .pagina-sectie .kaarten { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); max-width: none; margin-top: 2rem; }
 .kaarten .kaart { display: flex; flex-direction: column; gap: .75rem; margin-top: 0; }
 .kaarten .kaart .acties { margin-top: auto; padding-top: 1rem; }
+.kaart .prijs-groot { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .5rem; }
+.prijs-bedrag { font-size: clamp(2.25rem, 6vw, 3rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+.prijs-vanaf { color: var(--muted); }
+.kaart ul { list-style: disc; padding-left: 1.5em; }
+.btw-noot { margin-top: 2.5rem; color: var(--muted); font-size: .875rem; }
 .kaart .prijs { font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; }
 .pagina-sectie .platforms { display: grid; gap: 1rem; margin-top: 2rem; }
 .platforms li { padding-top: 1rem; border-top: 1px solid var(--ink); margin-top: 0; }

@@ -5,6 +5,7 @@ export const routes: string[] = [
   '/toegankelijke-website/advies/',
   '/ux-testing/',
   '/themas/',
+  '/tarieven/',
   '/info/',
   '/info/wat-is-digitale-toegankelijkheid/',
   '/info/european-accessibility-act-webshop/',

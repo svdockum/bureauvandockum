@@ -10,10 +10,10 @@ test('de eerste Tab toont de skiplink en die springt naar de inhoud', async ({ p
   await expect(page.locator('main')).toBeFocused();
 });
 
-test('het hoofdmenu heeft precies vier items in de goede volgorde', async ({ page }) => {
+test('het hoofdmenu heeft precies vijf items in de goede volgorde', async ({ page }) => {
   await page.goto('/');
   const items = page.getByRole('navigation', { name: 'Hoofdmenu' }).getByRole('link');
-  await expect(items).toHaveText(['Toegankelijke website', 'UX Testing', 'Thema’s', 'Info']);
+  await expect(items).toHaveText(['Toegankelijke website', 'UX Testing', 'Thema’s', 'Tarieven', 'Info']);
 });
 
 test('mobiel menu opent, sluit met Escape en geeft de focus terug', async ({ page }) => {
