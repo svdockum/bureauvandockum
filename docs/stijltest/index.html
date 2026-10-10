@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="nl" data-stijl="raster" data-basis="raster">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stijltest — Bureau van Dockum</title>
+  <meta name="description" content="Bureau van Dockum ontwerpt en bouwt toegankelijke websites en webshops in WordPress, WooCommerce en Shopify.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E1B17'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='14' fill='%23F4EFE7' text-anchor='middle'%3EvD%3C/text%3E%3C/svg%3E">
+  <script>
+    // Stijl zetten vóór de eerste paint, zodat er niet eerst een andere stijl flitst.
+    (function () {
+      var geldig = ['mix-a', 'mix-b', 'mix-c', 'editoriaal', 'raster', 'studio', 'nachtblauw', 'kaartenbak'];
+      var stijl = new URLSearchParams(location.search).get('stijl');
+      if (geldig.indexOf(stijl) < 0) {
+        try { stijl = localStorage.getItem('bvd-stijl'); } catch (e) { stijl = null; }
+      }
+      if (geldig.indexOf(stijl) < 0) stijl = 'raster';
+      // De mixen bouwen op Raster: data-basis laat de Raster-regels ook voor hen gelden.
+      document.documentElement.dataset.stijl = stijl;
+      document.documentElement.dataset.basis = stijl === 'raster' || stijl.indexOf('mix-') === 0 ? 'raster' : stijl;
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="css/basis.css">
+  <link rel="stylesheet" href="css/stijl-editoriaal.css">
+  <link rel="stylesheet" href="css/stijl-raster.css">
+  <link rel="stylesheet" href="css/stijl-studio.css">
+  <link rel="stylesheet" href="css/stijl-nachtblauw.css">
+  <link rel="stylesheet" href="css/stijl-kaartenbak.css">
+  <link rel="stylesheet" href="css/stijl-mixen.css">
+</head>
+<body>
+  <a class="skiplink" href="#inhoud">Naar de inhoud</a>
+
+  <div class="stijlkiezer" role="region" aria-label="Stijlkiezer">
+    <p class="stijlkiezer-label" id="stijlkiezer-label">Stijl</p>
+    <div class="stijlkiezer-knoppen" role="group" aria-labelledby="stijlkiezer-label">
+      <button type="button" data-kies-stijl="mix-a" aria-pressed="true"><span class="nr">A</span> Rond</button>
+      <button type="button" data-kies-stijl="mix-b" aria-pressed="false"><span class="nr">B</span> Serif-accent</button>
+      <button type="button" data-kies-stijl="mix-c" aria-pressed="false"><span class="nr">C</span> Serif-koppen</button>
+      <span class="stijlkiezer-scheiding" aria-hidden="true"></span>
+      <button type="button" data-kies-stijl="editoriaal" aria-pressed="false"><span class="nr">1</span> Editoriaal</button>
+      <button type="button" data-kies-stijl="raster" aria-pressed="false"><span class="nr">2</span> Raster</button>
+      <button type="button" data-kies-stijl="studio" aria-pressed="false"><span class="nr">3</span> Studio</button>
+      <button type="button" data-kies-stijl="nachtblauw" aria-pressed="false"><span class="nr">4</span> Nachtblauw</button>
+      <button type="button" data-kies-stijl="kaartenbak" aria-pressed="false"><span class="nr">5</span> Kaartenbak</button>
+    </div>
+    <p class="stijlkiezer-uitleg" aria-live="polite"></p>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="merk" href="index.html">
+        <span class="merk-teken" aria-hidden="true">vD</span>
+        <span class="merk-tekst"><span class="merk-a">Bureau</span> <span class="merk-b">van Dockum</span></span>
+      </a>
+      <button class="menu-knop" type="button" aria-expanded="false" aria-controls="nav-paneel">
+        <span class="menu-knop-lijnen" aria-hidden="true"><span></span><span></span></span>
+        <span>Menu</span>
+      </button>
+      <div class="nav-paneel" id="nav-paneel">
+        <nav class="hoofdmenu" aria-label="Hoofdmenu">
+          <ul>
+            <li><a href="#toegankelijk">Toegankelijke website</a></li>
+            <li><a href="#ux-testing">UX Testing</a></li>
+            <li><a href="#themas">Thema’s</a></li>
+          </ul>
+        </nav>
+        <a class="knop knop-primair header-cta" href="#kennismaken">Plan een kennismaking</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inhoud" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-titel">
+      <div class="wrap hero-grid">
+        <div class="hero-tekst">
+          <p class="eyebrow reveal">Digitale toegankelijkheid, van praktijk tot webshop</p>
+          <h1 id="hero-titel" class="reveal">Websites en webshops die voor <em>iedereen</em> werken.</h1>
+          <p class="lead reveal">Wij ontwerpen en bouwen toegankelijke websites en webshops voor de eerstelijnszorg, praktijken, verenigingen en online winkels. In WordPress, WooCommerce of Shopify, getoetst aan WCAG&nbsp;2.2 en getest met echte bezoekers.</p>
+          <div class="acties reveal">
+            <a class="knop knop-primair" href="#kennismaken">
+              <span>Plan een kennismaking</span>
+              <span class="knop-icoon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+            <a class="knop knop-secundair" href="#themas">Bekijk de thema’s</a>
+          </div>
+        </div>
+        <ul class="kenmerken reveal" aria-label="Kenmerken">
+          <li><span class="kenmerk-nr" aria-hidden="true">01</span><span>Getoetst aan WCAG 2.2 niveau AA</span></li>
+          <li><span class="kenmerk-nr" aria-hidden="true">02</span><span>Getest met echte bezoekers</span></li>
+          <li><span class="kenmerk-nr" aria-hidden="true">03</span><span>WordPress, WooCommerce en Shopify</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sectoren" aria-labelledby="sectoren-titel">
+      <div class="wrap sectoren-inner">
+        <h2 id="sectoren-titel" class="sectoren-titel">Wij werken voor</h2>
+        <ul class="sectoren-lijst">
+          <li>Eerstelijnszorg</li>
+          <li>Webshops</li>
+          <li>Praktijken</li>
+          <li>Verenigingen en clubs</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sectie diensten" aria-labelledby="diensten-titel">
+      <div class="wrap">
+        <header class="sectie-kop reveal">
+          <p class="eyebrow">Wat wij doen</p>
+          <h2 id="diensten-titel">Drie disciplines, één standaard.</h2>
+        </header>
+        <div class="diensten-grid">
+          <article class="dienst reveal" id="toegankelijk">
+            <div class="dienst-binnen">
+              <span class="dienst-nr" aria-hidden="true">01</span>
+              <h3>Toegankelijke website</h3>
+              <p>Een nieuwe website of webshop, of uw bestaande site verbeterd tot WCAG&nbsp;2.2&nbsp;AA. In WordPress, WooCommerce of Shopify: goed leesbaar, te bedienen met toetsenbord en schermlezer, en snel op elk apparaat.</p>
+              <a class="tekstlink" href="#werkwijze">Zo pakken wij het aan<span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="dienst reveal" id="ux-testing">
+            <div class="dienst-binnen">
+              <span class="dienst-nr" aria-hidden="true">02</span>
+              <h3>UX Testing</h3>
+              <p>Echte bezoekers testen uw site of webshop, van homepage tot afrekenen, onder wie mensen met een beperking. U ontvangt een helder rapport met verbeteringen, op volgorde van belang.</p>
+              <a class="tekstlink" href="#kennismaken">Plan een test<span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="dienst reveal">
+            <div class="dienst-binnen">
+              <span class="dienst-nr" aria-hidden="true">03</span>
+              <h3>Thema’s</h3>
+              <p>Kant-en-klare, toegankelijke thema’s voor WordPress en Shopify. Snel live, ingericht in uw huisstijl en met dezelfde zorg gebouwd als maatwerk.</p>
+              <a class="tekstlink" href="#themas">Bekijk de thema’s<span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-label="Onze overtuiging">
+      <div class="wrap">
+        <p class="statement-tekst reveal">Toegankelijkheid is geen vinkje achteraf. <em>Het is gastvrijheid, vanaf de eerste schets.</em></p>
+      </div>
+    </section>
+
+    <section class="sectie werkwijze" id="werkwijze" aria-labelledby="werkwijze-titel">
+      <div class="wrap">
+        <header class="sectie-kop reveal">
+          <p class="eyebrow">Werkwijze</p>
+          <h2 id="werkwijze-titel">Van eerste gesprek tot livegang.</h2>
+        </header>
+        <ol class="stappen">
+          <li class="stap reveal"><h3>Kennismaking</h3><p>We bespreken uw organisatie, uw bezoekers en wat u met de website wilt bereiken.</p></li>
+          <li class="stap reveal"><h3>Onderzoek</h3><p>We toetsen uw huidige website of webshop en brengen de knelpunten helder in kaart.</p></li>
+          <li class="stap reveal"><h3>Ontwerp en bouw</h3><p>Maatwerk of een thema, altijd toegankelijk vanaf de basis.</p></li>
+          <li class="stap reveal"><h3>Toetsing</h3><p>Vóór livegang testen echte bezoekers de site. Pas daarna gaat hij online.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sectie themas" id="themas" aria-labelledby="themas-titel">
+      <div class="wrap">
+        <header class="sectie-kop reveal">
+          <p class="eyebrow">Thema’s</p>
+          <h2 id="themas-titel">Toegankelijke thema’s voor uw vakgebied.</h2>
+          <p class="sectie-intro">Sneller live dan maatwerk, met dezelfde zorg gebouwd. Elk thema is vooraf getoetst aan WCAG&nbsp;2.2&nbsp;AA en wordt ingericht in uw huisstijl.</p>
+        </header>
+        <ul class="thema-lijst">
+          <li class="thema reveal">
+            <div class="thema-preview" aria-hidden="true">
+              <div class="pv-balk"><i></i><i></i><i></i></div>
+              <div class="pv-body pv-spreekuur">
+                <span class="pv-melding"></span>
+                <span class="pv-regel dik" style="--w:70%"></span>
+                <span class="pv-regel" style="--w:50%"></span>
+                <span class="pv-tegels"><span></span><span></span><span></span></span>
+              </div>
+            </div>
+            <h3>Spreekuur</h3>
+            <p class="thema-voor">Voor huisartsenpraktijken</p>
+            <p>Spoed, openingstijden en herhaalrecepten direct vindbaar, ook voor oudere patiënten.</p>
+          </li>
+          <li class="thema reveal">
+            <div class="thema-preview" aria-hidden="true">
+              <div class="pv-balk"><i></i><i></i><i></i></div>
+              <div class="pv-body pv-beweging">
+                <span class="pv-kolom">
+                  <span class="pv-regel dik" style="--w:90%"></span>
+                  <span class="pv-regel" style="--w:75%"></span>
+                  <span class="pv-regel" style="--w:55%"></span>
+                  <span class="pv-knop"></span>
+                </span>
+                <span class="pv-beeld"></span>
+              </div>
+            </div>
+            <h3>Beweging</h3>
+            <p class="thema-voor">Voor fysiotherapie</p>
+            <p>Behandelingen, het team en online een afspraak maken, helder op elk scherm.</p>
+          </li>
+          <li class="thema reveal">
+            <div class="thema-preview" aria-hidden="true">
+              <div class="pv-balk"><i></i><i></i><i></i></div>
+              <div class="pv-body pv-etalage">
+                <span class="pv-regel dik" style="--w:45%"></span>
+                <span class="pv-producten">
+                  <span><span class="pv-beeld"></span><span class="pv-regel" style="--w:80%"></span></span>
+                  <span><span class="pv-beeld"></span><span class="pv-regel" style="--w:60%"></span></span>
+                  <span><span class="pv-beeld"></span><span class="pv-regel" style="--w:70%"></span></span>
+                </span>
+                <span class="pv-knop"></span>
+              </div>
+            </div>
+            <h3>Etalage</h3>
+            <p class="thema-voor">Voor webshops in Shopify en WooCommerce</p>
+            <p>Productpagina’s, filters en een afrekenproces dat iedereen kan voltooien. Klaar voor de European Accessibility Act.</p>
+          </li>
+          <li class="thema reveal">
+            <div class="thema-preview" aria-hidden="true">
+              <div class="pv-balk"><i></i><i></i><i></i></div>
+              <div class="pv-body pv-clubhuis">
+                <span class="pv-regel dik" style="--w:50%"></span>
+                <span class="pv-agenda"><span class="pv-datum"></span><span class="pv-regel" style="--w:70%"></span></span>
+                <span class="pv-agenda"><span class="pv-datum"></span><span class="pv-regel" style="--w:55%"></span></span>
+                <span class="pv-agenda"><span class="pv-datum"></span><span class="pv-regel" style="--w:62%"></span></span>
+                <span class="pv-knop"></span>
+              </div>
+            </div>
+            <h3>Clubhuis</h3>
+            <p class="thema-voor">Voor verenigingen en clubs</p>
+            <p>Agenda, nieuws en lid worden in een paar klikken, voor leden van alle leeftijden.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta" id="kennismaken" aria-labelledby="cta-titel">
+      <div class="wrap">
+        <div class="cta-inner reveal">
+          <p class="eyebrow">Kennismaken</p>
+          <h2 id="cta-titel">Zullen we kennismaken?</h2>
+          <p class="cta-tekst">Een vrijblijvend gesprek van een uur, bij u op locatie of online. We kijken samen naar uw website en wat er beter kan.</p>
+          <div class="acties">
+            <a class="knop knop-primair" href="mailto:hallo@bureauvandockum.nl?subject=Kennismaking">
+              <span>Plan een kennismaking</span>
+              <span class="knop-icoon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+          </div>
+          <p class="cta-alt">Liever eerst mailen? <a href="mailto:hallo@bureauvandockum.nl">hallo@bureauvandockum.nl</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-merk">Bureau <span>van Dockum</span></p>
+      <nav class="footer-nav" aria-label="Footermenu">
+        <ul>
+          <li><a href="#toegankelijk">Toegankelijke website</a></li>
+          <li><a href="#ux-testing">UX Testing</a></li>
+          <li><a href="#themas">Thema’s</a></li>
+        </ul>
+      </nav>
+      <p class="footer-klein">© 2026 Bureau van Dockum</p>
+    </div>
+  </footer>
+
+  <script src="stijltest.js"></script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bouwplan · Bureau van Dockum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Raster, de gekozen stijl uit docs/stijltest */
+  --wit:#FFFFFF; --inkt:#111111; --grijs:#5B5B5B; --vlak:#F3F3F1; --lijn:rgba(17,17,17,.14);
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:1rem}
+body{margin:0;background:var(--wit);color:var(--inkt);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.25em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--inkt);outline-offset:3px}
+main:focus{outline:none}
+code{font:.875em var(--mono);background:var(--vlak);padding:.1em .35em;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skiplink{position:absolute;left:1rem;top:1rem;padding:.75rem 1rem;background:var(--inkt);color:var(--wit);font-weight:600;transform:translateY(-300%)}
+.skiplink:focus{transform:none}
+.wrap{width:min(100% - 2rem,54rem);margin-inline:auto}
+@media (min-width:48rem){.wrap{width:min(100% - 5rem,54rem)}}
+.kop{border-bottom:1px solid var(--inkt);padding-block:1.25rem}
+.kop .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 2rem}
+.merk{display:inline-flex;align-items:center;gap:.75rem;font-weight:600;letter-spacing:-.02em}
+.merk::before{content:"";width:1.125rem;height:1.125rem;background:var(--inkt)}
+.merk-b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.meta{font:.8125rem/1.5 var(--mono);color:var(--grijs)}
+.label{display:flex;align-items:center;gap:.625rem;margin:0;font:.75rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.02em}
+.label::before{content:"";width:.5rem;height:.5rem;background:currentColor}
+h1{margin:1.25rem 0 1.5rem;font-size:clamp(2.5rem,6.4vw,4.5rem);font-weight:600;line-height:.95;letter-spacing:-.045em;text-wrap:balance}
+h2{margin:.75rem 0 1.25rem;font-size:clamp(1.75rem,3.6vw,2.625rem);font-weight:600;line-height:1.05;letter-spacing:-.035em;text-wrap:balance}
+h3{margin:2.5rem 0 .75rem;font-size:1.1875rem;font-weight:600;letter-spacing:-.015em}
+p{margin:0 0 1rem;max-width:40em}
+ul,ol{margin:0 0 1rem;padding-left:1.25rem;max-width:42em}
+li{margin-bottom:.5rem}
+li::marker{color:var(--grijs)}
+section{padding-block:3.5rem;border-top:1px solid var(--inkt)}
+section.eerste{border-top:0;padding-top:3rem}
+.intro{font-size:1.1875rem;line-height:1.55;color:var(--grijs)}
+.toc{columns:2 14rem;column-gap:2rem;margin-top:2rem;padding:1.25rem 1.5rem 1rem 2.75rem;background:var(--vlak);border-radius:6px;max-width:none}
+.toc li{break-inside:avoid}
+.status{display:inline-block;padding:0 .5rem;border:1px solid var(--inkt);border-radius:6px;font:.75rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
+.citaat{margin:1.5rem 0 2rem;padding:2rem;background:var(--vlak);border-radius:6px;font-size:clamp(1.375rem,2.6vw,1.875rem);font-weight:500;line-height:1.2;letter-spacing:-.025em;max-width:none}
+.tabel{overflow-x:auto;margin:1.25rem 0 1.5rem}
+table{width:100%;min-width:34rem;border-collapse:collapse;font-size:.9375rem;line-height:1.5}
+th,td{padding:.875rem 1.25rem .875rem 0;border-top:1px solid var(--lijn);text-align:left;vertical-align:top}
+thead th{padding-block:.5rem;border-top:1px solid var(--inkt);font:400 .75rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.02em;color:var(--grijs)}
+tbody th{font-weight:600}
+td:first-child,th:first-child{white-space:nowrap}
+.kleur{display:inline-block;width:.875rem;height:.875rem;margin-right:.375rem;vertical-align:-.1em;border:1px solid var(--lijn)}
+.stappen{list-style:none;padding:0;counter-reset:stap;max-width:none}
+.stappen>li{counter-increment:stap;display:grid;grid-template-columns:3rem 1fr;padding-block:1rem;border-top:1px solid var(--lijn);margin:0}
+.stappen>li::before{content:counter(stap,decimal-leading-zero);content:counter(stap,decimal-leading-zero) / "";font:.8125rem/1.9 var(--mono);color:var(--grijs)}
+.groepen{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:0 2.5rem;margin-top:1.5rem}
+.groepen h4{margin:1.5rem 0 .75rem;padding-top:.75rem;border-top:1px solid var(--inkt);font:400 .75rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.02em}
+.groepen ul{padding-left:1.125rem;font-size:.9375rem}
+.groepen .status{margin-left:.25rem}
+.voet{border-top:1px solid var(--inkt);padding-block:2rem 3rem;color:var(--grijs);font-size:.875rem}
+@media print{
+  .skiplink,.toc{display:none}
+  section{break-inside:avoid-page;padding-block:1.5rem}
+  a{text-decoration:none}
+  .tabel{overflow:visible}
+}
+</style>
+</head>
+<body>
+<a class="skiplink" href="#inhoud">Naar de inhoud</a>
+
+<header class="kop">
+  <div class="wrap">
+    <span class="merk"><span>Bureau <span class="merk-b">van Dockum</span></span></span>
+    <span class="meta">Bouwplan · concept · 10 oktober 2026, bijgewerkt</span>
+  </div>
+</header>
+
+<main id="inhoud" tabindex="-1">
+<div class="wrap">
+
+<section class="eerste">
+  <p class="label">Projectdocument</p>
+  <h1>Wat we bouwen, en in welke volgorde</h1>
+  <p class="intro">Bureau van Dockum maakt toegankelijke websites en webshops voor de eerstelijnszorg, praktijken, verenigingen en online winkels. Dit document legt vast wat er gebouwd wordt: de eigen website met advies en uitlegartikelen, tien thema’s om mee te starten en twee uitbreidingen. En in welke volgorde.</p>
+  <p class="meta">Punten met <span class="status">besluit</span> liggen nog open. Ze staan samen onder <a href="#besluiten">Besluiten</a>.</p>
+  <nav aria-label="Inhoud van dit document">
+    <ol class="toc">
+      <li><a href="#kort">In het kort</a></li>
+      <li><a href="#maatwerk">Maatwerk eerst</a></li>
+      <li><a href="#stijl">De stijl</a></li>
+      <li><a href="#website">De website</a></li>
+      <li><a href="#advies">Advies voor huidige sites</a></li>
+      <li><a href="#artikelen">Artikelen</a></li>
+      <li><a href="#contact">Contact en terugbellen</a></li>
+      <li><a href="#kopen">Kopen en betalen</a></li>
+      <li><a href="#themas">De tien thema’s</a></li>
+      <li><a href="#uitbreidingen">Uitbreidingen</a></li>
+      <li><a href="#volgorde">Volgorde van bouwen</a></li>
+      <li><a href="#besluiten">Besluiten</a></li>
+    </ol>
+  </nav>
+</section>
+
+<section id="kort" aria-labelledby="kort-titel">
+  <h2 id="kort-titel">In het kort</h2>
+  <ul>
+    <li><strong>Eén website</strong> op Vercel, met vier menu-items: Toegankelijke website, UX Testing, Thema’s en Info.</li>
+    <li><strong>Advies voor huidige sites:</strong> een snelle scan van € 24, een volledige audit of begeleiding. Ook voor sites die een ander heeft gebouwd.</li>
+    <li><strong>Artikelen</strong> met vaste uitleg over toegankelijkheid, per onderwerp, onder Info. Ongeveer dertig, waarvan acht klaar bij livegang.</li>
+    <li><strong>Thema’s en de snelle scan zijn online te koop.</strong> Supabase regelt de bestellingen, Mollie de betaling en Brevo de mails.</li>
+    <li><strong>Contact gaat per e-mail</strong> en loopt uit op een terugbelafspraak. Wij bellen de klant.</li>
+    <li><strong>Tien thema’s</strong> om mee te starten: twee voor WordPress, twee in HTML, twee voor Shopify, twee voor WooCommerce en twee voor Drupal.</li>
+    <li><strong>Twee uitbreidingen:</strong> e-mailtemplates, en een huisstijlboekje voor drukwerk, zoals in de wachtkamer.</li>
+    <li><strong>Alles wat we opleveren</strong> haalt WCAG 2.2 niveau AA en is getest met echte bezoekers.</li>
+  </ul>
+</section>
+
+<section id="maatwerk" aria-labelledby="maatwerk-titel">
+  <p class="label">Uitgangspunt</p>
+  <h2 id="maatwerk-titel">Maatwerk eerst, thema’s als goede start</h2>
+  <p class="citaat">Op maat is bijna altijd de beste oplossing. Maar deze thema’s zijn ook goed te gebruiken.</p>
+  <p>Dat is de lijn op de hele site. Een thema is geen goedkope versie van maatwerk, maar een snelle en betaalbare start, met dezelfde zorg gebouwd. De boodschap staat op drie plekken: bovenaan de pagina Thema’s, in het themablok op de homepage en onderaan elke themapagina, met de knop voor een terugbelafspraak.</p>
+  <p>Voorstel voor de tekst op de site:</p>
+  <p><em>“Maatwerk is bijna altijd de beste oplossing: een website die precies past bij uw praktijk, club of winkel. Wilt u snel en voordelig starten? Dan zijn onze thema’s een goed alternatief. Ze zijn met dezelfde zorg gebouwd en vooraf getoetst aan WCAG 2.2 AA.”</em></p>
+</section>
+
+<section id="stijl" aria-labelledby="stijl-titel">
+  <p class="label">Vormgeving</p>
+  <h2 id="stijl-titel">De stijl: Raster</h2>
+  <p>Gekozen uit de <a href="../stijltest/index.html?stijl=raster">stijltest</a> (stijl 2). Zwart-wit en strak, met een zichtbaar kolommenraster. De stijltest is de referentie; de exacte waarden staan in <code>docs/stijltest/css/stijl-raster.css</code>.</p>
+  <div class="tabel" role="region" aria-label="Stijlkeuzes" tabindex="0">
+    <table>
+      <caption class="sr-only">Stijlkeuzes voor Bureau van Dockum</caption>
+      <thead><tr><th scope="col">Onderdeel</th><th scope="col">Keuze</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Kleuren</th><td><span class="kleur" style="background:#FFFFFF" aria-hidden="true"></span>wit #FFFFFF, <span class="kleur" style="background:#111111" aria-hidden="true"></span>inkt #111111, <span class="kleur" style="background:#5B5B5B" aria-hidden="true"></span>grijs #5B5B5B voor bijtekst, <span class="kleur" style="background:#F3F3F1" aria-hidden="true"></span>vlak #F3F3F1. Geen accentkleur.</td></tr>
+        <tr><th scope="row">Contrast</th><td>Inkt op wit 18,9:1. Grijs op wit 6,8:1. Grijs op vlak 6,1:1. Alles haalt AA, inkt ook AAA.</td></tr>
+        <tr><th scope="row">Letter</th><td>Geist voor tekst en koppen, Geist Mono voor labels en nummers. Op de echte site zelf hosten, niet via Google Fonts (AVG).</td></tr>
+        <tr><th scope="row">Knoppen</th><td>Zwart, met hoeken van 6px.</td></tr>
+        <tr><th scope="row">Raster</th><td>Zes kolommen, met dunne lijnen op de achtergrond.</td></tr>
+        <tr><th scope="row">Logo</th><td>Zwart vierkant en “Bureau van Dockum”, met “van Dockum” onderstreept (2px). In header en footer gelijk.</td></tr>
+        <tr><th scope="row">Taal</th><td>Nederlands. ‘Wij’ voor het bureau, ‘u’ voor de bezoeker. Taalniveau B1.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="website" aria-labelledby="website-titel">
+  <p class="label">De eigen site</p>
+  <h2 id="website-titel">De website</h2>
+  <p>Vier menu-items: Toegankelijke website, UX Testing, Thema’s en Info. Plus één knop rechtsboven: <strong>Plan een terugbelafspraak</strong>. Contact is dus geen menu-item, maar een knop die op elke pagina terugkomt. In de stijltest heet die knop nog ‘Plan een kennismaking’.</p>
+  <p>De site is statisch (Astro) en draait op Vercel. Alles wat een server nodig heeft, zoals het formulier, bestellen en betalen, loopt via Supabase. Zie <a href="#kopen">Kopen en betalen</a>.</p>
+  <div class="tabel" role="region" aria-label="Pagina’s" tabindex="0">
+    <table>
+      <caption class="sr-only">Pagina’s van de website</caption>
+      <thead><tr><th scope="col">Pagina</th><th scope="col">Wat erop staat</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Home</th><td>Wie we zijn, de drie diensten, advies voor huidige sites, de werkwijze, de thema’s, de nieuwste artikelen en de knop voor een terugbelafspraak. De stijltest is hiervoor de basis.</td></tr>
+        <tr><th scope="row">Toegankelijke website</th><td>Een nieuwe site of webshop, of een bestaande verbeteren tot WCAG 2.2 AA. In WordPress, WooCommerce, Shopify, Drupal of HTML. Met uitleg over de European Accessibility Act, die sinds 28 juni 2025 ook voor veel webshops geldt.</td></tr>
+        <tr><th scope="row">Advies voor uw huidige site</th><td>Pagina onder Toegankelijke website, met een directe link vanaf de homepage. Zie <a href="#advies">Advies voor huidige sites</a>.</td></tr>
+        <tr><th scope="row">UX Testing</th><td>Hoe een test verloopt, met wie we testen (ook mensen met een beperking) en wat u krijgt: een rapport met verbeteringen op volgorde van belang.</td></tr>
+        <tr><th scope="row">Thema’s</th><td>Overzicht van alle thema’s, te filteren op platform. Bovenaan de maatwerk-boodschap.</td></tr>
+        <tr><th scope="row">Thema (10×)</th><td>Per thema: voor wie, wat erin zit, een demo, het platform, de uitbreidingen en onderaan ‘Liever maatwerk?’.</td></tr>
+        <tr><th scope="row">Info</th><td>Eerst wie er achter Bureau van Dockum zit. Daaronder de artikelen, als een overzichtelijke kennisbank per onderwerp. Zie <a href="#artikelen">Artikelen</a>.</td></tr>
+        <tr><th scope="row">Bestellen en bedankt</th><td>Bestelformulier voor een thema of de snelle scan, en een bedankpagina die laat zien of de betaling gelukt is. Zie <a href="#kopen">Kopen en betalen</a>.</td></tr>
+        <tr><th scope="row">Artikel (±30×)</th><td>Eén onderwerp per artikel, met onderaan een link naar de dienst of het thema dat erbij past.</td></tr>
+        <tr><th scope="row">Terugbelafspraak</th><td>Het formulier. Zie <a href="#contact">Contact en terugbellen</a>.</td></tr>
+        <tr><th scope="row">Toegankelijkheidsverklaring</th><td>Wat we getoetst hebben, wanneer, en wat nog niet goed is. Link in de footer.</td></tr>
+        <tr><th scope="row">Privacyverklaring</th><td>Wat we doen met de gegevens uit het formulier en uit bestellingen. Link in de footer.</td></tr>
+        <tr><th scope="row">Algemene voorwaarden</th><td>Nodig voor online verkoop: licentie van een thema, levering, herroeping. Link in de footer en bij het bestellen.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Een thema komt pas op de site als het af en getest is. Tot die tijd tonen we alleen de thema’s die klaar zijn.</p>
+</section>
+
+<section id="advies" aria-labelledby="advies-titel">
+  <p class="label">Dienst</p>
+  <h2 id="advies-titel">Advies voor huidige sites</h2>
+  <p>Niet iedereen heeft een nieuwe site nodig. Veel klanten hebben al een site, vaak gebouwd door een ander bureau. Wij zoeken uit hoe toegankelijk die is en wat er beter moet, op elk platform.</p>
+  <div class="tabel" role="region" aria-label="Vormen van advies" tabindex="0">
+    <table>
+      <caption class="sr-only">Vormen van advies voor bestaande sites</caption>
+      <thead><tr><th scope="col">Vorm</th><th scope="col">Wat we doen</th><th scope="col">Wat u krijgt</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Snelle scan<br>€ 24</th><td>Online te bestellen en vooraf te betalen. De klant geeft bij het bestellen het webadres op. We bekijken de belangrijkste pagina’s: home, contact, een formulier en bij een webshop de weg naar afrekenen. Automatisch en met de hand, met toetsenbord en schermlezer.</td><td>Een kort rapport in gewone taal met de tien grootste problemen, en een inschatting van wat oplossen kost.</td></tr>
+        <tr><th scope="row">Volledige audit</th><td>Een complete toets aan WCAG 2.2 AA op een steekproef van pagina’s, volgens WCAG-EM, de onderzoeksmethode van het W3C.</td><td>Een rapport per succescriterium, een verbeterplan op volgorde van belang en de basis voor een toegankelijkheidsverklaring.</td></tr>
+        <tr><th scope="row">Begeleiding en hertest</th><td>We helpen de eigen bouwer of IT-partij van de klant met de verbeteringen, en testen daarna opnieuw.</td><td>Een bijgewerkt rapport en een actuele toegankelijkheidsverklaring.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>De snelle scan is de laagdrempelige eerste stap. Daarna volgt vaak een audit, een UX-test of een nieuwe site. Audit en begeleiding gaan op offerte. In het formulier komt ‘Advies voor mijn huidige site’ als onderwerp erbij.</p>
+</section>
+
+<section id="artikelen" aria-labelledby="artikelen-titel">
+  <p class="label">Kennis</p>
+  <h2 id="artikelen-titel">Artikelen: uitleg over toegankelijkheid</h2>
+  <p>Vaste uitleg over toegankelijkheid, per onderwerp. Geen nieuwsrubriek: de artikelen zijn tijdloos en we werken ze bij als WCAG of de wet verandert. Voor klanten, en voor iedereen die zelf aan de slag wil. Ze laten zien dat we het vak beheersen, en brengen bezoekers via zoekmachines naar de site.</p>
+  <p>Ze staan onder <strong>Info</strong>, onder het verhaal over wie er achter Bureau van Dockum zit. Niet als saaie lijst, maar als kennisbank: de zeven groepen als tegels met korte uitleg, en per groep de artikelen als kaarten met samenvatting en leestijd. Bovenaan een rij knoppen om op onderwerp te filteren. De homepage toont een paar artikelen, en elke dienst- en themapagina linkt naar de artikelen die erbij horen.</p>
+
+  <h3>Elk artikel</h3>
+  <ul>
+    <li>Is geschreven op B1-niveau, met een korte samenvatting bovenaan.</li>
+    <li>Toont de datum van publicatie en van de laatste controle. We lopen elk artikel minstens eens per jaar na.</li>
+    <li>Noemt de WCAG-succescriteria waar het over gaat, met een link naar de officiële uitleg.</li>
+    <li>Eindigt met een kort lijstje ‘Zelf controleren’ en een link naar de dienst of het thema dat erbij past.</li>
+  </ul>
+
+  <h3>De lijst</h3>
+  <p>Eenendertig onderwerpen in zeven groepen. De acht met <span class="status">livegang</span> zijn klaar als de site live gaat. De rest volgt wanneer het uitkomt, zonder vast ritme.</p>
+  <div class="groepen">
+    <div>
+      <h4>Basis</h4>
+      <ul>
+        <li>Wat is digitale toegankelijkheid, en voor wie doet u het? <span class="status">livegang</span></li>
+        <li>WCAG 2.2 in gewone taal: de vier principes</li>
+        <li>Niveau A, AA en AAA: wat betekenen ze?</li>
+        <li>De European Accessibility Act: geldt die voor uw webshop? <span class="status">livegang</span></li>
+        <li>De toegankelijkheidsverklaring: wat erin staat en waarom</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Tekst en inhoud</h4>
+      <ul>
+        <li>Schrijven op B1-niveau</li>
+        <li>Koppen en structuur: zo vindt iedereen de weg</li>
+        <li>Linkteksten die zeggen waar ze heen gaan</li>
+        <li>Alt-teksten schrijven voor afbeeldingen <span class="status">livegang</span></li>
+        <li>Pdf’s: toegankelijk maken, of liever een webpagina</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Vormgeving</h4>
+      <ul>
+        <li>Kleurcontrast: zo controleert u het <span class="status">livegang</span></li>
+        <li>Lettergrootte, regelafstand en inzoomen</li>
+        <li>Beweging en animatie: rekening houden met ‘minder beweging’</li>
+        <li>Een zichtbare focus voor wie het toetsenbord gebruikt</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Bediening</h4>
+      <ul>
+        <li>Alles met het toetsenbord <span class="status">livegang</span></li>
+        <li>Zo werkt een schermlezer, en zo test u ermee</li>
+        <li>Formulieren die iedereen kan invullen <span class="status">livegang</span></li>
+        <li>Foutmeldingen die helpen</li>
+        <li>Knoppen en links die groot genoeg zijn op de telefoon</li>
+        <li>Cookiemeldingen en pop-ups die niet in de weg zitten</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Beeld en geluid</h4>
+      <ul>
+        <li>Video: ondertiteling, audiodescriptie en een uitgeschreven tekst</li>
+        <li>Audio en podcasts: zet er een transcript bij</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Per sector</h4>
+      <ul>
+        <li>De huisartsensite: spoed en openingstijden voor iedereen vindbaar</li>
+        <li>Toegankelijk afrekenen in uw webshop</li>
+        <li>De verenigingssite: toegankelijk blijven met veel vrijwilligers</li>
+        <li>Toegankelijk drukwerk in de wachtkamer</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Testen en onderhoud</h4>
+      <ul>
+        <li>Zelf testen in tien minuten <span class="status">livegang</span></li>
+        <li>Waarom een automatische scan niet genoeg is</li>
+        <li>Overlays en toegankelijkheidsplugins: waarom we ze afraden <span class="status">livegang</span></li>
+        <li>UX-testen met mensen met een beperking: hoe gaat dat?</li>
+        <li>Toegankelijk blijven na de livegang</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-titel">
+  <p class="label">Contact</p>
+  <h2 id="contact-titel">Contact: e-mail en een terugbelafspraak</h2>
+  <p>Contact begint altijd per e-mail. Daarna bellen wij, op een moment dat de klant uitkomt. Op de site staat geen telefoonnummer <span class="status">besluit</span>.</p>
+  <ol class="stappen">
+    <li><span><strong>Aanvraag.</strong> De bezoeker vult het formulier in: naam, e-mailadres, telefoonnummer, waar het over gaat (Toegankelijke website, Advies voor mijn huidige site, UX Testing, Thema of iets anders), wanneer we het best kunnen bellen (dag, en ochtend of middag) en eventueel een korte vraag. Wie liever zelf mailt, ziet ook ons e-mailadres.</span></li>
+    <li><span><strong>Bevestiging.</strong> De bezoeker krijgt meteen een mail: “We hebben uw aanvraag. Binnen één werkdag mailen we u een moment om te bellen.” Wij krijgen de aanvraag in onze mailbox.</span></li>
+    <li><span><strong>Afspraak.</strong> Wij mailen een belmoment, of bevestigen het dagdeel dat de bezoeker vroeg.</span></li>
+    <li><span><strong>Gesprek.</strong> Wij bellen op het afgesproken moment.</span></li>
+  </ol>
+  <h3>Eisen aan het formulier</h3>
+  <ul>
+    <li>Elk veld heeft een zichtbaar label en de juiste <code>autocomplete</code> (<code>name</code>, <code>email</code>, <code>tel</code>), zodat browser en wachtwoordbeheerder kunnen invullen.</li>
+    <li>Foutmeldingen staan in tekst bij het veld, en bovenaan in een overzicht met links naar de velden. Niets hangt alleen af van kleur.</li>
+    <li>Geen tijdslimiet en geen puzzel om te bewijzen dat u een mens bent. Spam houden we tegen met een verborgen veld, een limiet per afzender en zo nodig Cloudflare Turnstile, dat normaal onzichtbaar blijft.</li>
+    <li>Na verzenden gaat de focus naar de bevestiging, zodat ook een schermlezer meldt dat het gelukt is.</li>
+    <li>Lukt verzenden niet, dan staat het e-mailadres in de foutmelding als uitweg.</li>
+    <li>We bewaren aanvragen niet in een database; ze gaan alleen per mail. Hoe lang we die mails bewaren, staat in de privacyverklaring.</li>
+  </ul>
+  <p><strong>Techniek.</strong> Het formulier stuurt naar een Edge Function in Supabase. Die verstuurt via Brevo twee mails: de aanvraag naar ons en de bevestiging naar de bezoeker.</p>
+</section>
+
+<section id="kopen" aria-labelledby="kopen-titel">
+  <p class="label">Verkoop</p>
+  <h2 id="kopen-titel">Kopen en betalen</h2>
+  <p>Thema’s en de snelle scan zijn online te koop. Supabase bewaart de bestellingen en draait de serverfuncties, Mollie handelt de betaling af en Brevo verstuurt de mails. De site zelf blijft statisch op Vercel.</p>
+  <ol class="stappen">
+    <li><span><strong>Bestellen.</strong> De klant kiest een thema of de snelle scan en vult een kort formulier in: naam, e-mailadres, eventueel bedrijfsnaam, bij de scan het webadres, en akkoord met de voorwaarden.</span></li>
+    <li><span><strong>Betaling starten.</strong> Een Edge Function maakt de bestelling aan in Supabase, start een betaling bij Mollie en stuurt de klant door naar de betaalpagina van Mollie (iDEAL, creditcard, Bancontact).</span></li>
+    <li><span><strong>Betaald.</strong> Mollie meldt de betaling aan een tweede Edge Function. Die vraagt de echte status op bij Mollie, want de melding zelf vertrouwen we niet, en zet de bestelling op betaald.</span></li>
+    <li><span><strong>Levering per mail via Brevo.</strong> Bij een thema: een downloadlink die zeven dagen geldig is, de licentie en de handleiding. Bij de scan: een bevestiging, en het rapport binnen vijf werkdagen <span class="status">besluit</span>.</span></li>
+    <li><span><strong>Bedankpagina.</strong> Mollie stuurt de klant terug naar de site. Die laat zien of de betaling gelukt is, of nog bezig is.</span></li>
+  </ol>
+  <h3>Eisen</h3>
+  <ul>
+    <li>Het bestelformulier volgt dezelfde toegankelijkheidseisen als het contactformulier.</li>
+    <li>De tabellen in Supabase zijn niet publiek leesbaar. Alleen de Edge Functions mogen erbij (RLS aan, geen open policies).</li>
+    <li>De betaalmelding van Mollie moet zonder inlog binnenkomen. Die functie krijgt daarom geen JWT-controle, maar controleert de betaling zelf bij Mollie.</li>
+    <li>Thema-bestanden staan in een privé-bucket in Supabase Storage. Een downloadlink is altijd tijdelijk en ondertekend.</li>
+    <li>De terugkeer-URL na betalen ligt vast in de code, zodat niemand de klant via onze site naar een andere site kan sturen.</li>
+    <li>De betaalpagina is van Mollie. Die kunnen we niet aanpassen; we testen hem wel op toegankelijkheid.</li>
+  </ul>
+</section>
+
+<section id="themas" aria-labelledby="themas-titel">
+  <p class="label">Thema’s</p>
+  <h2 id="themas-titel">De tien thema’s om mee te starten</h2>
+  <p>Twee per platform. De verdeling over de doelgroepen is een voorstel <span class="status">besluit</span>.</p>
+  <div class="tabel" role="region" aria-label="De tien thema’s" tabindex="0">
+    <table>
+      <caption class="sr-only">De tien thema’s per platform</caption>
+      <thead><tr><th scope="col">Platform</th><th scope="col">Thema</th><th scope="col">Voor wie</th><th scope="col">Waar het om draait</th></tr></thead>
+      <tbody>
+        <tr><td>WordPress</td><th scope="row">Spreekuur</th><td>Huisartsenpraktijken</td><td>Spoed en openingstijden bovenaan, herhaalrecepten en praktijkinformatie. De praktijk houdt de inhoud zelf bij.</td></tr>
+        <tr><td>WordPress</td><th scope="row">Clubhuis</th><td>Verenigingen en clubs</td><td>Agenda, nieuws en lid worden. Vrijwilligers kunnen het zonder training bijhouden.</td></tr>
+        <tr><td>HTML</td><th scope="row">Beweging</th><td>Fysiotherapie</td><td>Behandelingen, het team en een link naar het afsprakensysteem. Snel en bijna zonder onderhoud.</td></tr>
+        <tr><td>HTML</td><th scope="row">Praktijk</th><td>Zelfstandige praktijken, zoals tandarts, psycholoog of diëtist</td><td>Een compacte site: wat u doet, tarieven, praktische informatie en contact.</td></tr>
+        <tr><td>Shopify</td><th scope="row">Etalage</th><td>Webshops met een groot assortiment</td><td>Zoeken, filters en productpagina’s die goed werken met toetsenbord en schermlezer.</td></tr>
+        <tr><td>Shopify</td><th scope="row">Boetiek</th><td>Merken met een klein assortiment</td><td>Het verhaal van het merk, productpagina’s met veel beeld en goede alt-teksten, en weinig stappen naar afrekenen.</td></tr>
+        <tr><td>WooCommerce</td><th scope="row">Clubshop</th><td>Verenigingen en clubs</td><td>Clubkleding en merchandise. Sluit aan op Clubhuis: dezelfde WordPress-site, met een winkel erbij.</td></tr>
+        <tr><td>WooCommerce</td><th scope="row">Toonbank</th><td>Praktijken die iets verkopen</td><td>Hulpmiddelen, cadeaubonnen of cursussen, naast de bestaande praktijksite.</td></tr>
+        <tr><td>Drupal</td><th scope="row">Zorgplein</th><td>Gezondheidscentra en zorggroepen</td><td>Meerdere disciplines onder één dak: per discipline eigen pagina’s, één zoekfunctie, en redacteuren per praktijk met eigen rechten.</td></tr>
+        <tr><td>Drupal</td><th scope="row">Koepel</th><td>Bonden, koepels en grote verenigingen</td><td>Veel inhoud en veel redacteuren, een ledengedeelte en waar nodig meerdere talen.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Waarom welk platform</h3>
+  <ul>
+    <li><strong>WordPress</strong> voor organisaties die zelf veel bijhouden: nieuws, agenda, mededelingen.</li>
+    <li><strong>HTML</strong> voor sites die weinig veranderen. Geen beheersysteem, dus geen updates en bijna geen onderhoud. Wijzigingen doen wij.</li>
+    <li><strong>Shopify</strong> voor winkels die niets met hosting en updates te maken willen hebben.</li>
+    <li><strong>WooCommerce</strong> voor wie al een WordPress-site heeft, of de winkel helemaal in eigen hand wil houden.</li>
+    <li><strong>Drupal</strong> voor grotere organisaties: veel inhoud, veel redacteuren met eigen rechten, of meerdere talen. Te zwaar voor een kleine praktijk.</li>
+  </ul>
+
+  <h3>Wat elk thema meekrijgt</h3>
+  <ul>
+    <li>Getoetst aan WCAG 2.2 AA: automatisch met axe, en met de hand met toetsenbord, NVDA, VoiceOver (Mac en iPhone), TalkBack, 200% zoom en een scherm van 320px breed.</li>
+    <li>Een UX-test met minstens vijf echte gebruikers, onder wie mensen met een beperking. Bevindingen met prioriteit 1 en 2 zijn opgelost voordat het thema op de site komt.</li>
+    <li>Een demo met voorbeeldinhoud op B1-niveau.</li>
+    <li>Een korte beheerhandleiding: hoe u de site toegankelijk houdt (koppen, alt-teksten, linkteksten, ondertiteling bij video).</li>
+    <li>Een contrastcheck op de huisstijlkleuren van de klant. Haalt een kleur geen 4,5:1, dan gebruiken we voor tekst een donkerdere variant.</li>
+    <li>Een sjabloon voor de toegankelijkheidsverklaring.</li>
+    <li>Snelheid op een gemiddelde telefoon: LCP onder 2,5 s, CLS onder 0,1, INP onder 200 ms.</li>
+    <li>Geen tracking van derden, en lettertypes zelf gehost.</li>
+  </ul>
+
+  <h3>Per platform</h3>
+  <div class="tabel" role="region" aria-label="Bouwen per platform" tabindex="0">
+    <table>
+      <caption class="sr-only">Hoe we per platform bouwen</caption>
+      <thead><tr><th scope="col">Platform</th><th scope="col">Hoe we bouwen</th><th scope="col">Let op</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">WordPress</th><td>Blokthema met <code>theme.json</code>, patronen en templates. Geen paginabouwers. We volgen de eisen voor het label ‘accessibility-ready’ van WordPress.org.</td><td>De editor toont dezelfde stijl als de site, zodat de klant meteen ziet hoe een pagina eruit komt te zien.</td></tr>
+        <tr><th scope="row">HTML</th><td>Statische HTML en CSS, zo min mogelijk JavaScript, geen framework. Het formulier gebruikt dezelfde serverfunctie als onze eigen site.</td><td>Draait op elke host.</td></tr>
+        <tr><th scope="row">Shopify</th><td>Online Store 2.0: secties en JSON-templates, gecontroleerd met Theme Check en Lighthouse.</td><td>De afrekenpagina is van Shopify en is maar beperkt aan te passen. We testen hem wel en melden wat niet goed gaat.</td></tr>
+        <tr><th scope="row">WooCommerce</th><td>Bouwt op de WordPress-thema’s, met de WooCommerce-blokken voor winkelmand en afrekenen. Geschikt voor HPOS, de nieuwe orderopslag van WooCommerce.</td><td>Afrekenen is hier wel helemaal van ons, en dus ook helemaal te testen.</td></tr>
+        <tr><th scope="row">Drupal</th><td>Thema gemaakt met de starterkit van Drupal, met Single Directory Components en Twig. De toegankelijke basis van Drupal zelf (Olivero voor de site, Claro voor beheer) is het vertrekpunt.</td><td>Vraagt meer van hosting en onderhoud: beveiligingsupdates moeten snel worden geïnstalleerd. Spreek af wie dat doet.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="uitbreidingen" aria-labelledby="uitbreidingen-titel">
+  <p class="label">Extra</p>
+  <h2 id="uitbreidingen-titel">Uitbreidingen</h2>
+  <p>Los af te nemen, bij een thema of bij maatwerk.</p>
+
+  <h3>E-mailtemplates</h3>
+  <p>Mails in de huisstijl van de klant, net zo toegankelijk als de site.</p>
+  <ul>
+    <li><strong>Welke mails:</strong> nieuwsbrief, afspraakbevestiging en -herinnering, bevestiging van bestelling en verzending (Shopify en WooCommerce), welkomstmail voor nieuwe leden.</li>
+    <li><strong>Eisen:</strong> echte tekst in plaats van tekst in plaatjes, minimaal 16px, voldoende contrast, alt-teksten, de taal ingesteld (<code>lang="nl"</code>), opmaaktabellen met <code>role="presentation"</code>, een platte-tekstversie, en goed leesbaar in donkere modus.</li>
+    <li><strong>Getest in</strong> Outlook voor Windows, Gmail (web en app), Apple Mail, en met een schermlezer.</li>
+    <li><strong>Opgeleverd als</strong> meldingssjablonen in Shopify, e-mailsjablonen in WooCommerce en een nieuwsbriefsjabloon voor de dienst van de klant <span class="status">besluit</span>.</li>
+  </ul>
+
+  <h3>Huisstijlboekje voor drukwerk</h3>
+  <p>Voor alles op papier: in de wachtkamer, aan de balie, in de kantine van de club. Een kort boekje als pdf, plus sjablonen.</p>
+  <ul>
+    <li><strong>In het boekje:</strong> het logo en hoe u het gebruikt, de kleuren en welke combinaties goed leesbaar zijn, de lettertypes, schrijven op B1-niveau, en regels voor leesbaar drukwerk.</li>
+    <li><strong>Leesbaar drukwerk:</strong> tekst minimaal 12 pt (14 pt voor wachtkamers en oudere lezers), links uitgelijnd, geen tekst over foto’s, mat papier tegen spiegeling, en bij een QR-code altijd ook het webadres in gewone tekst.</li>
+    <li><strong>Sjablonen:</strong> wachtkamerposter (A3 en A4), folder (A5), mededeling voor het prikbord (zoals vakantie- en sluitingsdagen), visitekaartje en briefpapier.</li>
+    <li><strong>Opgeleverd als</strong> drukklare pdf’s plus bewerkbare bestanden <span class="status">besluit</span>.</li>
+  </ul>
+</section>
+
+<section id="volgorde" aria-labelledby="volgorde-titel">
+  <p class="label">Planning</p>
+  <h2 id="volgorde-titel">Volgorde van bouwen</h2>
+  <p>Eerst de bouwstenen, daarna alles wat erop leunt. Elk platform hergebruikt wat ervoor gemaakt is.</p>
+  <ol class="stappen">
+    <li><span><strong>Fundament.</strong> De Raster-stijl als vaste waarden (kleur, letter, ruimte) en de onderdelen die overal terugkomen: knop, link, formulier, kaart, menu, header en footer. Eén keer goed in HTML en CSS, getest op toegankelijkheid.</span></li>
+    <li><span><strong>De eigen website.</strong> Alle pagina’s, waaronder Info en Advies voor uw huidige site, het formulier met de bevestigingsmails, kopen en betalen met de snelle scan als eerste product, de verklaringen en voorwaarden, en de eerste acht artikelen. Daarna live. Elk thema komt erbij als product zodra het af is.</span></li>
+    <li><span><strong>HTML-thema’s</strong> Beweging en Praktijk. De kortste weg van onderdelen naar thema, en de referentie voor de andere platforms.</span></li>
+    <li><span><strong>WordPress-thema’s</strong> Spreekuur en Clubhuis.</span></li>
+    <li><span><strong>WooCommerce-thema’s</strong> Clubshop en Toonbank, op de WordPress-basis.</span></li>
+    <li><span><strong>Drupal-thema’s</strong> Zorgplein en Koepel.</span></li>
+    <li><span><strong>Shopify-thema’s</strong> Etalage en Boetiek.</span></li>
+    <li><span><strong>Uitbreidingen:</strong> de e-mailtemplates en het huisstijlboekje.</span></li>
+  </ol>
+  <h3>Wanneer is iets af</h3>
+  <ul>
+    <li>axe vindt niets, en de controle met toetsenbord en schermlezer is gedaan.</li>
+    <li>De snelheidsdoelen worden gehaald.</li>
+    <li>Bij een thema: de UX-test is gedaan, en prioriteit 1 en 2 zijn opgelost.</li>
+    <li>De toegankelijkheidsverklaring is bijgewerkt.</li>
+  </ul>
+</section>
+
+<section id="besluiten" aria-labelledby="besluiten-titel">
+  <p class="label">Besluiten</p>
+  <h2 id="besluiten-titel">Besluiten</h2>
+  <h3>Genomen</h3>
+  <div class="tabel" role="region" aria-label="Genomen besluiten" tabindex="0">
+    <table>
+      <caption class="sr-only">Genomen besluiten</caption>
+      <thead><tr><th scope="col">Onderwerp</th><th scope="col">Besluit</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Techniek eigen site</th><td>Astro, statisch, gehost op Vercel. De artikelen zijn Markdown-bestanden in de repository.</td></tr>
+        <tr><th scope="row">Serverkant</th><td>Supabase: database voor bestellingen, Edge Functions voor formulier en betalen, Storage voor thema-bestanden.</td></tr>
+        <tr><th scope="row">Betalen</th><td>Mollie.</td></tr>
+        <tr><th scope="row">Mail</th><td>Brevo, voor alle standaardmails: bevestiging terugbelaanvraag, bestelling, levering.</td></tr>
+        <tr><th scope="row">Thema’s</th><td>Online te koop.</td></tr>
+        <tr><th scope="row">Snelle scan</th><td>€ 24, vooraf online te betalen.</td></tr>
+        <tr><th scope="row">Menu</th><td>Vier items: Toegankelijke website, UX Testing, Thema’s en Info. Info toont eerst wie er achter het bureau zit, daaronder de artikelen.</td></tr>
+        <tr><th scope="row">Artikelen</th><td>Vaste uitleg, geen vast schrijfritme. Acht bij livegang.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nog open</h3>
+  <p>Elk punt heeft een voorstel. Zonder tegenbericht bouwen we op het voorstel.</p>
+  <div class="tabel" role="region" aria-label="Open besluiten" tabindex="0">
+    <table>
+      <caption class="sr-only">Open besluiten met voorstel</caption>
+      <thead><tr><th scope="col">Nr.</th><th scope="col">Besluit</th><th scope="col">Voorstel</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><th scope="row">Zijn de prijzen inclusief of exclusief btw?</th><td>Inclusief btw op de site, want ook kleine praktijken en clubs kopen. Op de factuur staat de btw apart.</td></tr>
+        <tr><td>2</td><th scope="row">Hoe maken we facturen? Mollie doet dat niet vanzelf.</th><td>Een boekhoudpakket dat Mollie-betalingen inleest, zoals Moneybird. Geen eigen factuurcode bouwen.</td></tr>
+        <tr><td>3</td><th scope="row">Wat houdt de licentie van een thema in?</th><td>Eén site per aankoop, een jaar lang updates.</td></tr>
+        <tr><td>4</td><th scope="row">Binnen hoeveel tijd levert u de snelle scan?</th><td>Binnen vijf werkdagen na betaling.</td></tr>
+        <tr><td>5</td><th scope="row">Vercel: het gratis Hobby-abonnement is volgens de voorwaarden alleen voor niet-commercieel gebruik.</th><td>Begin op Hobby zolang de site in opbouw is. Stap naar Pro (rond $20 per maand) vóór de eerste verkoop.</td></tr>
+        <tr><td>6</td><th scope="row">Supabase: een gratis project wordt na een week zonder activiteit gepauzeerd. Dan werken formulier en betalen niet meer.</th><td>Een dagelijkse controle-aanroep via GitHub Actions, die gratis is. Bij meer verkoop: Supabase Pro (rond $25 per maand).</td></tr>
+        <tr><td>7</td><th scope="row">Komt er een telefoonnummer op de site?</th><td>Nee. Contact begint per e-mail en wij bellen terug.</td></tr>
+        <tr><td>8</td><th scope="row">Hoe snel reageren we op een terugbelaanvraag?</th><td>Binnen één werkdag.</td></tr>
+        <tr><td>9</td><th scope="row">Klopt de verdeling van de thema’s over platforms en doelgroepen? Aan welke praktijken denken we?</th><td>Zie <a href="#themas">De tien thema’s</a>. Praktijken: tandarts, psycholoog, diëtist.</td></tr>
+        <tr><td>10</td><th scope="row">Welke nieuwsbriefdiensten ondersteunen de e-mailtemplates?</th><td>Brevo en Laposta (een Nederlandse dienst). Mailchimp op aanvraag.</td></tr>
+        <tr><td>11</td><th scope="row">In welk programma maken we de bewerkbare drukwerksjablonen?</th><td>Canva, zodat de klant zelf een mededeling kan aanpassen. De drukklare pdf’s blijven leidend.</td></tr>
+        <tr><td>12</td><th scope="row">Prijzen van thema’s, audit, begeleiding en uitbreidingen.</th><td>Nog geen voorstel.</td></tr>
+        <tr><td>13</td><th scope="row">Tekst en foto voor het verhaal op Info.</th><td>Aan te leveren door Stefan. Tot die tijd een korte tijdelijke tekst.</td></tr>
+        <tr><td>14</td><th scope="row">Domein.</th><td>Nog geen voorstel.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="voet">
+  <div class="wrap">Bouwplan Bureau van Dockum · concept 10 oktober 2026 · hoort bij de <a href="../stijltest/index.html?stijl=raster">stijltest</a></div>
+</footer>
+</body>
+</html>

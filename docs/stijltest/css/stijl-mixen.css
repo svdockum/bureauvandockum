@@ -1,0 +1,199 @@
+/* Drie mixen — Raster (2) als basis, de zachtheid van Kaartenbak (5) en de serif van Editoriaal (1).
+   De Raster-regels gelden al via data-basis="raster"; hier staat alleen wat de mixen anders doen.
+   A: geen serif, ronde vormen en markeerstift.  B: serif alleen als cursief accent.  C: serif voor alle koppen. */
+
+/* ==========================================================================
+   Gedeeld: Raster, maar minder blokkerig
+   ========================================================================== */
+
+[data-stijl^="mix-"] {
+  --btn-radius: 999px;
+  --radius-sm: var(--r-kaart);
+  --btn-bg-hover: #2A2A2A;
+  --zacht: 0 6px 18px -14px rgba(17, 17, 17, .3);
+  --veer: cubic-bezier(.34, 1.4, .64, 1);
+}
+
+/* Geen zwarte lijnen meer als scheiding: haarlijnen */
+[data-stijl^="mix-"] .site-header { border-bottom-color: var(--line); }
+[data-stijl^="mix-"] .merk-teken { border-radius: 6px; }
+[data-stijl^="mix-"] .sectoren { border-color: var(--line); }
+[data-stijl^="mix-"] .stap { border-top-color: var(--line); }
+[data-stijl^="mix-"] .site-footer { border-top-color: var(--line); }
+
+/* Labels: rond stipje in plaats van een blokje */
+[data-stijl^="mix-"] .eyebrow::before { border-radius: 50%; }
+
+/* Knoppen: pil, en ze veren mee (uit Kaartenbak) */
+[data-stijl^="mix-"] .knop { transition: transform .42s var(--veer), background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); }
+[data-stijl^="mix-"] .knop:hover { transform: translateY(-2px); }
+[data-stijl^="mix-"] .knop:active { transform: scale(.97); transition-duration: 90ms; }
+[data-stijl^="mix-"] .knop-icoon { transition: transform .42s var(--veer); }
+
+/* Kenmerken: een afgerond paneel in plaats van een zwarte bovenlijn */
+[data-stijl^="mix-"] .kenmerken { padding: .25rem 1.25rem; border-radius: var(--r-kaart); background: var(--paneel-bg, var(--surface)); box-shadow: var(--kaart-schaduw, none); }
+[data-stijl^="mix-"] .kenmerken li:first-child { border-top: 0; }
+[data-stijl^="mix-"] .kenmerken li:last-child { border-bottom: 0; }
+@media (min-width: 60rem) {
+  [data-stijl^="mix-"] .kenmerken { padding: 0; border-top: 0; }
+  [data-stijl^="mix-"] .kenmerken li,
+  [data-stijl^="mix-"] .kenmerken li:last-child { padding: 1.5rem; }
+  [data-stijl^="mix-"] .kenmerken li + li { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+}
+
+/* Diensten: drie afgeronde kaarten, de grote Raster-cijfers blijven */
+[data-stijl^="mix-"] .diensten-grid { gap: 1rem; border-top: 0; }
+[data-stijl^="mix-"] .dienst-binnen,
+[data-stijl^="mix-"] .dienst + .dienst .dienst-binnen {
+  padding: 2rem;
+  border: 1px solid var(--line); border-radius: var(--r-kaart);
+  background: var(--kaart-bg, var(--bg));
+  box-shadow: var(--kaart-schaduw, none);
+}
+[data-stijl^="mix-"] .dienst-nr { margin-bottom: 1.5rem; }
+
+/* Statement: een afgerond vlak binnen de kolom, niet meer van rand tot rand */
+[data-stijl^="mix-"] .statement { background: none; }
+[data-stijl^="mix-"] .statement .wrap { padding: clamp(2.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5rem); border-radius: var(--r-blok); background: var(--statement-bg, var(--surface)); }
+
+/* Thema's */
+[data-stijl^="mix-"] .thema-preview { border-color: var(--line); background: var(--kaart-bg, var(--bg)); box-shadow: var(--kaart-schaduw, none); }
+[data-stijl^="mix-"] .pv-balk { border-color: var(--line); }
+
+/* Kennismaken: het grote afgeronde blok uit Kaartenbak in plaats van een zwart vlak over de volle breedte */
+[data-stijl^="mix-"] .cta { --cta-bg: transparent; padding-top: 0; }
+[data-stijl^="mix-"] .cta-inner { padding: clamp(2.5rem, 7vw, 5.5rem); border-radius: var(--r-blok); background: var(--cta-vlak, #111111); }
+[data-stijl^="mix-"] .cta h2 { font-size: clamp(2.75rem, 7vw, 6rem); }
+
+/* ==========================================================================
+   Mix A — Rond: Raster met ronde hoeken, pillen en markeerstift. Geen serif.
+   ========================================================================== */
+
+[data-stijl="mix-a"] {
+  --r-kaart: 12px;
+  --r-blok: 20px;
+  --surface: #F4F4F2;
+  --focus: #0E7C42;
+  --marker: #CBF3BB;
+  --verloop-marker: linear-gradient(135deg, #E0F8D6 0%, #CBF3BB 100%);
+}
+[data-stijl="mix-a"] ::selection { background: var(--marker); color: #111111; }
+
+[data-stijl="mix-a"] h1 em,
+[data-stijl="mix-a"] .statement-tekst em {
+  padding: 0 .08em; border-radius: .1em;
+  color: var(--ink);
+  background: var(--verloop-marker) 0 85% / 100% 74% no-repeat;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+
+/* Label als tab */
+[data-stijl="mix-a"] .eyebrow { justify-self: start; width: fit-content; padding: .25rem .75rem; border-radius: 999px; background: #111111; color: #FFFFFF; }
+[data-stijl="mix-a"] .eyebrow::before { width: .4375rem; height: .4375rem; background: var(--marker); }
+[data-stijl="mix-a"] .cta .eyebrow { background: rgba(255, 255, 255, .14); }
+
+/* Sectoren als pillen */
+[data-stijl="mix-a"] .sectoren { border: 0; }
+[data-stijl="mix-a"] .sectoren-inner { padding-block: 0 1rem; }
+[data-stijl="mix-a"] .sectoren-lijst { gap: .5rem; font-size: 1rem; letter-spacing: -.01em; }
+[data-stijl="mix-a"] .sectoren-lijst li { padding: .5rem 1.125rem; border: 1px solid var(--ink); border-radius: 999px; }
+[data-stijl="mix-a"] .sectoren-lijst li + li { margin-left: 0; }
+[data-stijl="mix-a"] .sectoren-lijst li + li::before { content: none; }
+
+/* Stapnummers als pil */
+[data-stijl="mix-a"] .stap::before { justify-self: start; padding: .125rem .625rem; border: 1px solid var(--ink); border-radius: 999px; }
+
+[data-stijl="mix-a"] .pv-beeld { background: var(--verloop-marker); }
+
+/* ==========================================================================
+   Mix B — Serif-accent: zachte witte kaarten op warm wit, de serif alleen cursief
+   ========================================================================== */
+
+[data-stijl="mix-b"] {
+  --r-kaart: 16px;
+  --r-blok: 24px;
+  --bg: #F8F7F4;
+  --surface: #EFEDE8;
+  --ink: #141414;
+  --muted: #5A5955;
+  --line: rgba(20, 20, 20, .12);
+  --focus: #141414;
+  --kaart-bg: #FFFFFF;
+  --paneel-bg: #FFFFFF;
+  --kaart-schaduw: var(--zacht);
+  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+}
+/* Rustiger: geen zichtbaar raster op de achtergrond */
+[data-stijl="mix-b"] body::before { display: none; }
+
+/* Het luxe accent: losse woorden en cijfers in cursieve serif */
+[data-stijl="mix-b"] h1 em,
+[data-stijl="mix-b"] .statement-tekst em {
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: 1.12em; letter-spacing: -.01em;
+  color: var(--ink);
+}
+[data-stijl="mix-b"] .dienst-nr { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(3.5rem, 6vw, 5rem); letter-spacing: -.02em; }
+[data-stijl="mix-b"] .cta h2 { font-family: var(--serif); font-style: italic; font-weight: 500; letter-spacing: -.015em; line-height: 1; }
+
+[data-stijl="mix-b"] .kenmerken { border: 1px solid var(--line); }
+[data-stijl="mix-b"] .pv-beeld { background: var(--surface); }
+
+/* ==========================================================================
+   Mix C — Serif-koppen: het raster van Raster, de serif van Editoriaal en één diepgroen
+   ========================================================================== */
+
+[data-stijl="mix-c"] {
+  --r-kaart: 20px;
+  --r-blok: 28px;
+  --accent: #0F5C3F;
+  --tint: #EEF4F0;
+  --focus: #0F5C3F;
+  --link: #0F5C3F;
+  --surface: var(--tint);
+  --statement-bg: var(--tint);
+  --cta-vlak: #0F5C3F;
+  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-display: var(--serif);
+  --h1-size: clamp(3.5rem, 8vw, 7rem);
+  --h1-weight: 500;
+  --h1-lh: .95;
+  --h1-track: -.02em;
+  --h2-size: clamp(2.5rem, 5.4vw, 4.75rem);
+  --h2-weight: 500;
+  --h2-track: -.015em;
+}
+[data-stijl="mix-c"] ::selection { background: var(--accent); color: #FFFFFF; }
+
+[data-stijl="mix-c"] .merk-teken { border-radius: 50%; background: var(--accent); }
+[data-stijl="mix-c"] .merk-tekst { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: 0; }
+[data-stijl="mix-c"] h1 em,
+[data-stijl="mix-c"] .statement-tekst em { font-style: italic; color: var(--accent); }
+
+[data-stijl="mix-c"] .eyebrow { justify-self: start; width: fit-content; padding: .25rem .75rem; border-radius: 999px; background: var(--tint); color: var(--accent); }
+[data-stijl="mix-c"] .cta .eyebrow { background: rgba(255, 255, 255, .14); color: #FFFFFF; }
+
+[data-stijl="mix-c"] .sectoren-lijst { font-style: italic; font-weight: 500; letter-spacing: 0; font-size: clamp(1.5rem, 2.6vw, 2rem); }
+
+/* Diensten: nummer als kleine pil, titel in serif */
+[data-stijl="mix-c"] .dienst-nr {
+  align-self: flex-start;
+  padding: .25rem .75rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-family: var(--font-mono); font-size: .75rem; font-weight: 400; letter-spacing: .02em; line-height: 1.5;
+  color: var(--accent);
+}
+[data-stijl="mix-c"] .dienst h3,
+[data-stijl="mix-c"] .stap h3,
+[data-stijl="mix-c"] .thema h3 { font-family: var(--serif); font-size: 2rem; font-weight: 500; letter-spacing: -.005em; line-height: 1.05; }
+[data-stijl="mix-c"] .stap::before { color: var(--accent); }
+
+[data-stijl="mix-c"] .statement-tekst { font-weight: 500; letter-spacing: -.015em; line-height: 1.05; }
+[data-stijl="mix-c"] .pv-beeld { background: var(--tint); }
+[data-stijl="mix-c"] .pv-melding,
+[data-stijl="mix-c"] .pv-knop { background: var(--accent); }
+
+/* Kennismaken in diepgroen */
+[data-stijl="mix-c"] .cta { --cta-muted: #CFE0D7; --btn-ink: #0F5C3F; --btn-bg-hover: var(--tint); }
+[data-stijl="mix-c"] .cta h2 { letter-spacing: -.015em; line-height: 1; }
+[data-stijl="mix-c"] .footer-merk { font-size: 1.375rem; letter-spacing: 0; }

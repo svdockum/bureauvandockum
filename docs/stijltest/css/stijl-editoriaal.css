@@ -1,0 +1,113 @@
+/* Stijl 1 — Editoriaal
+   Warm papier, een klassieke serif en één bordeaux accent. Als een monografie. */
+
+[data-stijl="editoriaal"] {
+  --bg: #F4EFE7;
+  --surface: #EBE4D8;
+  --ink: #1E1B17;
+  --muted: #5A5249;
+  --accent: #7A2B2B;
+  --line: rgba(30, 27, 23, .16);
+  --focus: #7A2B2B;
+  --font-display: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk", system-ui, sans-serif;
+  --h1-size: clamp(3.25rem, 7.6vw, 6.75rem);
+  --h1-weight: 500;
+  --h1-lh: .96;
+  --h1-track: -.02em;
+  --h2-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  --h2-weight: 500;
+  --h3-size: 1.875rem;
+  --font-h3: var(--font-display);
+  --h3-weight: 600;
+  --h3-track: -.005em;
+  --btn-radius: 0;
+  --btn-bg: var(--ink);
+  --btn-ink: var(--bg);
+  --btn-bg-hover: var(--accent);
+  --link: var(--accent);
+}
+
+/* Papierkorrel: vast, niet-klikbaar, nauwelijks zichtbaar */
+[data-stijl="editoriaal"] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 10; pointer-events: none;
+  opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Header */
+[data-stijl="editoriaal"] .site-header { padding-block: 2rem; border-bottom: 1px solid var(--line); }
+[data-stijl="editoriaal"] .merk-tekst { display: grid; line-height: 1; }
+[data-stijl="editoriaal"] .merk-a { font-size: .6875rem; font-weight: 600; letter-spacing: .38em; text-transform: uppercase; margin-bottom: .25rem; }
+[data-stijl="editoriaal"] .merk-b { font-family: var(--font-display); font-size: 1.875rem; font-style: italic; font-weight: 500; letter-spacing: -.01em; }
+[data-stijl="editoriaal"] .header-cta {
+  min-height: auto; padding: .25rem 0;
+  background: none; color: var(--accent);
+  border: 0; border-bottom: 1px solid currentColor;
+}
+[data-stijl="editoriaal"] .header-cta:hover { background: none; color: var(--ink); }
+@media (max-width: 60rem) {
+  [data-stijl="editoriaal"] .header-cta { justify-content: flex-start; width: max-content; }
+}
+
+/* Hero */
+[data-stijl="editoriaal"] .eyebrow { display: flex; align-items: center; gap: 1rem; }
+[data-stijl="editoriaal"] .eyebrow::before { content: ""; width: 2.5rem; height: 1px; background: currentColor; }
+[data-stijl="editoriaal"] h1 em,
+[data-stijl="editoriaal"] .statement-tekst em { font-style: italic; color: var(--accent); }
+[data-stijl="editoriaal"] .kenmerken li { align-items: baseline; }
+[data-stijl="editoriaal"] .kenmerk-nr { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--accent); }
+
+/* Sectoren */
+[data-stijl="editoriaal"] .sectoren { border-top: 0; }
+[data-stijl="editoriaal"] .sectoren-lijst { font-style: italic; }
+[data-stijl="editoriaal"] .sectoren-lijst li + li::before { content: "·" / ""; margin-right: 2.5rem; color: var(--accent); font-style: normal; }
+[data-stijl="editoriaal"] .sectoren-lijst { gap: .5rem 0; }
+[data-stijl="editoriaal"] .sectoren-lijst li + li { margin-left: 2.5rem; }
+
+/* Diensten als redactionele index */
+[data-stijl="editoriaal"] .diensten-grid { grid-template-columns: 1fr; border-bottom: 1px solid var(--line); }
+[data-stijl="editoriaal"] .dienst-binnen { border-top: 1px solid var(--line); padding-block: 2.5rem; }
+[data-stijl="editoriaal"] .dienst-nr { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: var(--accent); line-height: 1; }
+[data-stijl="editoriaal"] .dienst h3 { font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: 500; line-height: 1.02; }
+@media (min-width: 60rem) {
+  [data-stijl="editoriaal"] .dienst-binnen {
+    display: grid; column-gap: 2.5rem; row-gap: 0;
+    grid-template-columns: 5rem minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-areas: "nr titel tekst" "nr titel link";
+    padding-block: 3.25rem;
+  }
+  [data-stijl="editoriaal"] .dienst-nr { grid-area: nr; padding-top: .5rem; }
+  [data-stijl="editoriaal"] .dienst h3 { grid-area: titel; }
+  [data-stijl="editoriaal"] .dienst p { grid-area: tekst; }
+  [data-stijl="editoriaal"] .dienst .tekstlink { grid-area: link; justify-self: start; }
+}
+
+/* Statement */
+[data-stijl="editoriaal"] .statement { background: var(--surface); }
+[data-stijl="editoriaal"] .statement-tekst { max-width: 21ch; font-weight: 500; }
+@media (min-width: 60rem) { [data-stijl="editoriaal"] .statement-tekst { margin-left: 16.666%; } }
+
+/* Werkwijze */
+[data-stijl="editoriaal"] .stap::before { font-family: var(--font-display); font-size: 2.5rem; font-style: italic; line-height: 1; color: var(--accent); }
+[data-stijl="editoriaal"] .stap h3 { font-size: 1.75rem; }
+
+/* Thema's */
+[data-stijl="editoriaal"] .thema-preview { background: #FBF8F3; }
+[data-stijl="editoriaal"] .thema h3 { font-size: 2rem; font-weight: 500; }
+
+/* Kennismaken: het ene bordeaux-moment van de pagina */
+[data-stijl="editoriaal"] .cta {
+  --cta-bg: var(--accent);
+  --cta-ink: #F4EFE7;
+  --cta-muted: #E9DCCB;
+  --btn-bg: #F4EFE7;
+  --btn-ink: #1E1B17;
+  --btn-bg-hover: #FFFFFF;
+  --focus: #F4EFE7;
+}
+[data-stijl="editoriaal"] .cta h2 { font-style: italic; }
+[data-stijl="editoriaal"] .cta .eyebrow::before { background: currentColor; }
+
+/* Footer */
+[data-stijl="editoriaal"] .footer-merk { font-style: italic; font-size: 1.5rem; }

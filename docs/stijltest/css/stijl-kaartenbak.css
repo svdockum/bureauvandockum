@@ -1,0 +1,181 @@
+/* Stijl 5 — Kaartenbak
+   Uit "Wat als ik later dood ben?": nevelgroen, zwart en één groen, dikke randen, kaarten met een
+   tab, markeerstift en knoppen die veren. Het felle groen haalt op nevel geen 3:1, dus het staat
+   hier alleen op zwart; op nevel wordt het diepgroen. */
+
+[data-stijl="kaartenbak"] {
+  --bg: #ECF4E8;
+  --surface: #FFFFFF;
+  --ink: #111111;
+  --muted: #4F564F;
+  --accent: #0E7C42;
+  --groen: #19A85A;
+  --marker: #CBF3BB;
+  --verloop-marker: linear-gradient(135deg, #E0F8D6 0%, #CBF3BB 100%);
+  --verloop-zwart: linear-gradient(145deg, #262626 0%, #111111 52%, #0A2216 100%);
+  --rand: 2px solid #111111;
+  --zacht: 0 6px 18px -14px rgba(17, 17, 17, .3);
+  --stapel: 6px 6px 0 -2px var(--bg), 6px 6px 0 0 #111111, 12px 12px 0 -2px var(--bg), 12px 12px 0 0 #111111;
+  --veer: cubic-bezier(.34, 1.4, .64, 1);
+  --line: rgba(17, 17, 17, .16);
+  --focus: #0E7C42;
+  --font-display: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-body: "Schibsted Grotesk", system-ui, sans-serif;
+  --body-size: 1.0625rem;
+  --h1-size: clamp(3rem, 6.4vw, 5.25rem);
+  --h1-weight: 900;
+  --h1-lh: .92;
+  --h1-track: -.04em;
+  --h2-size: clamp(2.25rem, 5vw, 4rem);
+  --h2-weight: 900;
+  --h2-track: -.035em;
+  --h3-size: 1.375rem;
+  --h3-weight: 900;
+  --h3-track: -.025em;
+  --radius: 12px;
+  --radius-sm: 12px;
+  --btn-radius: 999px;
+  --btn-bg: #111111;
+  --btn-ink: #FFFFFF;
+  --btn-bg-hover: #111111;
+  --link: var(--ink);
+  --kaart-gap: 2rem 1.5rem;
+}
+[data-stijl="kaartenbak"] ::selection { background: var(--marker); color: #111111; }
+[data-stijl="kaartenbak"] :focus-visible { border-radius: 6px; }
+
+/* De tab: klein, zwart, als een ruitertje op een systeemkaart */
+[data-stijl="kaartenbak"] .eyebrow,
+[data-stijl="kaartenbak"] .dienst-nr,
+[data-stijl="kaartenbak"] .kenmerken::before {
+  display: inline-block; justify-self: start; width: fit-content;
+  padding: .125rem .75rem;
+  border-radius: 999px;
+  background: var(--verloop-zwart); color: #FFFFFF;
+  font-size: .75rem; font-weight: 700; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase;
+}
+[data-stijl="kaartenbak"] .cta .eyebrow { color: #FFFFFF; }
+
+/* Header */
+[data-stijl="kaartenbak"] .site-header { padding-block: 1.25rem; }
+[data-stijl="kaartenbak"] .merk-tekst { font-size: 1.3125rem; font-weight: 900; letter-spacing: -.035em; }
+[data-stijl="kaartenbak"] .merk-tekst::after { content: "." / ""; color: var(--accent); }
+[data-stijl="kaartenbak"] .hoofdmenu a {
+  background: none; font-weight: 500;
+  text-decoration: underline 2px transparent; text-underline-offset: 5px;
+  transition: text-decoration-color .2s ease;
+}
+[data-stijl="kaartenbak"] .hoofdmenu a:hover { text-decoration-color: currentColor; }
+[data-stijl="kaartenbak"] .header-cta { min-height: 2.75rem; padding: .5rem 1.25rem; }
+[data-stijl="kaartenbak"] .menu-knop { border: var(--rand); border-radius: 999px; font-weight: 700; }
+@media (max-width: 60rem) {
+  [data-stijl="kaartenbak"] .nav-paneel { border-bottom: var(--rand); }
+}
+
+/* Knoppen: zwart verloop, pil, veren bij hover en drukken */
+[data-stijl="kaartenbak"] .knop { min-height: 3.25rem; padding: .875rem 1.5rem; font-size: .9375rem; font-weight: 700; transition: transform .42s var(--veer), background-color .2s ease, color .2s ease; }
+[data-stijl="kaartenbak"] .knop-primair,
+[data-stijl="kaartenbak"] .knop-primair:hover { background: var(--verloop-zwart); }
+[data-stijl="kaartenbak"] .knop:hover { transform: translateY(-2px); }
+[data-stijl="kaartenbak"] .knop:active { transform: scale(.97); transition-duration: 90ms; }
+[data-stijl="kaartenbak"] .knop-icoon { transition: transform .42s var(--veer); }
+[data-stijl="kaartenbak"] .knop-secundair,
+[data-stijl="kaartenbak"] .knop-secundair:hover { border: var(--rand); background: var(--bg); color: var(--ink); }
+[data-stijl="kaartenbak"] .tekstlink { font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+[data-stijl="kaartenbak"] .tekstlink:hover { color: var(--accent); }
+
+/* Hero: markeerstift in de kop, kenmerken op een stapel kaarten */
+[data-stijl="kaartenbak"] h1 em,
+[data-stijl="kaartenbak"] h2 em {
+  font-style: normal;
+  padding: 0 .1em;
+  border-radius: .12em;
+  /* Niet over de volle hoogte: anders verdwijnen de staarten van de regel erboven onder de stift. */
+  background: var(--verloop-marker) 0 85% / 100% 74% no-repeat;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+[data-stijl="kaartenbak"] .kenmerken {
+  position: relative;
+  margin: 13px 12px 12px 0;
+  padding: 1.5rem 1.5rem .5rem;
+  background: var(--surface);
+  border: var(--rand); border-radius: var(--radius);
+  box-shadow: var(--stapel);
+}
+[data-stijl="kaartenbak"] .kenmerken::before { content: "Kenmerken" / ""; position: absolute; top: -13px; left: 14px; }
+[data-stijl="kaartenbak"] .kenmerken li,
+[data-stijl="kaartenbak"] .kenmerken li:last-child { align-items: center; padding-block: .875rem; border: 0; border-top: 1px solid var(--line); font-weight: 500; }
+[data-stijl="kaartenbak"] .kenmerken li:first-child { border-top: 0; }
+[data-stijl="kaartenbak"] .kenmerk-nr {
+  display: grid; place-items: center; flex: none;
+  width: 1.75rem; height: 1.75rem; padding: 0;
+  border-radius: 50%;
+  background: var(--verloop-marker); color: #111111;
+  font-size: .75rem; font-weight: 700;
+}
+
+/* Sectoren als pillen met rand */
+[data-stijl="kaartenbak"] .sectoren { border: 0; }
+[data-stijl="kaartenbak"] .sectoren-inner { padding-block: 0 1rem; }
+[data-stijl="kaartenbak"] .sectoren-titel { color: var(--ink); font-size: .75rem; font-weight: 700; letter-spacing: .08em; }
+[data-stijl="kaartenbak"] .sectoren-lijst { gap: .625rem; font-family: var(--font-body); font-size: 1rem; font-weight: 700; }
+[data-stijl="kaartenbak"] .sectoren-lijst li { padding: .5rem 1.125rem; border: var(--rand); border-radius: 999px; }
+
+/* Diensten: kaarten met een tab; de eerste ligt bovenop de stapel */
+[data-stijl="kaartenbak"] .dienst-binnen {
+  position: relative;
+  padding: 2.25rem 1.5rem 1.5rem;
+  background: var(--surface);
+  border: var(--rand); border-radius: var(--radius);
+  box-shadow: var(--zacht);
+}
+[data-stijl="kaartenbak"] .dienst:first-child .dienst-binnen { box-shadow: var(--stapel); }
+[data-stijl="kaartenbak"] .dienst-nr { position: absolute; top: -13px; left: 14px; }
+[data-stijl="kaartenbak"] .dienst:nth-child(2) .dienst-nr { background: var(--marker); color: #111111; }
+[data-stijl="kaartenbak"] .dienst:nth-child(3) .dienst-nr { background: var(--bg); color: #111111; box-shadow: inset 0 0 0 2px #111111; }
+[data-stijl="kaartenbak"] .dienst h3 { font-size: 1.625rem; }
+
+/* Statement: het grote zwarte blok, met groen dat op zwart wél leesbaar is */
+[data-stijl="kaartenbak"] .statement .wrap { padding: clamp(2.5rem, 7vw, 5.5rem); border-radius: 20px; background: var(--verloop-zwart); color: #FFFFFF; }
+[data-stijl="kaartenbak"] .statement-tekst { max-width: 20ch; font-weight: 900; font-size: clamp(2.25rem, 5.4vw, 4.5rem); line-height: .98; letter-spacing: -.04em; }
+[data-stijl="kaartenbak"] .statement-tekst em { font-style: normal; color: var(--groen); }
+
+/* Werkwijze: kaarten met nummerbolletjes; de laatste stap is "klaar" en dus groen */
+[data-stijl="kaartenbak"] .stappen { gap: 1.25rem; }
+[data-stijl="kaartenbak"] .stap { padding: 1.5rem; border: var(--rand); border-radius: var(--radius); background: var(--surface); box-shadow: var(--zacht); }
+[data-stijl="kaartenbak"] .stap::before {
+  display: grid; place-items: center;
+  width: 2.25rem; height: 2.25rem; margin-bottom: .5rem;
+  border-radius: 50%;
+  background: var(--verloop-zwart); color: #FFFFFF;
+  font-size: .8125rem; font-weight: 700;
+}
+[data-stijl="kaartenbak"] .stap:last-child::before { background: var(--verloop-marker); color: #111111; box-shadow: inset 0 0 0 2px #111111; }
+
+/* Thema's */
+[data-stijl="kaartenbak"] .thema-preview { border: var(--rand); background: var(--surface); box-shadow: var(--zacht); transition: transform .42s var(--veer); }
+[data-stijl="kaartenbak"] .thema:hover .thema-preview { transform: translateY(-4px) rotate(-.6deg); }
+[data-stijl="kaartenbak"] .pv-balk { border-bottom: var(--rand); }
+[data-stijl="kaartenbak"] .pv-balk i { background: #111111; }
+[data-stijl="kaartenbak"] .pv-beeld { border-radius: 7px; background: var(--verloop-marker); }
+[data-stijl="kaartenbak"] .pv-regel.dik,
+[data-stijl="kaartenbak"] .pv-melding,
+[data-stijl="kaartenbak"] .pv-knop { background: #111111; }
+[data-stijl="kaartenbak"] .pv-melding { border-radius: 999px; }
+[data-stijl="kaartenbak"] .thema h3 { font-size: 1.625rem; }
+[data-stijl="kaartenbak"] .thema-voor { color: var(--accent); font-weight: 700; }
+
+/* Kennismaken: markeerstiftvlak op de stapel */
+[data-stijl="kaartenbak"] .cta { --cta-bg: transparent; padding-top: 0; }
+[data-stijl="kaartenbak"] .cta-inner {
+  margin-right: 12px;
+  padding: clamp(2.5rem, 7vw, 5rem);
+  border: var(--rand); border-radius: 20px;
+  background: var(--verloop-marker);
+  box-shadow: var(--stapel);
+}
+[data-stijl="kaartenbak"] .cta-alt a { text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 700; }
+
+/* Footer */
+[data-stijl="kaartenbak"] .site-footer { border-top: var(--rand); }
+[data-stijl="kaartenbak"] .footer-merk { font-size: 1.125rem; font-weight: 900; letter-spacing: -.03em; }

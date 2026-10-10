@@ -1,0 +1,128 @@
+/* Stijl 2 — Raster
+   Zwart-wit, een zichtbaar kolommenraster en strakke grotesk. Zwitsers en tijdloos.
+   Geldt via data-basis="raster" ook voor de drie mixen; die zetten er alleen hun verschillen overheen. */
+
+[data-basis="raster"] {
+  --bg: #FFFFFF;
+  --surface: #F3F3F1;
+  --ink: #111111;
+  --muted: #5B5B5B;
+  --accent: #111111;
+  --line: rgba(17, 17, 17, .14);
+  --focus: #111111;
+  --font-display: "Geist", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --body-size: 1.0625rem;
+  --h1-size: clamp(3.25rem, 9.4vw, 9rem);
+  --h1-weight: 600;
+  --h1-lh: .9;
+  --h1-track: -.05em;
+  --h2-size: clamp(2.5rem, 6vw, 5rem);
+  --h2-weight: 600;
+  --h2-track: -.04em;
+  --h3-size: 1.375rem;
+  --h3-weight: 600;
+  --h3-track: -.02em;
+  --btn-radius: 6px;
+  --btn-bg: #111111;
+  --btn-ink: #FFFFFF;
+  --btn-bg-hover: #3A3A3A;
+}
+
+/* Zichtbaar zeskoloms raster achter de inhoud */
+[data-basis="raster"] body::before {
+  content: ""; position: fixed; top: 0; bottom: 0; left: 50%; z-index: -1; pointer-events: none;
+  width: min(100% - 2 * var(--gutter), var(--maxw));
+  transform: translateX(-50%);
+  border-right: 1px solid rgba(17, 17, 17, .06);
+  background: linear-gradient(to right, rgba(17, 17, 17, .06) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%;
+}
+
+/* Monospace voor labels en nummers */
+[data-basis="raster"] .eyebrow,
+[data-basis="raster"] .sectoren-titel,
+[data-basis="raster"] .kenmerk-nr,
+[data-basis="raster"] .dienst-nr,
+[data-basis="raster"] .stap::before,
+[data-basis="raster"] .thema-voor,
+[data-basis="raster"] .footer-klein {
+  font-family: var(--font-mono); font-weight: 400; letter-spacing: .02em; text-transform: uppercase; font-size: .75rem;
+}
+[data-basis="raster"] .eyebrow { display: flex; align-items: center; gap: .625rem; color: var(--ink); }
+[data-basis="raster"] .eyebrow::before { content: ""; width: .5rem; height: .5rem; background: currentColor; }
+
+/* Header */
+[data-basis="raster"] .site-header { padding-block: 1.25rem; border-bottom: 1px solid var(--ink); background: var(--bg); }
+[data-basis="raster"] .merk-teken { display: block; width: 1.125rem; height: 1.125rem; background: var(--ink); color: transparent; overflow: hidden; }
+[data-basis="raster"] .merk-tekst { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; }
+[data-basis="raster"] .merk-b,
+[data-basis="raster"] .footer-merk span { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+[data-basis="raster"] .hoofdmenu a { font-weight: 500; }
+[data-basis="raster"] .header-cta { min-height: 2.5rem; padding: .5rem 1.125rem; font-size: .9375rem; }
+
+/* Hero: kop over de volle breedte, tekst ingesprongen op het raster */
+[data-basis="raster"] .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 4rem; }
+[data-basis="raster"] h1 em { font-style: normal; color: var(--muted); }
+@media (min-width: 60rem) {
+  [data-basis="raster"] .hero-tekst { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  [data-basis="raster"] .hero-tekst > * { grid-column: 1 / -1; }
+  [data-basis="raster"] .hero .lead,
+  [data-basis="raster"] .hero .acties { grid-column: 4 / -1; padding-left: 1rem; }
+  [data-basis="raster"] .kenmerken { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+  [data-basis="raster"] .kenmerken li,
+  [data-basis="raster"] .kenmerken li:last-child { flex-direction: column; gap: 2rem; padding: 1.25rem 1rem 0 0; border: 0; }
+  [data-basis="raster"] .kenmerken li + li { padding-left: 1rem; border-left: 1px solid var(--line); }
+}
+[data-basis="raster"] .kenmerken li { font-weight: 500; }
+
+/* Sectoren */
+[data-basis="raster"] .sectoren { border-color: var(--ink); background: var(--bg); }
+[data-basis="raster"] .sectoren-lijst { font-weight: 500; letter-spacing: -.03em; }
+[data-basis="raster"] .sectoren-lijst li + li::before { content: "/" / ""; margin-right: 2.5rem; color: var(--muted); font-weight: 300; }
+[data-basis="raster"] .sectoren-lijst { gap: .25rem 0; }
+[data-basis="raster"] .sectoren-lijst li + li { margin-left: 2.5rem; }
+
+/* Diensten: drie kolommen met haarlijnen en grote cijfers */
+[data-basis="raster"] .diensten-grid { border-top: 1px solid var(--ink); }
+[data-basis="raster"] .dienst-binnen { padding-block: 1.5rem 2.5rem; }
+[data-basis="raster"] .dienst + .dienst .dienst-binnen { border-top: 1px solid var(--line); }
+[data-basis="raster"] .dienst-nr { font-family: var(--font-display); font-size: clamp(4rem, 7vw, 6rem); font-weight: 300; letter-spacing: -.06em; line-height: 1; color: var(--ink); text-transform: none; margin-bottom: 2rem; }
+@media (min-width: 60rem) {
+  [data-basis="raster"] .dienst-binnen { padding-inline: 0 2rem; }
+  [data-basis="raster"] .dienst + .dienst .dienst-binnen { padding-left: 2rem; border-top: 0; border-left: 1px solid var(--line); }
+}
+[data-basis="raster"] .tekstlink { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: .125rem; align-self: flex-start; }
+
+/* Statement */
+[data-basis="raster"] .statement { background: var(--surface); }
+[data-basis="raster"] .statement-tekst { max-width: 18ch; font-weight: 500; font-size: clamp(2.25rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -.045em; }
+[data-basis="raster"] .statement-tekst em { font-style: normal; color: var(--muted); }
+@media (min-width: 60rem) { [data-basis="raster"] .statement-tekst { margin-left: calc(100% / 6); } }
+
+/* Werkwijze */
+[data-basis="raster"] .stap { border-top-color: var(--ink); }
+[data-basis="raster"] .stap::before { color: var(--ink); }
+
+/* Thema's */
+[data-basis="raster"] .thema-preview { border-color: var(--ink); background: var(--bg); }
+[data-basis="raster"] .pv-balk { border-color: var(--ink); }
+[data-basis="raster"] .pv-beeld { background: var(--surface); background-image: linear-gradient(to top right, transparent calc(50% - .5px), var(--line) 50%, transparent calc(50% + .5px)); }
+[data-basis="raster"] .thema-voor { color: var(--muted); }
+
+/* Kennismaken: zwart vlak */
+[data-basis="raster"] .cta {
+  --cta-bg: #111111;
+  --cta-ink: #FFFFFF;
+  --cta-muted: #B5B5B5;
+  --btn-bg: #FFFFFF;
+  --btn-ink: #111111;
+  --btn-bg-hover: #DADADA;
+  --focus: #FFFFFF;
+}
+[data-basis="raster"] .cta h2 { font-size: clamp(3rem, 9vw, 8rem); line-height: .9; letter-spacing: -.05em; }
+[data-basis="raster"] .cta .eyebrow { color: #FFFFFF; }
+
+/* Footer */
+[data-basis="raster"] .site-footer { border-top: 1px solid var(--ink); }
+[data-basis="raster"] .footer-merk { font-weight: 600; font-size: 1.0625rem; letter-spacing: -.02em; }

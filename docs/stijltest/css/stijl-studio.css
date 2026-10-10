@@ -1,0 +1,157 @@
+/* Stijl 3 — Studio
+   Zacht wit, diepgroen en ronde, gelaagde vormen. Modern en vriendelijk, van zorgpraktijk tot webshop. */
+
+[data-stijl="studio"] {
+  --bg: #F6F6F2;
+  --surface: #FFFFFF;
+  --ink: #17211E;
+  --muted: #4D5955;
+  --accent: #1F4D40;
+  --accent-soft: #E2EBE6;
+  --line: rgba(23, 33, 30, .12);
+  --focus: #1F4D40;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --body-size: 1.0625rem;
+  --h1-size: clamp(2.875rem, 6vw, 5.25rem);
+  --h1-weight: 600;
+  --h1-lh: 1.02;
+  --h1-track: -.04em;
+  --h2-size: clamp(2.125rem, 4.4vw, 3.625rem);
+  --h2-weight: 600;
+  --h2-track: -.035em;
+  --h3-size: 1.375rem;
+  --h3-weight: 600;
+  --h3-track: -.02em;
+  --radius: 2rem;
+  --radius-sm: 1.25rem;
+  --btn-radius: 999px;
+  --btn-bg: var(--accent);
+  --btn-ink: #FFFFFF;
+  --btn-bg-hover: #163A30;
+  --link: var(--accent);
+  --kaart-gap: 1rem;
+  --schaduw: 0 1px 1px rgba(255, 255, 255, .9) inset, 0 24px 48px -28px rgba(23, 33, 30, .22);
+}
+
+/* Header: zwevende pil, los van de bovenrand */
+[data-stijl="studio"] .site-header { padding-block: 1.25rem 0; }
+[data-stijl="studio"] .header-inner {
+  padding: .5rem .5rem .5rem 1.25rem;
+  background: var(--surface);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--line), var(--schaduw);
+}
+[data-stijl="studio"] .merk-teken {
+  display: grid; place-items: center;
+  width: 2.25rem; height: 2.25rem;
+  border-radius: .75rem;
+  background: var(--accent); color: #FFFFFF;
+  font-size: .875rem; font-weight: 700; letter-spacing: -.02em;
+}
+[data-stijl="studio"] .merk-tekst { font-size: 1.0625rem; font-weight: 700; letter-spacing: -.025em; }
+[data-stijl="studio"] .merk-b { color: var(--muted); font-weight: 500; }
+[data-stijl="studio"] .hoofdmenu a { padding: .5rem .875rem; border-radius: 999px; background: none; transition: background-color .4s var(--ease); }
+[data-stijl="studio"] .hoofdmenu a:hover { background: var(--accent-soft); }
+[data-stijl="studio"] .hoofdmenu ul { gap: .25rem; }
+[data-stijl="studio"] .header-cta { min-height: 2.75rem; padding: .5rem 1.25rem; font-size: .9375rem; }
+@media (max-width: 60rem) {
+  [data-stijl="studio"] .nav-paneel { top: calc(100% + .5rem); margin-inline: var(--gutter); padding: 1rem; border: 0; border-radius: 1.5rem; background: var(--surface); box-shadow: 0 0 0 1px var(--line), var(--schaduw); }
+  [data-stijl="studio"] .hoofdmenu a { border-radius: .75rem; border-bottom: 0; }
+}
+
+/* Eyebrow als pil */
+[data-stijl="studio"] .eyebrow {
+  justify-self: start; width: fit-content; max-width: 100%;
+  padding: .375rem .875rem;
+  border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: .75rem; font-weight: 600; letter-spacing: .12em;
+}
+
+/* Knop-in-knop: pijl in eigen cirkel */
+[data-stijl="studio"] .knop-primair:has(.knop-icoon) { padding: .375rem .375rem .375rem 1.5rem; }
+[data-stijl="studio"] .knop-icoon { width: 2.375rem; height: 2.375rem; border-radius: 50%; background: rgba(255, 255, 255, .16); }
+[data-stijl="studio"] .knop:hover .knop-icoon { transform: translate(3px, -1px) scale(1.06); }
+[data-stijl="studio"] .knop-secundair { min-height: 3.125rem; border-color: var(--line); background: var(--surface); color: var(--ink); }
+[data-stijl="studio"] .knop-secundair:hover { border-color: var(--accent); background: var(--surface); color: var(--accent); }
+
+/* Hero */
+[data-stijl="studio"] .hero { padding-top: clamp(3rem, 7vw, 5.5rem); }
+[data-stijl="studio"] h1 em { font-style: normal; color: var(--accent); }
+[data-stijl="studio"] .hero-grid { align-items: center; }
+
+/* Kenmerken als dubbelwandige kaart: schaal met losse rijen erin */
+[data-stijl="studio"] .kenmerken {
+  display: grid; gap: .375rem; padding: .5rem;
+  border-radius: var(--radius);
+  background: rgba(23, 33, 30, .04);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+[data-stijl="studio"] .kenmerken li,
+[data-stijl="studio"] .kenmerken li:last-child {
+  align-items: center; padding: 1.125rem 1.25rem;
+  border: 0; border-radius: calc(var(--radius) - .5rem);
+  background: var(--surface);
+  box-shadow: var(--schaduw);
+  font-weight: 500;
+}
+[data-stijl="studio"] .kenmerk-nr { display: none; }
+[data-stijl="studio"] .kenmerken li::before {
+  content: ""; flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231F4D40' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E") center / .875rem no-repeat;
+}
+
+/* Sectoren als pillen */
+[data-stijl="studio"] .sectoren { border: 0; }
+[data-stijl="studio"] .sectoren-inner { padding-block: 0 1rem; }
+[data-stijl="studio"] .sectoren-lijst { gap: .625rem; font-size: 1rem; font-weight: 600; }
+[data-stijl="studio"] .sectoren-lijst li { padding: .625rem 1.125rem; border-radius: 999px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+
+/* Diensten: asymmetrische bento met dubbelwandige kaarten */
+@media (min-width: 60rem) {
+  [data-stijl="studio"] .diensten-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-rows: auto auto; }
+  [data-stijl="studio"] .dienst:first-child { grid-row: span 2; }
+}
+[data-stijl="studio"] .dienst { padding: .5rem; border-radius: var(--radius); background: rgba(23, 33, 30, .04); box-shadow: inset 0 0 0 1px var(--line); }
+[data-stijl="studio"] .dienst-binnen { padding: 2rem; border-radius: calc(var(--radius) - .5rem); background: var(--surface); box-shadow: var(--schaduw); }
+[data-stijl="studio"] .dienst-nr { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+[data-stijl="studio"] .dienst:first-child .dienst-binnen { justify-content: flex-end; min-height: 22rem; background: var(--accent); color: #FFFFFF; --link: #FFFFFF; --focus: #FFFFFF; }
+[data-stijl="studio"] .dienst:first-child h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -.035em; }
+[data-stijl="studio"] .dienst:first-child p { color: rgba(255, 255, 255, .84); }
+[data-stijl="studio"] .dienst:first-child .dienst-nr { margin-bottom: auto; background: rgba(255, 255, 255, .14); color: #FFFFFF; }
+[data-stijl="studio"] .tekstlink { margin-top: .5rem; }
+
+/* Statement in zacht groen vlak */
+[data-stijl="studio"] .statement .wrap { padding: clamp(3rem, 8vw, 6.5rem) clamp(1.5rem, 6vw, 5rem); border-radius: 2.5rem; background: var(--accent-soft); }
+[data-stijl="studio"] .statement-tekst { max-width: 24ch; margin-inline: auto; text-align: center; font-weight: 600; letter-spacing: -.035em; font-size: clamp(1.875rem, 4vw, 3.25rem); }
+[data-stijl="studio"] .statement-tekst em { font-style: normal; color: var(--accent); }
+
+/* Werkwijze als kaarten */
+[data-stijl="studio"] .stappen { gap: 1rem; }
+[data-stijl="studio"] .stap { padding: 1.75rem; border: 0; border-radius: var(--radius-sm); background: var(--surface); box-shadow: 0 0 0 1px var(--line), var(--schaduw); }
+[data-stijl="studio"] .stap::before { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; margin-bottom: .75rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+/* Thema's */
+[data-stijl="studio"] .thema-preview { padding: .375rem; border: 0; border-radius: var(--radius); background: rgba(23, 33, 30, .05); box-shadow: inset 0 0 0 1px var(--line); }
+[data-stijl="studio"] .pv-balk { border: 0; }
+[data-stijl="studio"] .pv-body { margin: 0 .25rem .25rem; border-radius: calc(var(--radius) - .625rem); background: var(--surface); box-shadow: var(--schaduw); }
+
+/* Kennismaken: groene kaart in de pagina */
+[data-stijl="studio"] .cta { --cta-bg: transparent; padding-top: 0; }
+[data-stijl="studio"] .cta-inner {
+  padding: clamp(2.5rem, 7vw, 5.5rem);
+  border-radius: 2.5rem;
+  background: var(--accent); color: #FFFFFF;
+  --cta-muted: rgba(255, 255, 255, .84);
+  --cta-ink: #FFFFFF;
+  --btn-bg: #FFFFFF;
+  --btn-ink: var(--accent);
+  --btn-bg-hover: var(--accent-soft);
+  --focus: #FFFFFF;
+}
+[data-stijl="studio"] .cta .eyebrow { background: rgba(255, 255, 255, .14); color: #FFFFFF; }
+[data-stijl="studio"] .cta .knop-icoon { background: var(--accent); color: #FFFFFF; }
+
+/* Footer */
+[data-stijl="studio"] .footer-merk { font-weight: 700; font-size: 1.0625rem; letter-spacing: -.025em; }
