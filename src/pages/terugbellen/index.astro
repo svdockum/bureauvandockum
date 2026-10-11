@@ -13,23 +13,24 @@ import '../../styles/formulieren.css';
         <h2 id="foutoverzicht-titel">Controleer deze velden</h2>
         <ul></ul>
       </div>
+      <p class="formulier-uitleg">Velden met ‘verplicht’ moet u invullen.</p>
       <div class="veld">
-        <label for="naam">Naam</label>
+        <label for="naam">Naam <span class="veld-status">(verplicht)</span></label>
         <input id="naam" name="naam" autocomplete="name" required maxlength="120" aria-describedby="naam-fout" data-fout="Vul uw naam in." />
         <p class="veldfout" id="naam-fout" hidden></p>
       </div>
       <div class="veld">
-        <label for="email">E-mailadres</label>
+        <label for="email">E-mailadres <span class="veld-status">(verplicht)</span></label>
         <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="email-fout" data-patroon="^[^\s@]+@[^\s@]+\.[^\s@]+$" data-fout="Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl." />
         <p class="veldfout" id="email-fout" hidden></p>
       </div>
       <div class="veld">
-        <label for="telefoon">Telefoonnummer</label>
+        <label for="telefoon">Telefoonnummer <span class="veld-status">(verplicht)</span></label>
         <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" required maxlength="40" data-min-cijfers="10" aria-describedby="telefoon-fout" data-fout="Vul een telefoonnummer in van minstens tien cijfers." />
         <p class="veldfout" id="telefoon-fout" hidden></p>
       </div>
       <div class="veld">
-        <label for="onderwerp">Waar gaat het over?</label>
+        <label for="onderwerp">Waar gaat het over? <span class="veld-status">(verplicht)</span></label>
         <select id="onderwerp" name="onderwerp" required aria-describedby="onderwerp-fout" data-fout="Kies waar het over gaat.">
           <option value="">Kies een onderwerp</option>
           <option value="toegankelijke-website">Een toegankelijke website</option>
@@ -60,7 +61,7 @@ import '../../styles/formulieren.css';
         <label class="keuze"><input type="radio" id="dagdeel-maakt-niet-uit" name="dagdeel" value="maakt-niet-uit" checked /> Maakt niet uit</label>
       </fieldset>
       <div class="veld">
-        <label for="vraag">Uw vraag (niet verplicht)</label>
+        <label for="vraag">Uw vraag <span class="veld-status">(niet verplicht)</span></label>
         <textarea id="vraag" name="vraag" rows="5" maxlength="2000" aria-describedby="vraag-fout"></textarea>
         <p class="veldfout" id="vraag-fout" hidden></p>
       </div>

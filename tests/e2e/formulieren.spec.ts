@@ -21,14 +21,14 @@ test('leeg terugbelformulier toont een foutoverzicht met links naar de velden', 
   await expect(overzicht).toBeVisible();
   await expect(overzicht).toBeFocused();
   await expect(overzicht.getByRole('link', { name: 'Vul uw naam in.' })).toBeVisible();
-  await expect(page.getByLabel('Naam', { exact: true })).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByLabel('Naam (verplicht)', { exact: true })).toHaveAttribute('aria-invalid', 'true');
   await overzicht.getByRole('link', { name: 'Vul uw naam in.' }).click();
-  await expect(page.getByLabel('Naam', { exact: true })).toBeFocused();
+  await expect(page.getByLabel('Naam (verplicht)', { exact: true })).toBeFocused();
 });
 
 test('terugbelformulier controleert net zo streng als de server', async ({ page }) => {
   await page.goto('/terugbellen/');
-  await page.getByLabel('Naam', { exact: true }).fill('   ');
+  await page.getByLabel('Naam (verplicht)', { exact: true }).fill('   ');
   await page.getByLabel('E-mailadres').fill('naam@gmailcom');
   await page.getByLabel('Telefoonnummer').fill('06.12345678');
   await page.getByLabel('Waar gaat het over?').selectOption('advies');
@@ -56,7 +56,7 @@ test('ingevuld terugbelformulier gaat naar de functie en daarna naar de bevestig
     await route.fulfill({ status: 303, headers: { location: 'http://127.0.0.1:4321/terugbellen/verzonden/' } });
   });
   await page.goto('/terugbellen/');
-  await page.getByLabel('Naam', { exact: true }).fill('Anna de Vries');
+  await page.getByLabel('Naam (verplicht)', { exact: true }).fill('Anna de Vries');
   await page.getByLabel('E-mailadres').fill('anna@praktijk.nl');
   await page.getByLabel('Telefoonnummer').fill('06 12345678');
   await page.getByLabel('Waar gaat het over?').selectOption('advies');
@@ -89,7 +89,7 @@ test('ingevuld scanformulier gaat naar de functie', async ({ page }) => {
     await route.fulfill({ status: 303, headers: { location: 'http://127.0.0.1:4321/scan-aanvragen/verzonden/' } });
   });
   await page.goto('/scan-aanvragen/');
-  await page.getByLabel('Naam', { exact: true }).fill('Anna');
+  await page.getByLabel('Naam (verplicht)', { exact: true }).fill('Anna');
   await page.getByLabel('E-mailadres').fill('anna@praktijk.nl');
   await page.getByLabel('Telefoonnummer').fill('06 12345678');
   await page.getByLabel('Naam van uw organisatie (niet verplicht)').fill('Praktijk Anna');
@@ -118,7 +118,7 @@ test.describe('zonder JavaScript', () => {
     for (const id of ['naam', 'email', 'telefoon', 'website']) {
       await expect(page.locator(`#${id}`)).toHaveAttribute('required', '');
     }
-    await page.getByLabel('Naam', { exact: true }).fill('Anna');
+    await page.getByLabel('Naam (verplicht)', { exact: true }).fill('Anna');
     await page.getByLabel('E-mailadres').fill('anna@praktijk.nl');
     await page.getByLabel('Telefoonnummer').fill('06 12345678');
     await page.getByLabel('Webadres van uw site').fill('www.praktijk.nl');

@@ -31,6 +31,6 @@ const datum = (d: Date) => d.toLocaleDateString('nl-NL', { day: 'numeric', month
         <ul>{artikel.data.wcag.map((c) => <li><a href={c.url}>{c.nummer}: {c.naam}</a></li>)}</ul>
       </aside>
     )}
-    <p><a class="knop knop-primair" href={artikel.data.verwijzing.href}>{artikel.data.verwijzing.tekst}</a></p>
+    <div class="acties"><a class="knop knop-primair" href={artikel.data.verwijzing.href}>{artikel.data.verwijzing.tekst}</a></div>
   </article>
 </Basis>

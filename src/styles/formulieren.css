@@ -2,6 +2,8 @@
 .formulier { max-width: 36rem; margin-top: 2.5rem; display: grid; gap: 1.5rem; }
 .formulier .veld { display: grid; gap: .5rem; border: 0; padding: 0; margin: 0; min-width: 0; }
 .formulier label, .formulier legend { font-weight: 700; padding: 0; }
+.formulier .veld-status { font-weight: 400; color: var(--muted); }
+.formulier-uitleg { color: var(--muted); }
 .formulier input:not([type="radio"], [type="checkbox"]),
 .formulier select,
 .formulier textarea {
