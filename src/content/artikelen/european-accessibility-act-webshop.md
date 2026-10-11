@@ -2,7 +2,7 @@
 titel: "De European Accessibility Act: geldt die voor uw webshop?"
 samenvatting: Sinds 28 juni 2025 geldt een Europese richtlijn voor toegankelijkheid, ook voor webshops. Wat er staat, wie is uitgezonderd en wat u nu kunt doen.
 groep: basis
-volgorde: 2
+volgorde: 3
 gepubliceerd: 2026-10-10
 gecontroleerd: 2026-10-10
 wcag: []

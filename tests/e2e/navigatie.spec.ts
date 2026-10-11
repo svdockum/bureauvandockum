@@ -16,6 +16,13 @@ test('het hoofdmenu heeft precies vijf items in de goede volgorde', async ({ pag
   await expect(items).toHaveText(['Toegankelijke website', 'UX Testing', 'Thema’s', 'Tarieven', 'Info']);
 });
 
+test('het logo in de footer gaat naar de homepage', async ({ page }) => {
+  await page.goto('/tarieven/');
+  await page.locator('footer').getByRole('link', { name: 'Bureau van Dockum' }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator('h1')).toContainText('Websites en webshops');
+});
+
 test('mobiel menu opent, sluit met Escape en geeft de focus terug', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');

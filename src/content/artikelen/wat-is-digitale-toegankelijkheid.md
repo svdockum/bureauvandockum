@@ -45,7 +45,7 @@ Iedereen heeft wel eens last van een beperking die weer overgaat. Denk aan een g
 
 ## Wat is WCAG?
 
-WCAG staat voor Web Content Accessibility Guidelines. Dat zijn internationale regels voor toegankelijke websites. Ze zijn geschreven door het W3C, een organisatie die afspraken maakt voor het web. De regels zijn verdeeld in drie niveaus: A, AA en AAA. Voor de meeste sites is niveau AA het doel. De huidige versie is WCAG 2.2. Alle regels hebben vier uitgangspunten: informatie moet waarneembaar, bedienbaar, begrijpelijk en robuust zijn. Voor overheden is het vaak al een plicht. Ook voor bedrijven worden de eisen strenger.
+WCAG staat voor Web Content Accessibility Guidelines. Dat zijn internationale regels voor toegankelijke websites. Ze zijn geschreven door het W3C, een organisatie die afspraken maakt voor het web. De regels zijn verdeeld in drie niveaus: A, AA en AAA. Voor de meeste sites is niveau AA het doel. De huidige versie is WCAG 2.2. Alle regels hebben vier uitgangspunten: informatie moet waarneembaar, bedienbaar, begrijpelijk en robuust zijn. Voor overheden is het vaak al een plicht. Ook voor bedrijven worden de eisen strenger. Meer hierover leest u in [Wat is WCAG, en wat betekent niveau AA?](/info/wat-is-wcag/)
 
 ## Wat levert het u op?
 

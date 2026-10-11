@@ -2,6 +2,18 @@ import { test, expect } from '@playwright/test';
 
 const FUNCTIONS = 'http://127.0.0.1:54521/functions/v1';
 
+test('de keynote-knop op Info kiest het onderwerp in het terugbelformulier alvast', async ({ page }) => {
+  await page.goto('/info/');
+  await page.getByRole('link', { name: 'Neem contact op voor een keynote' }).click();
+  await expect(page).toHaveURL(/\/terugbellen\/\?onderwerp=keynote$/);
+  await expect(page.getByLabel('Waar gaat het over?')).toHaveValue('keynote');
+});
+
+test('een onbekend onderwerp in de link laat de keuze leeg', async ({ page }) => {
+  await page.goto('/terugbellen/?onderwerp=bestaat-niet');
+  await expect(page.getByLabel('Waar gaat het over?')).toHaveValue('');
+});
+
 test('leeg terugbelformulier toont een foutoverzicht met links naar de velden', async ({ page }) => {
   await page.goto('/terugbellen/');
   await page.getByRole('button', { name: 'Verstuur aanvraag' }).click();

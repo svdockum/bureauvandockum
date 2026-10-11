@@ -1,21 +1,33 @@
 ---
+import { Image } from 'astro:assets';
 import Basis from '../layouts/Basis.astro';
 import LeesOok from '../components/LeesOok.astro';
 import Kennismaken from '../components/Kennismaken.astro';
+import heatmap from '../assets/heatmap-voorbeeld.svg';
 ---
-<Basis titel="UX Testing" beschrijving="Echte bezoekers testen uw site of webshop, onder wie mensen met een beperking. U krijgt een helder rapport met verbeteringen.">
+<Basis titel="UX Testing" beschrijving="Echte bezoekers testen uw site of webshop, met eyetracking en heatmaps. U krijgt een helder rapport met verbeteringen.">
   <div class="wrap pagina">
     <h1>UX Testing</h1>
-    <p class="lead">Echte bezoekers testen uw site of webshop, van de homepage tot afrekenen. Onder hen zijn mensen met een beperking. Zo ziet u waar het misgaat, voordat uw klanten afhaken.</p>
+    <p class="lead">Echte bezoekers testen uw site of webshop, van de homepage tot afrekenen. Zo ziet u waar het misgaat, voordat uw klanten afhaken.</p>
 
     <section class="pagina-sectie" aria-labelledby="verloop-titel">
       <h2 id="verloop-titel">Hoe een test verloopt</h2>
       <ol>
         <li><strong>Kennismaking.</strong> We bespreken uw organisatie, uw bezoekers en wat u wilt weten.</li>
         <li><strong>Testplan.</strong> Wij maken de opdrachten voor de test, zoals “zoek de openingstijden” of “bestel een product”.</li>
-        <li><strong>Sessies.</strong> Echte bezoekers voeren die opdrachten uit op uw site. Onder hen zijn mensen met een beperking.</li>
+        <li><strong>Sessies.</strong> Echte bezoekers voeren die opdrachten uit op uw site. Met eyetracking zien we waar ze kijken.</li>
         <li><strong>Rapport.</strong> U krijgt een helder rapport met wat we zagen en wat u kunt verbeteren.</li>
       </ol>
+    </section>
+
+    <section class="pagina-sectie" aria-labelledby="eyetracking-titel">
+      <h2 id="eyetracking-titel">Eyetracking en heatmaps</h2>
+      <p>Bij onze tests gebruiken we ook eyetracking-apparatuur. Die volgt waar een bezoeker op het scherm kijkt, en hoe lang. Daar maken we heatmaps van: een kaart van uw pagina die laat zien wat de aandacht trekt, en wat over het hoofd wordt gezien.</p>
+      <p>Zo ziet u bijvoorbeeld of bezoekers de knop om te bestellen wel opmerken, of dat hun blik blijft hangen bij een foto.</p>
+      <figure class="heatmap">
+        <Image src={heatmap} alt="Heatmap over de productpagina van een webshop. De meeste aandacht gaat naar de productfoto, de titel, de prijs en de knop om te bestellen. Het menu bovenaan en de kleine foto’s onderaan krijgen weinig aandacht." />
+        <figcaption>Een voorbeeld ter illustratie, geen echte meting. Hoe roder de vlek, hoe langer bezoekers ernaar keken.</figcaption>
+      </figure>
     </section>
 
     <section class="pagina-sectie" aria-labelledby="krijgt-titel">

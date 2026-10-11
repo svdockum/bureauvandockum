@@ -4,6 +4,11 @@
 .advies-inner .acties { margin-top: .5rem; }
 .themas-tekst { display: grid; justify-items: start; gap: 1.25rem; max-width: 40em; }
 .themas-tekst p:first-child { font-size: 1.1875rem; }
+.info-link { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.info-staart { white-space: nowrap; }
+.info-link:hover { text-decoration-thickness: 2px; }
+.info-icoon { display: inline-block; margin-left: .25em; vertical-align: -.1em; }
+.info-icoon svg { width: .9em; height: .9em; }
 .kennisbank-meer { margin-top: 2rem; }
 .kennisbank-meer .tekstlink { margin-top: 0; padding-top: 0; }
 .kennisbank .artikel-lijst { margin-top: 0; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }

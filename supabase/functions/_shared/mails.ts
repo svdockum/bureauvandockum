@@ -9,7 +9,7 @@ export type BestellingVoorMail = {
 
 const ONDERWERP: Record<Terugbelverzoek['onderwerp'], string> = {
   'toegankelijke-website': 'Toegankelijke website', advies: 'Advies voor de huidige site',
-  'ux-testing': 'UX Testing', thema: 'Thema', anders: 'Iets anders',
+  'ux-testing': 'UX Testing', thema: 'Thema', keynote: 'Keynote of lezing', anders: 'Iets anders',
 };
 const DAGDEEL: Record<Terugbelverzoek['dagdeel'], string> = { ochtend: 'in de ochtend', middag: 'in de middag', 'maakt-niet-uit': 'op elk moment van de dag' };
 const dagTekst = (dag: Terugbelverzoek['dag']) => (dag === 'maakt-niet-uit' ? 'op elke werkdag' : `op ${dag}`);
@@ -105,12 +105,12 @@ export function scanMailVoorBezoeker(a: Scanaanvraag): Mail {
     'Beste lezer,',
     'Dank u wel voor uw aanvraag voor een toegankelijkheidsscan.',
     'Binnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.',
-    'De scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.',
+    'De scan kost € 59, exclusief btw. Uw aanvraag is vrijblijvend.',
   ];
   return {
     aan: { email: a.email },
     onderwerp: 'Uw aanvraag voor een toegankelijkheidsscan',
     html: omhul('Uw aanvraag voor een toegankelijkheidsscan', alineas),
-    tekst: `Beste lezer,\n\nDank u wel voor uw aanvraag voor een toegankelijkheidsscan.\nBinnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.\n\nDe scan kost € 59, inclusief btw. Uw aanvraag is vrijblijvend.\n\nBureau van Dockum`,
+    tekst: `Beste lezer,\n\nDank u wel voor uw aanvraag voor een toegankelijkheidsscan.\nBinnen twee werkdagen nemen wij contact met u op. Dan stemmen we samen de verwachtingen af, en hoort u waar we extra op letten.\n\nDe scan kost € 59, exclusief btw. Uw aanvraag is vrijblijvend.\n\nBureau van Dockum`,
   };
 }

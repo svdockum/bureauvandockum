@@ -65,3 +65,8 @@ export function koppelFormulier(form: HTMLFormElement): void {
 }
 
 for (const form of document.querySelectorAll<HTMLFormElement>('form[data-controleer]')) koppelFormulier(form);
+
+// Een link als /terugbellen/?onderwerp=keynote kiest het onderwerp alvast. Alleen bestaande keuzes.
+const gevraagd = new URLSearchParams(location.search).get('onderwerp');
+const onderwerp = document.querySelector<HTMLSelectElement>('select[name="onderwerp"]');
+if (gevraagd && onderwerp && Array.from(onderwerp.options).some((o) => o.value === gevraagd)) onderwerp.value = gevraagd;

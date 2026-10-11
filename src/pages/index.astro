@@ -14,6 +14,7 @@ const artikelen = alle
   .slice(0, 3);
 
 const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+const info = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" focusable="false"><circle cx="8" cy="8" r="6.25"/><path d="M8 7.25v4"/><circle cx="8" cy="4.75" r=".85" fill="currentColor" stroke="none"/></svg>';
 ---
 <Basis titel="Home" beschrijving="Bureau van Dockum ontwerpt en bouwt toegankelijke websites en webshops.">
   <section class="hero" aria-labelledby="hero-titel">
@@ -21,7 +22,7 @@ const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-
       <div class="hero-tekst">
         <p class="eyebrow">Digitale toegankelijkheid, van praktijk tot webshop</p>
         <h1 id="hero-titel">Websites en webshops die voor <em>iedereen</em> werken.</h1>
-        <p class="lead">Wij ontwerpen en bouwen toegankelijke websites en webshops voor de eerstelijnszorg, praktijken, verenigingen en online winkels. In WordPress, WooCommerce, Shopify of Drupal, getoetst aan WCAG&nbsp;2.2 en getest met echte bezoekers.</p>
+        <p class="lead">Wij ontwerpen en bouwen toegankelijke websites en webshops voor de eerstelijnszorg, praktijken, verenigingen en online winkels. In elk populair CMS of framework, getoetst aan <a class="info-link" href="/info/wat-is-wcag/"><span class="info-staart">WCAG&nbsp;2.2<span class="info-icoon" aria-hidden="true" set:html={info} /></span></a> en getest met echte bezoekers. WCAG is ook de basis van de <a class="info-link" href="/info/european-accessibility-act-webshop/">European Accessibility <span class="info-staart">Act<span class="info-icoon" aria-hidden="true" set:html={info} /></span></a>, die sinds juni 2025 voor veel webshops geldt.</p>
         <div class="acties">
           <a class="knop knop-primair" href="/terugbellen/">
             <span>Plan een terugbelafspraak</span>
@@ -33,7 +34,7 @@ const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-
       <ul class="kenmerken" aria-label="Kenmerken">
         <li><span class="kenmerk-nr" aria-hidden="true">01</span><span>Getoetst aan WCAG 2.2 niveau AA</span></li>
         <li><span class="kenmerk-nr" aria-hidden="true">02</span><span>Getest met echte bezoekers</span></li>
-        <li><span class="kenmerk-nr" aria-hidden="true">03</span><span>WordPress, WooCommerce, Shopify en Drupal</span></li>
+        <li><span class="kenmerk-nr" aria-hidden="true">03</span><span>Elk populair CMS of framework</span></li>
       </ul>
     </div>
   </section>
@@ -61,7 +62,7 @@ const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-
           <div class="dienst-binnen">
             <span class="dienst-nr" aria-hidden="true">01</span>
             <h3>Toegankelijke website</h3>
-            <p>Een nieuwe website of webshop, of uw bestaande site verbeterd tot WCAG&nbsp;2.2&nbsp;AA. In WordPress, WooCommerce, Shopify of Drupal: goed leesbaar, te bedienen met toetsenbord en schermlezer, en snel op elk apparaat.</p>
+            <p>Een nieuwe website of webshop, of uw bestaande site verbeterd tot WCAG&nbsp;2.2&nbsp;AA. In elk populair CMS of framework: goed leesbaar, te bedienen met toetsenbord en schermlezer, en snel op elk apparaat.</p>
             <a class="tekstlink" href="/toegankelijke-website/">Zo pakken wij het aan<span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -69,7 +70,7 @@ const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-
           <div class="dienst-binnen">
             <span class="dienst-nr" aria-hidden="true">02</span>
             <h3>UX Testing</h3>
-            <p>Echte bezoekers testen uw site of webshop, van homepage tot afrekenen, onder wie mensen met een beperking. U ontvangt een helder rapport met verbeteringen, op volgorde van belang.</p>
+            <p>Echte bezoekers testen uw site of webshop, van homepage tot afrekenen. U ontvangt een helder rapport met verbeteringen, op volgorde van belang.</p>
             <a class="tekstlink" href="/ux-testing/">Lees meer over UX Testing<span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -92,7 +93,7 @@ const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-
       <p class="lead">Niet iedereen heeft een nieuwe site nodig. Wij zoeken uit hoe toegankelijk uw huidige site is en wat er beter moet, op elk platform.</p>
       <div class="acties">
         <a class="knop knop-primair" href="/scan-aanvragen/">
-          <span>Vraag de scan aan, € 59</span>
+          <span>Vraag de scan aan, € 59 excl. btw</span>
           <span class="knop-icoon" aria-hidden="true" set:html={pijl} />
         </a>
       </div>

@@ -3,7 +3,7 @@ import Basis from '../../layouts/Basis.astro';
 import LeesOok from '../../components/LeesOok.astro';
 import Kennismaken from '../../components/Kennismaken.astro';
 ---
-<Basis titel="Advies voor uw huidige site" beschrijving="Een toegankelijkheidsscan van € 59, een volledige audit of begeleiding en hertest voor uw bestaande website.">
+<Basis titel="Advies voor uw huidige site" beschrijving="Een toegankelijkheidsscan van € 59 excl. btw, een volledige audit of begeleiding en hertest voor uw bestaande website.">
   <div class="wrap pagina">
     <p class="eyebrow"><a href="/toegankelijke-website/">Toegankelijke website</a></p>
     <h1>Advies voor uw huidige site</h1>
@@ -14,8 +14,8 @@ import Kennismaken from '../../components/Kennismaken.astro';
       <ul class="kaarten">
         <li class="kaart">
           <h3>Toegankelijkheidsscan</h3>
-          <p class="prijs">€ 59</p>
-          <p>Inclusief btw. U vraagt de scan vrijblijvend aan. Binnen twee werkdagen nemen wij contact op om de verwachtingen af te stemmen.</p>
+          <p class="prijs">€ 59 <span class="prijs-btw">excl. btw</span></p>
+          <p>U vraagt de scan vrijblijvend aan. Binnen twee werkdagen nemen wij contact op om de verwachtingen af te stemmen.</p>
           <div class="acties">
             <a class="knop knop-primair" href="/scan-aanvragen/"><span>Vraag de scan aan</span></a>
           </div>
@@ -50,6 +50,6 @@ import Kennismaken from '../../components/Kennismaken.astro';
     </section>
   </div>
 
-  <LeesOok ids={['zelf-testen-in-tien-minuten', 'kleurcontrast-controleren']} />
+  <LeesOok ids={['alles-met-het-toetsenbord', 'kleurcontrast-controleren']} />
   <Kennismaken />
 </Basis>

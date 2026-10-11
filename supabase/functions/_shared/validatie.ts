@@ -3,7 +3,7 @@ export type Resultaat<T> = { ok: true; waarde: T } | { ok: false; fouten: Veldfo
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SLUG = /^[a-z0-9-]{1,60}$/;
-export const ONDERWERPEN = ['toegankelijke-website', 'advies', 'ux-testing', 'thema', 'anders'] as const;
+export const ONDERWERPEN = ['toegankelijke-website', 'advies', 'ux-testing', 'thema', 'keynote', 'anders'] as const;
 export const DAGEN = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'maakt-niet-uit'] as const;
 export const DAGDELEN = ['ochtend', 'middag', 'maakt-niet-uit'] as const;
 

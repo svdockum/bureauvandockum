@@ -22,6 +22,9 @@ describe('valideerTerugbelverzoek', () => {
   it('accepteert een internationaal nummer', () => {
     expect(valideerTerugbelverzoek(formulier({ ...terugbel, telefoon: '+31 6 1234 5678' })).ok).toBe(true);
   });
+  it('accepteert een keynote als onderwerp', () => {
+    expect(valideerTerugbelverzoek(formulier({ ...terugbel, onderwerp: 'keynote' })).ok).toBe(true);
+  });
   it('weigert een onbekend onderwerp', () => {
     const r = valideerTerugbelverzoek(formulier({ ...terugbel, onderwerp: 'iets' }));
     expect(r.ok).toBe(false);

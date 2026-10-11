@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
+import foto from '../../assets/stefan-van-dockum.jpg';
 import { groepen } from '../../lib/artikelgroepen';
 import { leestijd } from '../../lib/leestijd';
 
@@ -11,20 +13,34 @@ const perGroep = groepen.map((g) => ({
   artikelen: artikelen.filter((a) => a.groep === g.id).sort((x, y) => x.volgorde - y.volgorde),
 }));
 const aantal = (n: number) => (n === 1 ? '1 artikel' : `${n} artikelen`);
+const pijl = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 ---
 <Basis titel="Info" beschrijving="Wie zit er achter Bureau van Dockum, en vaste uitleg over digitale toegankelijkheid in de kennisbank.">
   <div class="wrap info">
     <h1>Info</h1>
 
-    <section class="sectie info-sectie" aria-labelledby="wie-titel">
-      <!-- TIJDELIJK: echte tekst en foto volgen (bouwplan, besluit 13) -->
-      <h2 id="wie-titel">Wie zit er achter Bureau van Dockum?</h2>
-      <p class="lead">Achter Bureau van Dockum zit Stefan van Dockum. Wij maken websites en webshops die voor iedereen werken, en we testen ze met echte bezoekers. Wilt u weten wat wij voor u kunnen doen? Plan een terugbelafspraak.</p>
+    <section class="sectie info-sectie voorstellen" aria-labelledby="wie-titel">
+      <Image class="voorstellen-foto" src={foto} alt="Portret van Stefan van Dockum" widths={[320, 480, 651]} sizes="(min-width: 60rem) 26rem, 20rem" loading="eager" />
+      <div class="voorstellen-tekst">
+        <h2 id="wie-titel">Wie zit er achter Bureau van Dockum?</h2>
+        <p class="lead">Stefan van Dockum, oprichter Bureau van Dockum. Ruime ervaring met het maken van online oplossingen, van websites en webshops tot apps.</p>
+        <p>Als docent aan een hogeschool geef ik de aandacht voor toegankelijkheid door aan de nieuwe generatie ict’ers. Zo leren zij vanaf het begin bouwen voor iedereen.</p>
+        <p>Daarnaast adviseer ik bedrijven over digitale toegankelijkheid: waar staat u nu, wat moet er beter, en hoe pakt u dat aan?</p>
+
+        <h3>Een keynote bij uw bedrijf</h3>
+        <p>Ik kom ook graag bij u spreken. In een keynote of lezing zorg ik voor bewustwording: waarom toegankelijkheid ertoe doet, en hoe u techniek en mens samenbrengt. Met herkenbare voorbeelden, voor iedereen in uw organisatie.</p>
+        <div class="acties">
+          <a class="knop knop-primair" href="/terugbellen/?onderwerp=keynote">
+            <span>Neem contact op voor een keynote</span>
+            <span class="knop-icoon" aria-hidden="true" set:html={pijl} />
+          </a>
+        </div>
+      </div>
     </section>
 
     <section class="sectie info-sectie" aria-labelledby="kennisbank-titel">
       <h2 id="kennisbank-titel">Kennisbank</h2>
-      <p class="lead">Vaste uitleg over toegankelijkheid, per onderwerp. Kies een onderwerp of lees verder.</p>
+      <p class="lead">Korte uitleg over toegankelijkheid, per onderwerp. Kies een onderwerp of lees verder.</p>
 
       <ul class="groep-raster">
         {perGroep.map((g) => (
